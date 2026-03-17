@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Breadcrumbs from "../components/ui/breadcrumbs";
+import Breadcrumbs from "../components/common/breadcrumbs";
 import AllProjects from "../components/projects/AllProjects";
 import ProjectHero from "../components/projects/project";
 

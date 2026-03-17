@@ -1,4 +1,4 @@
-import Breadcrumbs from "../components/ui/breadcrumbs";
+import Breadcrumbs from "../components/common/breadcrumbs";
 import HeroSection from "../components/home/Hero";
 import AboutSection from "../components/home/About";
 import RecentProjects from "../components/home/Recentprojects";

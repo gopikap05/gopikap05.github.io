@@ -12,8 +12,8 @@ import Projects from "./pages/Projects";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import About from "./pages/About";
 
-import AppLoader from "./components/ui/AppLoader";
-import CustomCursor from "./components/ui/CustomCursor";
+import AppLoader from "./components/common/AppLoader";
+import CustomCursor from "./components/common/CustomCursor";
 import ScrollToTop from "./components/utils/ScrollToTop";
 
 function App() {

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Breadcrumbs from "../components/ui/breadcrumbs";
+import Breadcrumbs from "../components/common/breadcrumbs";
 import ContactForm from "../components/contacts/contactForm";
 import ThanksNote from "../components/contacts/thanksnote";
 import Social from "../components/contacts/Social";

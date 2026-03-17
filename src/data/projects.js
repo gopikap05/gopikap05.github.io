@@ -1,9 +1,11 @@
 // src/data/projects.js
 import { emildaProjects } from "./emilda-projects";
 import { friskaProjects } from "./friska-projects";
+import { freelanceProjects } from "./freelance-projects"; // ✅ ADD
+
 
 // Combine all projects
-const projects = [...emildaProjects, ...friskaProjects];
+const projects = [...emildaProjects, ...friskaProjects, ...freelanceProjects];
 
 // Log to verify data
 console.log("Total projects loaded:", projects.length);
