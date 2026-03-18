@@ -12,9 +12,7 @@ function Projects() {
           { label: "Projects", path: "/projects" },
         ]}
       />
-
       <ProjectHero />
-
       <AllProjects />
     </Box>
   );

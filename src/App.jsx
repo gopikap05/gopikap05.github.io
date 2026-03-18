@@ -34,6 +34,9 @@ function App() {
       infinite: false,
     });
 
+    // Make lenis available globally
+    window.lenis = lenis;
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -43,6 +46,7 @@ function App() {
 
     return () => {
       lenis.destroy();
+      delete window.lenis;
     };
   }, [loading]);
 
