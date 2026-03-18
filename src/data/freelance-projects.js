@@ -6,7 +6,7 @@ export const freelanceProjects = [
     origin: "freelance",
     status: "active",
 
-    liveUrl: "https://spei-in.netlify.app/",
+    liveUrl: "https://spei.in/",
 
     shortDescription:
       "A professional corporate website built for SPEI with modern UI, responsive layout, and clean structure.",
