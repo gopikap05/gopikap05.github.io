@@ -226,20 +226,6 @@ function Footer() {
                     gopikap026@gmail.com
                   </a>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <span style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "9px",
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                    color: "rgba(255,59,59,0.5)",
-                    width: "48px",
-                    flexShrink: 0,
-                  }}>Phone</span>
-                  <a href="tel:+919150453302" className="footer-link">
-                    +91 91504 53302
-                  </a>
-                </div>
               </div>
             </motion.div>
           </Box>
