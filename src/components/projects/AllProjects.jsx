@@ -1,7 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SearchIcon from "@mui/icons-material/Search";
 import projects from "../../data/projects";
 
 const ORIGIN_FILTERS = [
@@ -22,19 +23,29 @@ const CARDS_PER_PAGE = 6;
 function AllProjects() {
   const [activeOrigin, setActiveOrigin] = useState("all");
   const [activeStatus, setActiveStatus] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
 
   const filteredProjects = projects
     .filter((project) => {
+      // Origin filter
       const originMatch =
         activeOrigin === "all" ||
         (project.origin &&
           project.origin.toLowerCase().trim() === activeOrigin.toLowerCase().trim());
+      
+      // Status filter
       const statusMatch =
         activeStatus === "all" ||
         (project.status &&
           project.status.toLowerCase() === activeStatus.toLowerCase());
-      return originMatch && statusMatch;
+      
+      // Search filter - matches project title or company name
+      const searchMatch = searchQuery === "" || 
+        (project.title && project.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (project.company && project.company.toLowerCase().includes(searchQuery.toLowerCase()));
+      
+      return originMatch && statusMatch && searchMatch;
     })
     .sort((a, b) => b.count - a.count);
 
@@ -45,6 +56,14 @@ function AllProjects() {
     setter(val);
     setPage(1);
   };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    setPage(1); // Reset to first page when searching
+  };
+
+  // Get the total number of projects dynamically
+  const totalProjectsCount = projects.length;
 
   return (
     <>
@@ -174,6 +193,31 @@ function AllProjects() {
           border: 1px dashed #1c1c1c;
           background: #0d0d0d;
         }
+
+        .search-input {
+          font-family: 'DM Sans', sans-serif;
+        }
+        .search-input .MuiOutlinedInput-root {
+          color: rgba(255,255,255,0.7);
+          font-size: 14px;
+          letter-spacing: 0.5px;
+        }
+        .search-input .MuiOutlinedInput-root fieldset {
+          border-color: #1c1c1c;
+          border-radius: 999px;
+          transition: border-color 0.3s ease;
+        }
+        .search-input .MuiOutlinedInput-root:hover fieldset {
+          border-color: rgba(255,255,255,0.25);
+        }
+        .search-input .MuiOutlinedInput-root.Mui-focused fieldset {
+          border-color: #fff;
+        }
+        .search-input .MuiInputLabel-root {
+          color: rgba(255,255,255,0.3);
+          font-family: 'DM Sans', sans-serif;
+          letter-spacing: 1px;
+        }
       `}</style>
 
       <Box sx={{
@@ -251,14 +295,48 @@ function AllProjects() {
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(11px, 1vw, 14px)",
                 color: "rgba(255,255,255,0.3)",
-                letterSpacing: "2px",
+                letterSpacing: "5px",
                 textTransform: "uppercase",
                 pb: { sm: "6px" },
               }}>
-                {filteredProjects.length} Project{filteredProjects.length !== 1 ? "s" : ""}
+                {totalProjectsCount} Project{totalProjectsCount !== 1 ? "s" : ""}
               </Typography>
             </motion.div>
           </Box>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <Box sx={{
+              mb: { xs: 4, md: 5 },
+              maxWidth: "500px",
+              mx: "auto",
+            }}>
+              <TextField
+                fullWidth
+                placeholder="Search projects by name or company..."
+                value={searchQuery}
+                onChange={handleSearch}
+                className="search-input"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon sx={{ color: "rgba(255,255,255,0.3)", fontSize: "20px" }} />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0,0,0,0.3)',
+                  }
+                }}
+              />
+            </Box>
+          </motion.div>
 
           {/* Filters */}
           <motion.div
@@ -315,6 +393,26 @@ function AllProjects() {
             </Box>
           </motion.div>
 
+          {/* Results count indicator */}
+          {searchQuery && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Typography sx={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "12px",
+                letterSpacing: "1px",
+                color: "rgba(255,255,255,0.4)",
+                mb: 2,
+                textAlign: "center",
+              }}>
+                Found {filteredProjects.length} project{filteredProjects.length !== 1 ? "s" : ""} matching "{searchQuery}"
+              </Typography>
+            </motion.div>
+          )}
+
           {/* Divider */}
           <div style={{
             width: "100%", height: "1px",
@@ -326,7 +424,7 @@ function AllProjects() {
           <AnimatePresence mode="wait">
             {paginated.length > 0 ? (
               <motion.div
-                key={`${activeOrigin}-${activeStatus}-${page}`}
+                key={`${activeOrigin}-${activeStatus}-${searchQuery}-${page}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

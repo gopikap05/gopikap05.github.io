@@ -52,12 +52,12 @@ function ProjectDetails() {
     project.relatedProjects?.includes(p.id)
   );
 
-  // 2 most recent, excluding current + already shown in related
+  // 3 most recent, excluding current + already shown in related
   const relatedCounts = new Set(relatedProjects.map((p) => p.count));
   const recentProjects = [...projects]
     .filter((p) => p.count !== project.count && !relatedCounts.has(p.count))
     .sort((a, b) => b.count - a.count)
-    .slice(0, 2);
+    .slice(0, 3); // Changed from 2 to 3
 
   // Zero-pad project number: 1 → "01", 12 → "12"
   const projectNumber = String(project.count).padStart(2, "0");
@@ -419,7 +419,11 @@ function ProjectDetails() {
 
               <Box sx={{
                 display: "grid",
-                gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)" },
+                gridTemplateColumns: { 
+                  xs: "1fr",           // 1 column on mobile
+                  sm: "repeat(2, 1fr)", // 2 columns on tablet
+                  md: "repeat(3, 1fr)"  // 3 columns on desktop
+                },
                 gap: "16px",
               }}>
                 {recentProjects.map((p) => (

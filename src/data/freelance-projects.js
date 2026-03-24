@@ -1,6 +1,6 @@
 export const freelanceProjects = [
   {
-    count: 100, // make sure it's unique
+    count: 60, 
     title: "SPEI Website",
     company: "SPEI",
     origin: "freelance",
@@ -24,6 +24,6 @@ export const freelanceProjects = [
 
     relatedProjects: [],
 
-    image: "/projects/spei-preview.jpg", // optional (add if you have)
+    image: "/projects/spei-preview.jpg", 
   },
 ];
