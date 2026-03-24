@@ -2,12 +2,15 @@ import { Box } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
+import ThemeToggle from "../common/ThemeToggle";
+import { useTheme } from "../../context/ThemeContext";
 const logo = "/icons/logo.png";
 
 function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -49,7 +52,7 @@ function Navbar() {
           left: 0;
           width: 0%;
           height: 1px;
-          background: #fff;
+          background: var(--theme-text-primary);
           transition: width 0.3s ease;
         }
         .nav-link:hover::after,
@@ -75,7 +78,7 @@ function Navbar() {
         .hamburger-line {
           width: 22px;
           height: 1px;
-          background: #fff;
+          background: var(--theme-text-primary);
           transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
           transform-origin: center;
         }
@@ -94,7 +97,7 @@ function Navbar() {
           position: fixed;
           top: 0; left: 0;
           width: 100%; height: 100%;
-          background: #080808;
+          background: var(--theme-bg-primary);
           z-index: 999;
           display: flex;
           flex-direction: column;
@@ -114,13 +117,13 @@ function Navbar() {
           font-size: 2rem;
           letter-spacing: 4px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
+          color: var(--theme-text-muted);
           text-decoration: none;
           transition: color 0.3s ease;
         }
         .mobile-nav-link:hover,
         .mobile-nav-link.active {
-          color: #fff;
+          color: var(--theme-text-primary);
         }
 
         /* ── Active dot ── */
@@ -152,8 +155,12 @@ function Navbar() {
           sx={{
             width: "100%",
             height: { xs: "56px", sm: "62px", md: "70px" },
-            backgroundColor: scrolled ? "rgba(8,8,8,0.92)" : "#080808",
-            borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid #141414",
+            backgroundColor: scrolled 
+              ? `var(--theme-bg-primary)` 
+              : "var(--theme-bg-primary)",
+            borderBottom: scrolled 
+              ? "1px solid var(--theme-border-hover)" 
+              : "1px solid var(--theme-border)",
             backdropFilter: scrolled ? "blur(12px)" : "none",
             transition: "background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
             display: "flex",
@@ -180,14 +187,14 @@ function Navbar() {
                   height: { xs: "24px", sm: "26px", md: "40px" },
                   width: "auto",
                   objectFit: "contain",
-                  filter: "brightness(1)",
-                  transition: "filter 0.3s ease",
+                  filter: isDark ? "brightness(1)" : "brightness(0.8)",
+                  transition: "filter 0.3s ease, opacity 0.3s ease",
                   "&:hover": { filter: "brightness(0.75)" },
                 }}
               />
             </Link>
 
-            {/* Desktop Nav links */}
+            {/* Desktop Nav links and Theme Toggle */}
             <Box
               className="nav-links"
               sx={{
@@ -208,7 +215,7 @@ function Navbar() {
                     className={`nav-link ${isActive ? "active" : ""}`}
                     style={{
                       fontSize: "16px",
-                      color: isActive ? "#fff" : "rgba(255,255,255,0.45)",
+                      color: isActive ? "var(--theme-text-primary)" : "var(--theme-text-muted)",
                       fontWeight: isActive ? 500 : 400,
                     }}
                   >
@@ -217,6 +224,9 @@ function Navbar() {
                   </Link>
                 );
               })}
+              
+              {/* Theme Toggle for Desktop */}
+              <ThemeToggle />
             </Box>
 
             {/* Hamburger (mobile) */}
@@ -239,8 +249,8 @@ function Navbar() {
         <div style={{
           position: "absolute", top: 24, left: 24,
           width: 24, height: 24,
-          borderTop: "1px solid rgba(255,255,255,0.15)",
-          borderLeft: "1px solid rgba(255,255,255,0.15)",
+          borderTop: "1px solid var(--theme-border-hover)",
+          borderLeft: "1px solid var(--theme-border-hover)",
         }} />
 
         {navItems.map((item, i) => {
@@ -264,13 +274,22 @@ function Navbar() {
           );
         })}
 
+        {/* Theme Toggle for Mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={menuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: navItems.length * 0.07, duration: 0.4 }}
+        >
+          <ThemeToggle />
+        </motion.div>
+
         {/* Bottom tag */}
         <div style={{
           position: "absolute", bottom: 32,
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "10px",
           letterSpacing: "3px",
-          color: "rgba(255,255,255,0.2)",
+          color: "var(--theme-text-muted)",
           textTransform: "uppercase",
         }}>
           Gopika · Portfolio

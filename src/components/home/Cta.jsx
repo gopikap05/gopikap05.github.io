@@ -25,7 +25,7 @@ function CTASection() {
           transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
           animation: gradient_301 5s ease infinite;
           border: double 4px transparent;
-          background-image: linear-gradient(#0d0d0d, #0d0d0d),
+          background-image: linear-gradient(var(--theme-bg-card), var(--theme-bg-card)),
             linear-gradient(137.48deg, #ffdb3b 10%, #fe53bb 45%, #8f51ea 67%, #0044ff 87%);
           background-origin: border-box;
           background-clip: content-box, border-box;
@@ -48,8 +48,8 @@ function CTASection() {
           font-family: 'DM Sans', sans-serif;
           font-size: clamp(0.65rem, 1.3vw, 0.78rem);
           letter-spacing: 4px;
-          color: #ffffff;
-          text-shadow: 0 0 6px rgba(255,255,255,0.6);
+          color: var(--theme-text-primary);
+          text-shadow: 0 0 6px rgba(255,255,255,0.3);
         }
 
         #glow {
@@ -70,7 +70,7 @@ function CTASection() {
 
         .btn:hover #container-stars {
           z-index: 1;
-          background-color: #0d0d0d;
+          background-color: var(--theme-bg-card);
         }
         .btn:hover {
           transform: scale(1.06);
@@ -97,7 +97,7 @@ function CTASection() {
           top: -10rem; left: -100rem;
           width: 100%; height: 100%;
           animation: animStarRotate 90s linear infinite;
-          background-image: radial-gradient(#ffffff 1px, transparent 1%);
+          background-image: radial-gradient(var(--theme-text-primary) 1px, transparent 1%);
           background-size: 50px 50px;
         }
         #stars::before {
@@ -106,7 +106,7 @@ function CTASection() {
           top: 0; left: -50%;
           width: 170%; height: 500%;
           animation: animStar 60s linear infinite;
-          background-image: radial-gradient(#ffffff 1px, transparent 1%);
+          background-image: radial-gradient(var(--theme-text-primary) 1px, transparent 1%);
           background-size: 50px 50px;
           opacity: 0.5;
         }
@@ -145,14 +145,33 @@ function CTASection() {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(48px, 7vw, 96px);
           letter-spacing: 4px;
-          color: transparent;
-          -webkit-text-stroke: 1px rgba(255,255,255,0.1);
           user-select: none;
           flex-shrink: 0;
+          transition: opacity 0.3s ease;
         }
-        .cta-marquee-item.filled {
+        
+        /* Dark theme marquee */
+        [data-theme="dark"] .cta-marquee-item {
+          color: transparent;
+          -webkit-text-stroke: 1px var(--theme-border);
+          opacity: 0.4;
+        }
+        [data-theme="dark"] .cta-marquee-item.filled {
           -webkit-text-stroke: 0;
-          color: rgba(255,255,255,0.04);
+          color: var(--theme-text-primary);
+          opacity: 0.08;
+        }
+        
+        /* Light theme marquee - more visible */
+        [data-theme="light"] .cta-marquee-item {
+          color: var(--theme-primary);
+          opacity: 0.3;
+          -webkit-text-stroke: 0;
+          font-weight: 500;
+        }
+        [data-theme="light"] .cta-marquee-item.filled {
+          color: var(--theme-primary-light);
+          opacity: 0.25;
         }
 
         /* ── Corner decoration ── */
@@ -160,15 +179,15 @@ function CTASection() {
           position: absolute;
           top: 24px; left: 24px;
           width: 28px; height: 28px;
-          border-top: 1px solid rgba(255,255,255,0.12);
-          border-left: 1px solid rgba(255,255,255,0.12);
+          border-top: 1px solid var(--theme-border-hover);
+          border-left: 1px solid var(--theme-border-hover);
         }
         .cta-corner-br {
           position: absolute;
           bottom: 24px; right: 24px;
           width: 28px; height: 28px;
-          border-bottom: 1px solid rgba(255,255,255,0.12);
-          border-right: 1px solid rgba(255,255,255,0.12);
+          border-bottom: 1px solid var(--theme-border-hover);
+          border-right: 1px solid var(--theme-border-hover);
         }
       `}</style>
 
@@ -176,9 +195,9 @@ function CTASection() {
       <Box
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -208,7 +227,7 @@ function CTASection() {
           overflow: "hidden",
           pointerEvents: "none",
           zIndex: 0,
-          opacity: 0.6,
+          opacity: 0.8,
         }}>
           <div className="cta-marquee-track">
             {["LET'S WORK", "·", "GET IN TOUCH", "·", "HIRE ME", "·", "COLLABORATE", "·",
@@ -267,7 +286,7 @@ function CTASection() {
                 fontSize: "10px",
                 letterSpacing: "3px",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.35)",
+                color: "var(--theme-text-muted)",
               }}>
                 Available for work
               </span>
@@ -287,6 +306,7 @@ function CTASection() {
                 lineHeight: 1.05,
                 letterSpacing: "3px",
                 mb: { xs: 2, md: 3 },
+                color: "var(--theme-text-primary)",
               }}>
                 Let's Build Something{" "}
                 <Box component="span" sx={{
@@ -312,7 +332,7 @@ function CTASection() {
             >
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
-                color: "rgba(255,255,255,0.45)",
+                color: "var(--theme-text-muted)",
                 mb: { xs: 4, md: 5 },
                 fontSize: { xs: "0.9rem", md: "1.05rem" },
                 lineHeight: 1.8,

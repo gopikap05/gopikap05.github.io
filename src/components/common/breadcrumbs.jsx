@@ -7,11 +7,10 @@ function Breadcrumbs({ items }) {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: "#000", // Added for consistency with other sections
-        borderBottom: "1px solid #1a1a1a",
-        // Section padding: left/right 5% (handled by container px), top/bottom specific
-        px: "5%", // Added for consistent section padding
-        pt: { xs: "80px", sm: "90px", md: "100px" }, // Accounts for fixed navbar
+        backgroundColor: "var(--theme-bg-primary)",
+        borderBottom: "1px solid var(--theme-border)",
+        px: "5%",
+        pt: { xs: "80px", sm: "90px", md: "100px" },
         pb: { xs: "16px", sm: "20px", md: "24px" },
       }}
     >
@@ -21,7 +20,6 @@ function Breadcrumbs({ items }) {
           maxWidth: "1350px",
           width: "100%",
           mx: "auto",
-          // No padding here since section handles it
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
@@ -48,7 +46,8 @@ function Breadcrumbs({ items }) {
                   sx={{
                     fontSize: "inherit",
                     letterSpacing: "inherit",
-                    color: "#aaa",
+                    color: "var(--theme-text-secondary)",
+                    opacity: 0.9,
                   }}
                 >
                   {item.label}
@@ -58,20 +57,27 @@ function Breadcrumbs({ items }) {
                   <Link
                     to={item.path}
                     style={{
-                      color: "#777",
+                      color: "var(--theme-text-secondary)",
                       textDecoration: "none",
                       display: "flex",
                       alignItems: "center",
                       fontSize: "inherit",
                       letterSpacing: "inherit",
                       transition: "color 0.3s ease",
+                      fontWeight: 500,
                     }}
-                    onMouseEnter={(e) => (e.target.style.color = "#fff")}
-                    onMouseLeave={(e) => (e.target.style.color = "#777")}
+                    onMouseEnter={(e) => (e.target.style.color = "var(--theme-text-primary)")}
+                    onMouseLeave={(e) => (e.target.style.color = "var(--theme-text-secondary)")}
                   >
                     {item.label}
                   </Link>
-                  <span style={{ margin: "0 8px", color: "#444" }}>/</span>
+                  <span style={{ 
+                    margin: "0 12px", 
+                    color: "var(--theme-text-primary)",
+                    opacity: 0.5,
+                    fontSize: "inherit",
+                    fontWeight: 600,
+                  }}>/</span>
                 </>
               )}
             </Box>

@@ -63,7 +63,7 @@ function ContactForm() {
     emailjs.send("service_3wgg108", "template_wieh09d", {
       from_name: form.name, 
       from_email: form.email,
-      from_phone: `+91${form.phone}`, // Add +91 here when sending
+      from_phone: `+91${form.phone}`,
       from_company: form.company || "Not provided",
       message: form.message, 
       to_email: form.email,
@@ -79,20 +79,21 @@ function ContactForm() {
 
   const fieldSx = {
     "& .MuiOutlinedInput-root": {
-      color: "#fff",
+      color: "var(--theme-text-primary)",
       borderRadius: "12px",
       fontFamily: "'DM Sans', sans-serif",
       fontSize: "14px",
-      "& fieldset": { borderColor: "#1c1c1c" },
-      "&:hover fieldset": { borderColor: "#333" },
-      "&.Mui-focused fieldset": { borderColor: "rgba(255,255,255,0.4)", borderWidth: "1px" },
+      backgroundColor: "var(--theme-bg-secondary)",
+      "& fieldset": { borderColor: "var(--theme-border)" },
+      "&:hover fieldset": { borderColor: "var(--theme-border-hover)" },
+      "&.Mui-focused fieldset": { borderColor: "var(--theme-primary)", borderWidth: "1px" },
       "&.Mui-error fieldset": { borderColor: "rgba(255,59,59,0.5)" },
     },
     "& .MuiInputLabel-root": {
-      color: "rgba(255,255,255,0.25)",
+      color: "var(--theme-text-muted)",
       fontFamily: "'DM Sans', sans-serif",
       fontSize: "16px",
-      "&.Mui-focused": { color: "rgba(255,255,255,0.6)" },
+      "&.Mui-focused": { color: "var(--theme-text-secondary)" },
       "&.Mui-error": { color: "rgba(255,59,59,0.7)" },
     },
     "& .MuiFormHelperText-root": {
@@ -117,15 +118,15 @@ function ContactForm() {
           width: 100%;
           padding: 16px;
           border-radius: 12px;
-          border: 1px solid #1c1c1c;
-          background: #0d0d0d;
-          color: rgba(255,255,255,0.7);
+          border: 1px solid var(--theme-border);
+          background: var(--theme-bg-card);
+          color: var(--theme-text-secondary);
           font-family: 'DM Sans', sans-serif;
           font-size: 11px;
           letter-spacing: 3px;
           text-transform: uppercase;
           cursor: pointer;
-          transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+          transition: all 0.3s ease;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -142,8 +143,9 @@ function ContactForm() {
           transition: opacity 0.3s ease;
         }
         .cf-submit-btn:hover:not(:disabled) {
-          border-color: rgba(255,255,255,0.2);
-          color: #fff;
+          border-color: var(--theme-border-hover);
+          color: var(--theme-text-primary);
+          background: var(--theme-bg-tertiary);
         }
         .cf-submit-btn:hover:not(:disabled)::before { opacity: 1; }
         .cf-submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -153,15 +155,26 @@ function ContactForm() {
           transition: transform 0.3s ease;
         }
         .cf-submit-btn:hover .cf-arrow { transform: translateX(4px); }
+
+        /* Light theme adjustments */
+        [data-theme="light"] .cf-submit-btn {
+          background: var(--theme-bg-card);
+          border-color: var(--theme-border);
+        }
+        [data-theme="light"] .cf-submit-btn:hover:not(:disabled) {
+          background: var(--theme-primary-light);
+          border-color: var(--theme-primary);
+          color: var(--theme-text-primary);
+        }
       `}</style>
 
       <Box
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
-          borderBottom: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
+          borderBottom: "1px solid var(--theme-border)",
           px: "5%",
           py: { xs: "60px", sm: "70px", md: "90px" },
         }}
@@ -184,7 +197,7 @@ function ContactForm() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "10px", letterSpacing: "2.5px",
-                textTransform: "uppercase", color: "rgba(255,255,255,0.3)",
+                textTransform: "uppercase", color: "var(--theme-text-muted)",
               }}>
                 Contact
               </Typography>
@@ -197,6 +210,7 @@ function ContactForm() {
               letterSpacing: "3px",
               lineHeight: 1,
               mb: { xs: 4, md: 6 },
+              color: "var(--theme-text-primary)",
             }}>
               Let's Start a Conversation
             </Typography>
@@ -298,7 +312,7 @@ function ContactForm() {
               <Box sx={{ mt: 1 }}>
                 <button type="submit" disabled={loading} className="cf-submit-btn">
                   {loading
-                    ? <CircularProgress size={16} sx={{ color: "#fff" }} />
+                    ? <CircularProgress size={16} sx={{ color: "var(--theme-text-primary)" }} />
                     : <>Send Message <span className="cf-arrow">→</span></>
                   }
                 </button>
@@ -323,6 +337,7 @@ function ContactForm() {
             borderRadius: "12px",
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "16px",
+            backgroundColor: snackbar.severity === "success" ? "var(--theme-success)" : "var(--theme-error)",
           }}
         >
           {snackbar.message}

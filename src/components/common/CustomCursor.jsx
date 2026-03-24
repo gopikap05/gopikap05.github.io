@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
+  const { themeColors, currentTheme } = useTheme();
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -32,11 +34,10 @@ const CustomCursor = () => {
 
     // Hover effect for interactive elements
     const addHoverEffect = () => cursor.classList.add("cursor-hover");
-    const removeHoverEffect = () =>
-      cursor.classList.remove("cursor-hover");
+    const removeHoverEffect = () => cursor.classList.remove("cursor-hover");
 
     const interactiveElements = document.querySelectorAll(
-      "a, button, .button"
+      "a, button, .button, [role='button'], .filter-pill, .project-card, .animated-button"
     );
 
     interactiveElements.forEach((el) => {
@@ -53,6 +54,19 @@ const CustomCursor = () => {
     };
   }, []);
 
+  // Update cursor styles when theme changes
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    // Update cursor colors based on theme
+    if (currentTheme === "light") {
+      cursor.style.background = themeColors.primary;
+    } else {
+      cursor.style.background = "#ffffff";
+    }
+  }, [currentTheme, themeColors]);
+
   return (
     <>
       <style>
@@ -67,7 +81,7 @@ const CustomCursor = () => {
             left: 0;
             width: 10px;
             height: 10px;
-            background: #ffffff;
+            background: var(--theme-cursor);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
@@ -78,7 +92,7 @@ const CustomCursor = () => {
           .cursor-hover {
             width: 28px;
             height: 28px;
-            background: rgba(139, 92, 246, 0.3);
+            background: var(--theme-cursor-hover);
             backdrop-filter: blur(4px);
           }
 

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 
 const MotionTypography = motion(Typography);
 const MotionBox = motion(Box);
@@ -8,6 +9,7 @@ const MotionBox = motion(Box);
 function HeroSection() {
   const sectionRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { isDark } = useTheme();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -65,7 +67,7 @@ function HeroSection() {
           width: 100%;
           height: 100%;
           filter: blur(18px);
-          box-shadow: 0 0 180px 12px rgba(255,255,255,0.6);
+          box-shadow: 0 0 180px 12px var(--theme-primary-light);
           transform: rotateX(90deg) scale(1.1) translateZ(-110px);
         }
 
@@ -73,7 +75,7 @@ function HeroSection() {
           position: absolute;
           width: 100%;
           height: 100%;
-          background: rgb(18, 18, 18);
+          background: var(--theme-bg-tertiary);
           transform: rotateX(90deg) translateZ(90px);
           animation: updown 4s infinite ease-in-out;
         }
@@ -104,7 +106,7 @@ function HeroSection() {
           .inn6 { transform: rotateX(90deg) translateZ(55px); }
           .objchild::after {
             filter: blur(12px);
-            box-shadow: 0 0 120px 10px rgba(255,255,255,0.5);
+            box-shadow: 0 0 120px 10px var(--theme-primary-light);
             transform: rotateX(90deg) scale(1.1) translateZ(-65px);
           }
           @keyframes updown {
@@ -118,7 +120,7 @@ function HeroSection() {
           .inn6 { transform: rotateX(90deg) translateZ(40px); }
           .objchild::after {
             filter: blur(8px);
-            box-shadow: 0 0 80px 6px rgba(255,255,255,0.4);
+            box-shadow: 0 0 80px 6px var(--theme-primary-light);
             transform: rotateX(90deg) scale(1.1) translateZ(-46px);
           }
           @keyframes updown {
@@ -132,7 +134,7 @@ function HeroSection() {
           .inn6 { transform: rotateX(90deg) translateZ(28px); }
           .objchild::after {
             filter: blur(6px);
-            box-shadow: 0 0 60px 4px rgba(255,255,255,0.3);
+            box-shadow: 0 0 60px 4px var(--theme-primary-light);
             transform: rotateX(90deg) scale(1.1) translateZ(-33px);
           }
           @keyframes updown {
@@ -149,7 +151,7 @@ function HeroSection() {
         }
         .name-letter:hover {
           transform: translateY(-8px) skewX(-2deg);
-          color: rgba(255,255,255,0.55);
+          color: var(--theme-text-secondary);
         }
         @media (hover: none) {
           .name-letter:hover {
@@ -187,16 +189,16 @@ function HeroSection() {
         }
         .scroll-line span {
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
+          font-size: 11px;
           letter-spacing: 2.5px;
-          color: rgba(255,255,255,0.3);
+          color: var(--theme-text-muted);
           text-transform: uppercase;
           white-space: nowrap;
         }
         .scroll-dot {
           width: 1px;
           height: 36px;
-          background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+          background: linear-gradient(to bottom, var(--theme-text-secondary), transparent);
           animation: scrollpulse 2s ease-in-out infinite;
         }
         @keyframes scrollpulse {
@@ -211,8 +213,8 @@ function HeroSection() {
           left: 24px;
           width: 24px;
           height: 24px;
-          border-top: 1px solid rgba(255,255,255,0.2);
-          border-left: 1px solid rgba(255,255,255,0.2);
+          border-top: 1px solid var(--theme-border-hover);
+          border-left: 1px solid var(--theme-border-hover);
           z-index: 3;
         }
         .corner-br {
@@ -221,8 +223,8 @@ function HeroSection() {
           right: 24px;
           width: 24px;
           height: 24px;
-          border-bottom: 1px solid rgba(255,255,255,0.2);
-          border-right: 1px solid rgba(255,255,255,0.2);
+          border-bottom: 1px solid var(--theme-border-hover);
+          border-right: 1px solid var(--theme-border-hover);
           z-index: 3;
         }
         @media (max-width: 480px) {
@@ -234,7 +236,7 @@ function HeroSection() {
         .hero-rule {
           width: 100%;
           height: 1px;
-          background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+          background: linear-gradient(to right, transparent, var(--theme-border-hover), transparent);
           margin: 28px 0 22px 0;
         }
         @media (max-width: 600px) {
@@ -261,7 +263,7 @@ function HeroSection() {
           width: 5px;
           height: 5px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.4);
+          background: var(--theme-text-muted);
           flex-shrink: 0;
           animation: blink 2.5s infinite;
         }
@@ -285,13 +287,13 @@ function HeroSection() {
         }
         .hello-text {
           font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
+          font-size: clamp(11px, 2vw, 14px);
           letter-spacing: 4px;
-          color: rgba(255,255,255,0.5);
+          color: var(--theme-text-muted);
           text-transform: uppercase;
         }
-        @media (max-width: 900px) { .hello-text { font-size: 11px; letter-spacing: 3px; } }
-        @media (max-width: 600px) { .hello-text { font-size: 10px; letter-spacing: 2.5px; } }
+        @media (max-width: 900px) { .hello-text { letter-spacing: 3px; } }
+        @media (max-width: 600px) { .hello-text { letter-spacing: 2.5px; } }
 
         /* ── Name heading ── */
         .name-heading {
@@ -302,6 +304,7 @@ function HeroSection() {
           margin: 0;
           font-size: clamp(64px, 11vw, 185px);
           white-space: nowrap;
+          color: var(--theme-text-primary);
         }
         @media (max-width: 600px) {
           .name-heading {
@@ -340,24 +343,30 @@ function HeroSection() {
         /* ── Index label ── */
         .index-label {
           font-family: 'DM Sans', sans-serif;
-          font-size: 12px;
+          font-size: clamp(11px, 1.5vw, 14px);
           letter-spacing: 2px;
-          color: rgba(255,255,255,0.3);
+          color: var(--theme-text-muted);
           white-space: nowrap;
         }
-        @media (max-width: 600px) { .index-label { font-size: 10px; } }
 
         /* ── Role label ── */
         .role-label {
           font-family: 'DM Sans', sans-serif;
-          font-size: 15px;
+          font-size: clamp(12px, 2vw, 16px);
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.8);
+          color: var(--theme-text-secondary);
           white-space: nowrap;
         }
-        @media (max-width: 900px) { .role-label { font-size: 13px; letter-spacing: 2.5px; } }
-        @media (max-width: 600px) { .role-label { font-size: 11px; letter-spacing: 2px; } }
+        @media (max-width: 900px) { .role-label { letter-spacing: 2.5px; } }
+        @media (max-width: 600px) { .role-label { letter-spacing: 2px; } }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+          .scroll-line span {
+            font-size: 10px;
+          }
+        }
       `}</style>
 
       <MotionBox
@@ -369,8 +378,8 @@ function HeroSection() {
           width: "100%",
           minHeight: { xs: "520px", sm: "600px", md: "80vh" },
           height: { xs: "auto", md: "80vh" },
-          backgroundColor: "#080808",
-          color: "#fff",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
           position: "relative",
           overflow: "hidden",
           display: "flex",
@@ -395,14 +404,14 @@ function HeroSection() {
           transition={{ delay: 1.8, duration: 0.5 }}
         />
 
-        {/* Ambient glow top-right */}
+        {/* Ambient glow top-right - using theme primary color */}
         <MotionBox
           style={{ opacity: glowOpacity }}
           sx={{
             position: "absolute",
             width: { xs: "200px", sm: "300px", md: "500px", lg: "600px" },
             height: { xs: "200px", sm: "300px", md: "500px", lg: "600px" },
-            background: "radial-gradient(circle, #fff 0%, transparent 70%)",
+            background: `radial-gradient(circle, var(--theme-primary-light) 0%, transparent 70%)`,
             filter: { xs: "blur(60px)", sm: "blur(80px)", md: "blur(120px)", lg: "blur(130px)" },
             top: { xs: "-60px", sm: "-80px", md: "-100px" },
             right: { xs: "-60px", sm: "-80px", md: "-100px" },
@@ -420,7 +429,7 @@ function HeroSection() {
             position: "absolute",
             width: { xs: "150px", sm: "220px", md: "400px" },
             height: { xs: "150px", sm: "220px", md: "400px" },
-            background: "radial-gradient(circle, #aaa 0%, transparent 70%)",
+            background: `radial-gradient(circle, var(--theme-primary) 0%, transparent 70%)`,
             filter: { xs: "blur(50px)", sm: "blur(70px)", md: "blur(100px)" },
             bottom: { xs: "-40px", sm: "-50px", md: "-60px" },
             left: { xs: "-40px", sm: "-50px", md: "-60px" },
@@ -541,7 +550,7 @@ function HeroSection() {
             left: 0,
             width: "100%",
             height: { xs: "60px", sm: "80px", md: "100px" },
-            background: "linear-gradient(to top, #080808, transparent)",
+            background: "linear-gradient(to top, var(--theme-bg-primary), transparent)",
             zIndex: 3,
             pointerEvents: "none",
           }}

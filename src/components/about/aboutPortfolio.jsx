@@ -125,7 +125,7 @@ function AboutPortfolio() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        /* ── COLOR PALETTE — completely unchanged ── */
+        /* ── COLOR PALETTE ── */
         .item-color {
           position: relative; flex-shrink: 0;
           width: clamp(22px, 3vw, 30px);
@@ -146,7 +146,8 @@ function AboutPortfolio() {
           left: 50%; bottom: 48px;
           font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 1px;
           transform: translateX(-50%); padding: 3px 6px;
-          background: #fff; color: #000; border-radius: 4px;
+          background: var(--theme-text-primary); color: var(--theme-bg-primary);
+          border-radius: 4px;
           pointer-events: none; opacity: 0; visibility: hidden;
           transition: 300ms ease; white-space: nowrap;
         }
@@ -186,12 +187,16 @@ function AboutPortfolio() {
 
         /* ── CARD ── */
         .bcard {
-          background: #0d0d0d;
-          border: 1px solid #1e1e1e;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
           border-radius: 2px;
           padding: clamp(28px, 4vw, 52px);
           position: relative;
           overflow: hidden;
+          transition: border-color 0.3s ease;
+        }
+        .bcard:hover {
+          border-color: var(--theme-border-hover);
         }
 
         /* The looping scan line */
@@ -234,10 +239,11 @@ function AboutPortfolio() {
           font-size: 9.5px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.2);
+          color: var(--theme-text-muted);
           padding: 3px 10px;
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid var(--theme-border-hover);
           border-radius: 999px;
+          transition: all 0.3s ease;
         }
 
         .bcard-title {
@@ -245,7 +251,7 @@ function AboutPortfolio() {
           font-size: clamp(2.2rem, 5vw, 3.6rem);
           font-weight: 400;
           letter-spacing: 3px;
-          color: #fff;
+          color: var(--theme-text-primary);
           margin: 0 0 clamp(14px, 2vw, 20px);
           line-height: 0.95;
           position: relative;
@@ -255,7 +261,7 @@ function AboutPortfolio() {
         .bcard-rule {
           width: 100%;
           height: 1px;
-          background: rgba(255,255,255,0.06);
+          background: var(--theme-border-hover);
           margin-bottom: clamp(16px, 2.5vw, 26px);
           position: relative;
           z-index: 2;
@@ -269,7 +275,7 @@ function AboutPortfolio() {
         .bcard-p {
           font-family: 'DM Sans', sans-serif;
           font-size: clamp(0.9rem, 1.3vw, 1rem);
-          color: rgba(255,255,255,0.45);
+          color: var(--theme-text-secondary);
           line-height: 1.85;
           margin: 0 0 10px;
         }
@@ -284,7 +290,7 @@ function AboutPortfolio() {
         .bcard-li {
           font-family: 'DM Sans', sans-serif;
           font-size: clamp(0.88rem, 1.2vw, 0.97rem);
-          color: rgba(255,255,255,0.42);
+          color: var(--theme-text-secondary);
           line-height: 1.7;
           padding-left: 16px;
           position: relative;
@@ -296,14 +302,27 @@ function AboutPortfolio() {
           width: 5px; height: 1px;
           background: rgba(255,59,59,0.4);
         }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .bcard {
+          background: var(--theme-bg-card);
+        }
+        [data-theme="light"] .bcard-tag {
+          border-color: var(--theme-border);
+        }
+        [data-theme="light"] .bcard-p,
+        [data-theme="light"] .bcard-li {
+          color: var(--theme-text-secondary);
+          opacity: 0.8;
+        }
       `}</style>
 
       <section style={{
         width: "100%",
-        backgroundColor: "#080808",
-        color: "#fff",
-        borderTop: "1px solid #141414",
-        borderBottom: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)",
+        borderTop: "1px solid var(--theme-border)",
+        borderBottom: "1px solid var(--theme-border)",
       }}>
         <div style={{
           maxWidth: "1350px",
@@ -324,12 +343,12 @@ function AboutPortfolio() {
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               padding: "4px 12px",
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid var(--theme-border-hover)",
               borderRadius: "999px",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px", letterSpacing: "2px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "var(--theme-text-muted)",
               marginBottom: "24px",
             }}>
               <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
@@ -348,10 +367,11 @@ function AboutPortfolio() {
                 letterSpacing: "5px",
                 margin: "0",
                 lineHeight: 0.95,
+                color: "var(--theme-text-primary)",
               }}
             >
               Design &amp;{" "}
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>Build System</span>
+              <span style={{ color: "var(--theme-text-muted)", opacity: 0.5 }}>Build System</span>
             </motion.h2>
           </motion.div>
 
@@ -365,11 +385,11 @@ function AboutPortfolio() {
           {/* Divider */}
           <div style={{
             width: "100%", height: "1px",
-            background: "linear-gradient(to right, transparent, rgba(255,255,255,0.07), transparent)",
+            background: "linear-gradient(to right, transparent, var(--theme-border-hover), transparent)",
             margin: "clamp(40px, 6vw, 72px) 0 0",
           }} />
 
-          {/* Color palette — completely unchanged */}
+          {/* Color palette */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -380,7 +400,7 @@ function AboutPortfolio() {
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px", letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.2)",
+              color: "var(--theme-text-muted)",
               margin: "clamp(24px, 3vw, 36px) 0 0",
             }}>
               Palette

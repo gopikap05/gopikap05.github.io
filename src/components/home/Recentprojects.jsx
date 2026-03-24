@@ -45,8 +45,8 @@ function ProjectCard({ project, index, to }) {
           textDecoration: "none",
           position: "relative",
           overflow: "hidden",
-          border: "1px solid #1c1c1c",
-          backgroundColor: "#0d0d0d",
+          border: "1px solid var(--theme-border)",
+          backgroundColor: "var(--theme-bg-card)",
           cursor: "none",
           boxSizing: "border-box",
         }}
@@ -67,7 +67,7 @@ function ProjectCard({ project, index, to }) {
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(13,13,13,0.84)",
+          background: "var(--theme-overlay-dark)",
           zIndex: 1,
         }} />
 
@@ -90,7 +90,7 @@ function ProjectCard({ project, index, to }) {
             width: "50px",
             height: "50px",
             borderRadius: "50%",
-            background: "#fff",
+            background: "var(--theme-text-primary)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -106,14 +106,14 @@ function ProjectCard({ project, index, to }) {
           }}
           transition={{ opacity: { duration: 0.2 } }}
         >
-          <span style={{ fontSize: "18px", color: "#000", lineHeight: 1 }}>→</span>
+          <span style={{ fontSize: "18px", color: "var(--theme-bg-primary)", lineHeight: 1 }}>→</span>
           <span style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: "7px",
             fontWeight: 700,
             letterSpacing: "2px",
             textTransform: "uppercase",
-            color: "#000",
+            color: "var(--theme-bg-primary)",
           }}>View</span>
         </motion.div>
 
@@ -141,7 +141,7 @@ function ProjectCard({ project, index, to }) {
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(1.3rem, 2.5vw, 1.75rem)",
             letterSpacing: "2px",
-            color: "#fff",
+            color: "var(--theme-text-primary)",
             lineHeight: 1,
             marginBottom: "10px",
           }}>
@@ -150,7 +150,7 @@ function ProjectCard({ project, index, to }) {
 
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
-            color: "rgba(255,255,255,0.35)",
+            color: "var(--theme-text-muted)",
             fontSize: "11px",
             letterSpacing: "2px",
             textTransform: "uppercase",
@@ -162,7 +162,7 @@ function ProjectCard({ project, index, to }) {
 
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
-            color: "rgba(255,255,255,0.55)",
+            color: "var(--theme-text-secondary)",
             fontSize: "0.88rem",
             lineHeight: 1.7,
           }}>
@@ -211,13 +211,13 @@ function RecentProjects() {
           align-items: center;
           gap: 6px;
           padding: 4px 12px;
-          border: 1px solid rgba(255,255,255,0.12);
+          border: 1px solid var(--theme-border-hover);
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.4);
+          color: var(--theme-text-muted);
           margin-bottom: clamp(28px, 4vw, 48px);
         }
 
@@ -228,7 +228,7 @@ function RecentProjects() {
           align-items: center;
           justify-content: center;
           padding: 14px 40px;
-          border: 1px solid rgba(255,255,255,0.3);
+          border: 1px solid var(--theme-border-hover);
           background: transparent;
           border-radius: 100px;
           font-family: 'DM Sans', sans-serif;
@@ -236,7 +236,7 @@ function RecentProjects() {
           font-size: 0.8rem;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: #fff;
+          color: var(--theme-text-primary);
           cursor: pointer;
           overflow: hidden;
           transition: color 0.5s ease, border-color 0.5s ease, border-radius 0.5s ease;
@@ -245,7 +245,7 @@ function RecentProjects() {
         .animated-button .btn-bg {
           position: absolute;
           inset: 0;
-          background: #fff;
+          background: var(--theme-text-primary);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -253,7 +253,11 @@ function RecentProjects() {
           border-radius: inherit;
         }
         .animated-button:hover .btn-bg { transform: scaleX(1); }
-        .animated-button:hover { color: #000; border-color: #fff; border-radius: 10px; }
+        .animated-button:hover { 
+          color: var(--theme-bg-primary); 
+          border-color: var(--theme-text-primary); 
+          border-radius: 10px; 
+        }
         .animated-button .btn-text {
           position: relative;
           z-index: 1;
@@ -272,9 +276,9 @@ function RecentProjects() {
       {/* ── SECTION ── */}
       <Box sx={{
         width: "100%",
-        backgroundColor: "#080808",
-        color: "#fff",
-        borderTop: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)",
+        borderTop: "1px solid var(--theme-border)",
         position: "relative",
         overflow: "hidden",
       }}>
@@ -321,6 +325,7 @@ function RecentProjects() {
                 fontWeight: 400,
                 lineHeight: 0.95,
                 letterSpacing: "3px",
+                color: "var(--theme-text-primary)",
               }}>
                 Latest Work
               </Typography>
@@ -335,7 +340,7 @@ function RecentProjects() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(11px, 1vw, 13px)",
-                color: "rgba(255,255,255,0.3)",
+                color: "var(--theme-text-muted)",
                 letterSpacing: "2px",
                 textTransform: "uppercase",
                 pb: { sm: "8px" },

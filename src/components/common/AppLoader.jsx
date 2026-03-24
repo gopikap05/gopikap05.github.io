@@ -22,15 +22,27 @@ const AppLoader = ({ onFinish }) => {
             justify-content: center;
             gap: 40px;
             z-index: 9999;
+            background: var(--theme-bg-primary);
+            transition: background 0.3s ease;
+          }
+
+          /* Gradient animation for dark theme */
+          [data-theme="dark"] .loader-wrapper {
             background: linear-gradient(
               -45deg,
-              #000000,
-              #111111,
-              #1a1a1a,
-              #000000
+              #080808,
+              #0d0d0d,
+              #141414,
+              #080808
             );
             background-size: 400% 400%;
             animation: gradientMove 8s ease infinite;
+          }
+
+          /* Solid background for light theme (softer) */
+          [data-theme="light"] .loader-wrapper {
+            background: var(--theme-bg-primary);
+            animation: none;
           }
 
           @keyframes gradientMove {
@@ -43,7 +55,7 @@ const AppLoader = ({ onFinish }) => {
             font-size: 48px;
             font-weight: 600;
             letter-spacing: 6px;
-            color: #ffffff;
+            color: var(--theme-text-primary);
             opacity: 0;
             animation: fadeIn 1s ease forwards;
           }
@@ -63,10 +75,23 @@ const AppLoader = ({ onFinish }) => {
             position: relative;
             border-radius: 50%;
             transform: scale(var(--size));
+            transition: box-shadow 0.3s ease;
+          }
+
+          /* Dark theme loader styles */
+          [data-theme="dark"] .loader {
             box-shadow:
               0 0 25px 0 var(--color-three),
               0 20px 50px 0 var(--color-four);
             animation: colorize calc(var(--time-animation) * 3) ease-in-out infinite;
+          }
+
+          /* Light theme loader styles - using theme colors */
+          [data-theme="light"] .loader {
+            box-shadow:
+              0 0 25px 0 rgba(122, 63, 145, 0.3),
+              0 20px 50px 0 rgba(122, 63, 145, 0.2);
+            animation: colorizeLight calc(var(--time-animation) * 3) ease-in-out infinite;
           }
 
           .loader::before {
@@ -85,6 +110,16 @@ const AppLoader = ({ onFinish }) => {
               inset 0 -10px 10px 0 var(--color-four);
           }
 
+          /* Light theme loader gradient */
+          [data-theme="light"] .loader::before {
+            border-top: solid 1px var(--theme-primary);
+            border-bottom: solid 1px var(--theme-primary-light);
+            background: linear-gradient(180deg, rgba(122, 63, 145, 0.2), rgba(197, 157, 217, 0.3));
+            box-shadow:
+              inset 0 10px 10px 0 rgba(122, 63, 145, 0.2),
+              inset 0 -10px 10px 0 rgba(197, 157, 217, 0.2);
+          }
+
           .loader .box {
             width: 100px;
             height: 100px;
@@ -95,6 +130,15 @@ const AppLoader = ({ onFinish }) => {
             );
             mask: url(#clipping);
             -webkit-mask: url(#clipping);
+          }
+
+          /* Light theme box gradient */
+          [data-theme="light"] .loader .box {
+            background: linear-gradient(
+              180deg,
+              var(--theme-primary) 30%,
+              var(--theme-primary-light) 70%
+            );
           }
 
           .loader svg {
@@ -169,10 +213,21 @@ const AppLoader = ({ onFinish }) => {
             80% { filter: hue-rotate(-45deg); }
             100% { filter: hue-rotate(0deg); }
           }
+
+          /* Light theme color animation - using purple hues */
+          @keyframes colorizeLight {
+            0% { filter: hue-rotate(0deg); }
+            20% { filter: hue-rotate(30deg); }
+            40% { filter: hue-rotate(60deg); }
+            60% { filter: hue-rotate(90deg); }
+            80% { filter: hue-rotate(45deg); }
+            100% { filter: hue-rotate(0deg); }
+          }
         `}
       </style>
 
       <div className="loader-wrapper">
+        {/* Optional text loader - uncomment if needed */}
         {/* <div className="loader-text">GOPIKA</div> */}
 
         <div className="loader">

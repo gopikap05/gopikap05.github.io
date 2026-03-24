@@ -48,16 +48,16 @@ function AboutSection() {
           padding: 0;
         }
         .c-button--gooey {
-          color: #fff;
+          color: var(--theme-text-primary);
           text-transform: uppercase;
           letter-spacing: 3px;
           font-size: clamp(0.7rem, 0.9vw, 0.8rem);
-          border: 1px solid rgba(255,255,255,0.25);
+          border: 1px solid var(--theme-border-hover);
           padding: 1em 2.2em;
           transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
         }
         .c-button--gooey:hover {
-          color: #000;
+          color: var(--theme-bg-primary);
           border-color: transparent;
         }
         .c-button--gooey .c-button__blobs {
@@ -69,7 +69,7 @@ function AboutSection() {
           z-index: -1;
         }
         .c-button--gooey .c-button__blobs div {
-          background: #fff;
+          background: var(--theme-text-primary);
           width: 34%;
           height: 100%;
           border-radius: 100%;
@@ -97,7 +97,8 @@ function AboutSection() {
         .about-index {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(80px, 12vw, 180px);
-          color: rgba(255,255,255,0.03);
+          color: var(--theme-text-muted);
+          opacity: 0.03;
           position: absolute;
           top: -20px;
           right: 0;
@@ -113,13 +114,13 @@ function AboutSection() {
           align-items: center;
           gap: 6px;
           padding: 4px 12px;
-          border: 1px solid rgba(255,255,255,0.15);
+          border: 1px solid var(--theme-border-hover);
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.4);
+          color: var(--theme-text-muted);
         }
         .about-tag-dot {
           width: 5px; height: 5px;
@@ -134,17 +135,18 @@ function AboutSection() {
 
         /* ── Stat cards ── */
         .stat-card {
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid var(--theme-border-hover);
           padding: 20px 24px;
           position: relative;
           overflow: hidden;
           transition: border-color 0.3s ease;
+          background: var(--theme-bg-primary);
         }
         .stat-card::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: rgba(255,255,255,0.02);
+          background: var(--theme-bg-secondary);
           transform: translateY(100%);
           transition: transform 0.4s ease;
         }
@@ -152,21 +154,25 @@ function AboutSection() {
           transform: translateY(0);
         }
         .stat-card:hover {
-          border-color: rgba(255,255,255,0.2);
+          border-color: var(--theme-border);
         }
         .stat-number {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(32px, 4vw, 52px);
           line-height: 1;
-          color: #fff;
+          color: var(--theme-text-primary);
+          position: relative;
+          z-index: 1;
         }
         .stat-label {
           font-family: 'DM Sans', sans-serif;
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
+          color: var(--theme-text-muted);
           margin-top: 4px;
+          position: relative;
+          z-index: 1;
         }
       `}</style>
 
@@ -179,9 +185,9 @@ function AboutSection() {
         transition={{ duration: 0.8 }}
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -191,7 +197,7 @@ function AboutSection() {
           style={{
             width: lineWidth,
             height: "1px",
-            background: "linear-gradient(to right, #ff3b3b, rgba(255,255,255,0.3), transparent)",
+            background: "linear-gradient(to right, #ff3b3b, var(--theme-text-secondary), transparent)",
             position: "absolute",
             top: 0,
             left: 0,
@@ -210,9 +216,6 @@ function AboutSection() {
             position: "relative",
           }}
         >
-          {/* Big background number */}
-          {/* <div className="about-index">02</div> */}
-
           {/* Top row: tag + section label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -228,7 +231,7 @@ function AboutSection() {
             <div style={{
               height: "1px",
               width: "40px",
-              background: "rgba(255,255,255,0.15)"
+              background: "var(--theme-border-hover)"
             }} />
           </motion.div>
 
@@ -253,6 +256,7 @@ function AboutSection() {
                   fontWeight: 600,
                   lineHeight: 1.25,
                   letterSpacing: "-0.5px",
+                  color: "var(--theme-text-primary)",
                 }}
               >
                 I'm a versatile{" "}
@@ -288,7 +292,7 @@ function AboutSection() {
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gap: "1px",
                 mt: { xs: "32px", md: "48px" },
-                background: "rgba(255,255,255,0.08)",
+                background: "var(--theme-border-hover)",
               }}>
                 {[
                   { number: "2+", label: "Years Exp." },
@@ -302,7 +306,6 @@ function AboutSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }}
-                    style={{ background: "#080808" }}
                   >
                     <div className="stat-number">{stat.number}</div>
                     <div className="stat-label">{stat.label}</div>
@@ -335,7 +338,7 @@ function AboutSection() {
                         marginRight: "0.4em",
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)",
-                        color: "#ccc",
+                        color: "var(--theme-text-secondary)",
                       }}
                     >
                       {word}

@@ -15,6 +15,8 @@ import About from "./pages/About";
 import AppLoader from "./components/common/AppLoader";
 import CustomCursor from "./components/common/CustomCursor";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import ThemeSettings from "./pages/ThemeSettings";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -61,6 +63,7 @@ function App() {
       <ScrollToTop />
 
       <Routes>
+        <Route path="/theme" element={<ThemeSettings />} />
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />

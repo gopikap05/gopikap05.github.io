@@ -47,11 +47,16 @@ function AboutMe() {
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
-          border: 1px solid rgba(255,255,255,0.1);
+          color: var(--theme-text-muted);
+          border: 1px solid var(--theme-border-hover);
           padding: 3px 10px;
           border-radius: 999px;
           white-space: nowrap;
+          transition: all 0.3s ease;
+        }
+        .service-tag:hover {
+          border-color: var(--theme-primary);
+          color: var(--theme-text-secondary);
         }
 
         /* ── Service row hover ── */
@@ -73,7 +78,7 @@ function AboutMe() {
           height: 100%;
         }
         .service-row:hover {
-          background: rgba(255,255,255,0.02);
+          background: var(--theme-overlay);
         }
 
         /* ── About hero char ── */
@@ -83,7 +88,15 @@ function AboutMe() {
         }
         .about-hero-char:hover {
           transform: translateY(-10px);
-          color: rgba(255,255,255,0.4);
+          color: var(--theme-text-muted);
+        }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .service-tag {
+          border-color: var(--theme-border);
+        }
+        [data-theme="light"] .service-row:hover {
+          background: rgba(122, 63, 145, 0.03);
         }
       `}</style>
 
@@ -95,9 +108,9 @@ function AboutMe() {
         transition={{ duration: 0.8 }}
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderBottom: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderBottom: "1px solid var(--theme-border)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -106,24 +119,25 @@ function AboutMe() {
         <div style={{
           position: "absolute", top: 24, left: 24,
           width: 28, height: 28,
-          borderTop: "1px solid rgba(255,255,255,0.1)",
-          borderLeft: "1px solid rgba(255,255,255,0.1)",
+          borderTop: "1px solid var(--theme-border-hover)",
+          borderLeft: "1px solid var(--theme-border-hover)",
         }} />
         <div style={{
           position: "absolute", bottom: 24, right: 24,
           width: 28, height: 28,
-          borderBottom: "1px solid rgba(255,255,255,0.1)",
-          borderRight: "1px solid rgba(255,255,255,0.1)",
+          borderBottom: "1px solid var(--theme-border-hover)",
+          borderRight: "1px solid var(--theme-border-hover)",
         }} />
 
         {/* Ambient glow */}
         <div style={{
           position: "absolute",
           width: "400px", height: "400px",
-          background: "radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, var(--theme-primary-light) 0%, transparent 70%)",
           filter: "blur(80px)",
           top: "-100px", right: "-100px",
           pointerEvents: "none",
+          opacity: 0.1,
         }} />
 
         <Box sx={{
@@ -158,7 +172,7 @@ function AboutMe() {
               fontSize: "10px",
               letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "var(--theme-text-muted)",
             }}>
               About Me
             </span>
@@ -178,6 +192,7 @@ function AboutMe() {
               lineHeight: 0.9,
               margin: 0,
               textAlign: "center",
+              color: "var(--theme-text-primary)",
             }}>
               {"ABOUT ME".split("").map((char, i) => (
                 <span key={i} className="about-hero-char">
@@ -196,7 +211,7 @@ function AboutMe() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(12px, 1.1vw, 14px)",
-              color: "rgba(255,255,255,0.3)",
+              color: "var(--theme-text-muted)",
               letterSpacing: "3px",
               textTransform: "uppercase",
               textAlign: "center",
@@ -211,9 +226,9 @@ function AboutMe() {
       {/* ── SERVICES SECTION ── */}
       <Box sx={{
         width: "100%",
-        backgroundColor: "#080808",
-        color: "#fff",
-        borderBottom: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)",
+        borderBottom: "1px solid var(--theme-border)",
       }}>
         <Box sx={{
           maxWidth: "1350px",
@@ -243,13 +258,13 @@ function AboutMe() {
                 <div style={{
                   display: "inline-flex", alignItems: "center", gap: "6px",
                   padding: "4px 12px",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid var(--theme-border-hover)",
                   borderRadius: "999px",
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "10px",
                   letterSpacing: "2px",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.3)",
+                  color: "var(--theme-text-muted)",
                   marginBottom: "20px",
                 }}>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
@@ -262,7 +277,7 @@ function AboutMe() {
                   fontWeight: 400,
                   letterSpacing: "3px",
                   lineHeight: 1.1,
-                  color: "#fff",
+                  color: "var(--theme-text-primary)",
                 }}>
                   I<br />Provide<br />Various<br />Services
                 </Typography>
@@ -288,8 +303,8 @@ function AboutMe() {
                       sx={{
                         py: { xs: "20px", md: "24px" },
                         px: "16px",
-                        borderTop: index === 0 ? "1px solid #1c1c1c" : "none",
-                        borderBottom: "1px solid #1c1c1c",
+                        borderTop: index === 0 ? `1px solid var(--theme-border)` : "none",
+                        borderBottom: `1px solid var(--theme-border)`,
                       }}
                     >
                       {/* Header row */}
@@ -304,7 +319,7 @@ function AboutMe() {
                           fontFamily: "'Bebas Neue', sans-serif",
                           fontSize: "12px",
                           letterSpacing: "2px",
-                          color: isOpen ? "rgba(255,59,59,0.7)" : "rgba(255,255,255,0.2)",
+                          color: isOpen ? "rgba(255,59,59,0.7)" : "var(--theme-text-muted)",
                           minWidth: "28px",
                           transition: "color 0.3s ease",
                         }}>
@@ -315,7 +330,7 @@ function AboutMe() {
                         <Typography sx={{
                           fontFamily: "'DM Sans', sans-serif",
                           fontSize: { xs: "0.95rem", md: "1.05rem" },
-                          color: isOpen ? "#fff" : "rgba(255,255,255,0.6)",
+                          color: isOpen ? "var(--theme-text-primary)" : "var(--theme-text-secondary)",
                           fontWeight: isOpen ? 500 : 400,
                           flex: 1,
                           transition: "color 0.3s ease",
@@ -330,7 +345,7 @@ function AboutMe() {
                           transition={{ duration: 0.3 }}
                           style={{
                             fontSize: "20px",
-                            color: isOpen ? "#fff" : "rgba(255,255,255,0.3)",
+                            color: isOpen ? "var(--theme-text-primary)" : "var(--theme-text-muted)",
                             display: "inline-block",
                             lineHeight: 1,
                             transition: "color 0.3s ease",
@@ -363,7 +378,7 @@ function AboutMe() {
                               <Typography sx={{
                                 fontFamily: "'DM Sans', sans-serif",
                                 fontSize: { xs: "0.82rem", md: "0.88rem" },
-                                color: "rgba(255,255,255,0.45)",
+                                color: "var(--theme-text-secondary)",
                                 lineHeight: 1.8,
                                 maxWidth: "480px",
                               }}>

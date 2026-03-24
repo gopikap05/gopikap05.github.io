@@ -26,7 +26,7 @@ function FigmaAnimation() {
           height: 250px;
           border-radius: 10px;
           padding: 1px;
-          background: radial-gradient(circle 230px at 0% 0%, #ffffff, #0c0d0d);
+          background: radial-gradient(circle 230px at 0% 0%, var(--theme-primary-light), var(--theme-bg-tertiary));
           position: relative;
         }
 
@@ -34,8 +34,8 @@ function FigmaAnimation() {
           width: 5px;
           aspect-ratio: 1;
           position: absolute;
-          background-color: #fff;
-          box-shadow: 0 0 10px #ffffff;
+          background-color: var(--theme-text-primary);
+          box-shadow: 0 0 10px var(--theme-primary);
           border-radius: 100px;
           z-index: 2;
           right: 10%;
@@ -55,14 +55,14 @@ function FigmaAnimation() {
           width: 100%;
           height: 100%;
           border-radius: 9px;
-          border: solid 1px #202222;
-          background: radial-gradient(circle 280px at 0% 0%, #444444, #0c0d0d);
+          border: solid 1px var(--theme-border);
+          background: radial-gradient(circle 280px at 0% 0%, var(--theme-bg-tertiary), var(--theme-bg-secondary));
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
           flex-direction: column;
-          color: #fff;
+          color: var(--theme-text-primary);
         }
 
         .ray {
@@ -70,9 +70,9 @@ function FigmaAnimation() {
           height: 45px;
           border-radius: 100px;
           position: absolute;
-          background-color: #c7c7c7;
-          opacity: 0.4;
-          box-shadow: 0 0 50px #fff;
+          background-color: var(--theme-primary);
+          opacity: 0.3;
+          box-shadow: 0 0 50px var(--theme-primary-light);
           filter: blur(10px);
           transform-origin: 10%;
           top: 0%;
@@ -84,33 +84,61 @@ function FigmaAnimation() {
           font-weight: 700;
           font-size: 3.5rem;
           letter-spacing: 2px;
+          color: var(--theme-text-primary);
         }
 
         .line {
           width: 100%;
           height: 1px;
           position: absolute;
-          background-color: #2c2c2c;
+          background-color: var(--theme-border);
         }
 
         .topl {
           top: 10%;
-          background: linear-gradient(90deg, #888888 30%, #1d1f1f 70%);
+          background: linear-gradient(90deg, var(--theme-text-muted) 30%, var(--theme-border) 70%);
         }
 
-        .bottoml { bottom: 10%; }
+        .bottoml { 
+          bottom: 10%;
+          background: linear-gradient(90deg, var(--theme-border), var(--theme-text-muted));
+        }
 
         .leftl {
           left: 10%;
           width: 1px;
           height: 100%;
-          background: linear-gradient(180deg, #747474 30%, #222424 70%);
+          background: linear-gradient(180deg, var(--theme-text-muted) 30%, var(--theme-border) 70%);
         }
 
         .rightl {
           right: 10%;
           width: 1px;
           height: 100%;
+          background: linear-gradient(180deg, var(--theme-border), var(--theme-text-muted));
+        }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .outer {
+          background: radial-gradient(circle 230px at 0% 0%, var(--theme-primary-light), var(--theme-primary));
+        }
+        
+        [data-theme="light"] .card {
+          background: radial-gradient(circle 280px at 0% 0%, #ffffff, var(--theme-bg-card));
+        }
+        
+        [data-theme="light"] .dot {
+          background-color: var(--theme-primary);
+          box-shadow: 0 0 10px var(--theme-primary);
+        }
+        
+        [data-theme="light"] .ray {
+          background-color: var(--theme-primary-light);
+          opacity: 0.4;
+        }
+        
+        [data-theme="light"] .card .text {
+          color: var(--theme-text-primary);
         }
 
         /* Mobile stacking */
@@ -140,25 +168,27 @@ function FigmaAnimation() {
               y="20"
               width="559"
               height="286"
-              stroke="#000"
+              stroke="var(--theme-border)"
               strokeWidth="2"
-              fill="#8b5cf610"
+              fill="var(--theme-primary-light)"
+              opacity="0.1"
             />
 
-            <text x="50%" y="130" textAnchor="middle" fill="white" fontSize="52" fontWeight="600">
+            <text x="50%" y="130" textAnchor="middle" fill="var(--theme-text-primary)" fontSize="52" fontWeight="600">
               Build,
             </text>
-            <text x="50%" y="190" textAnchor="middle" fill="white" fontSize="52" fontWeight="600">
+            <text x="50%" y="190" textAnchor="middle" fill="var(--theme-text-primary)" fontSize="52" fontWeight="600">
               Create,
             </text>
-            <text x="50%" y="250" textAnchor="middle" fill="white" fontSize="52" fontWeight="600">
+            <text x="50%" y="250" textAnchor="middle" fill="var(--theme-text-primary)" fontSize="52" fontWeight="600">
               Launch.
             </text>
 
             <path
               strokeWidth="2"
-              stroke="white"
-              fill="#8b5cf6"
+              stroke="var(--theme-primary)"
+              fill="var(--theme-primary)"
+              opacity="0.8"
               d="M453.383 343L448 317L471 331L459.745 333.5L453.383 343Z"
             />
           </svg>
@@ -172,7 +202,7 @@ function FigmaAnimation() {
             <div className="ray"></div>
 
             <div className="text">40+</div>
-            <div style={{ fontSize: "14px", letterSpacing: "2px", marginTop: "6px" }}>
+            <div style={{ fontSize: "14px", letterSpacing: "2px", marginTop: "6px", color: "var(--theme-text-muted)" }}>
               Projects
             </div>
 

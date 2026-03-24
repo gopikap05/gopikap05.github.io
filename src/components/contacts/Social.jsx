@@ -27,41 +27,63 @@ function Social() {
           align-items: center;
           justify-content: space-between;
           padding: 24px 0;
-          border-bottom: 1px solid #1c1c1c;
+          border-bottom: 1px solid var(--theme-border);
           gap: 16px;
-          transition: border-color 0.3s ease;
+          transition: all 0.3s ease;
           cursor: pointer;
         }
-        .social-link:first-of-type { border-top: 1px solid #1c1c1c; }
-        .social-link:hover { border-color: #2e2e2e; }
+        .social-link:first-of-type { border-top: 1px solid var(--theme-border); }
+        .social-link:hover { 
+          border-color: var(--theme-border-hover); 
+        }
 
         .social-link-label {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(2rem, 5vw, 3.5rem);
           letter-spacing: 3px;
-          color: rgba(255,255,255,0.25);
+          color: var(--theme-text-muted);
           line-height: 1;
           transition: color 0.3s ease;
         }
-        .social-link:hover .social-link-label { color: #fff; }
+        .social-link:hover .social-link-label { 
+          color: var(--theme-text-primary); 
+        }
 
         .social-link-num {
           font-family: 'Bebas Neue', sans-serif;
           font-size: 11px;
           letter-spacing: 2px;
-          color: rgba(255,59,59,0.4);
+          color: rgba(255,59,59,0.5);
           transition: color 0.3s ease;
         }
-        .social-link:hover .social-link-num { color: rgba(255,59,59,0.7); }
+        .social-link:hover .social-link-num { 
+          color: rgba(255,59,59,0.8); 
+        }
 
         .social-link-arrow {
           font-size: 18px;
-          color: rgba(255,255,255,0.15);
-          transition: color 0.3s ease, transform 0.3s ease;
+          color: var(--theme-text-muted);
+          opacity: 0.5;
+          transition: all 0.3s ease;
         }
         .social-link:hover .social-link-arrow {
-          color: #fff;
+          color: var(--theme-text-primary);
+          opacity: 1;
           transform: translate(4px, -4px);
+        }
+
+        /* Light theme adjustments */
+        [data-theme="light"] .social-link-label {
+          color: var(--theme-text-secondary);
+        }
+        [data-theme="light"] .social-link:hover .social-link-label {
+          color: var(--theme-text-primary);
+        }
+        [data-theme="light"] .social-link-arrow {
+          color: var(--theme-text-secondary);
+        }
+        [data-theme="light"] .social-link:hover .social-link-arrow {
+          color: var(--theme-primary);
         }
       `}</style>
 
@@ -69,24 +91,42 @@ function Social() {
         ref={ref}
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
-          borderBottom: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
+          borderBottom: "1px solid var(--theme-border)",
           px: "5%",
           py: { xs: "60px", sm: "70px", md: "90px" },
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* BG text */}
-        <motion.div style={{ y, position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none", zIndex: 0 }}>
+        {/* BG text - Now more visible */}
+        <motion.div 
+          style={{ 
+            y, 
+            position: "absolute", 
+            inset: 0, 
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            pointerEvents: "none", 
+            zIndex: 0 
+          }}
+        >
           <Typography sx={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: { xs: "clamp(4rem, 20vw, 10rem)" },
-            color: "rgba(255,255,255,0.018)",
+            fontSize: { xs: "clamp(5rem, 20vw, 12rem)" },
+            color: "var(--theme-text-primary)",
+            opacity: {
+              xs: 0.03,
+              md: 0.04
+            },
             whiteSpace: "nowrap",
             letterSpacing: "10px",
+            textTransform: "uppercase",
+            fontWeight: 700,
+            userSelect: "none",
           }}>
             CONNECT
           </Typography>
@@ -101,7 +141,7 @@ function Social() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "10px", letterSpacing: "2.5px",
-                textTransform: "uppercase", color: "rgba(255,255,255,0.3)",
+                textTransform: "uppercase", color: "var(--theme-text-muted)",
               }}>
                 Connect
               </Typography>
@@ -114,6 +154,7 @@ function Social() {
               letterSpacing: "3px",
               lineHeight: 1,
               mb: { xs: 5, md: 7 },
+              color: "var(--theme-text-primary)",
             }}>
               Let's Stay Connected
             </Typography>

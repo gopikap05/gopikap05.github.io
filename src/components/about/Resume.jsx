@@ -15,40 +15,52 @@ function Resume() {
         }
         .resume-img:hover {
           transform: translateY(-8px);
-          box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+          box-shadow: var(--theme-shadow-lg);
         }
 
-        /* ── 3D Card ── */
+        /* ── 3D Card - Fixed for better visibility ── */
         .resume-3d-card {
-          width: min(240px, 100%);
-          background: linear-gradient(135deg, #1a0533, #2d0a6e);
-          border: 1px solid rgba(124,58,237,0.4);
-          border-radius: 16px;
+          width: min(260px, 100%);
+          background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-dark) 100%);
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 20px;
           transform: rotate3d(1, -1, 1, 55deg);
-          transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease;
+          transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
           overflow: hidden;
-          padding: 20px;
+          padding: 28px 24px;
           display: flex;
           align-items: flex-start;
           position: relative;
           cursor: pointer;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
+        
         .resume-3d-card::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(139,92,246,0.15), transparent);
+          background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
           pointer-events: none;
         }
+        
+        .resume-3d-card::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15), transparent 70%);
+          pointer-events: none;
+        }
+        
         .resume-3d-card:hover {
-          transform: rotate3d(0,0,0,0deg);
-          box-shadow: 0 24px 60px rgba(109,40,217,0.4);
+          transform: rotate3d(0,0,0,0deg) scale(1.02);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+          border-color: rgba(255,255,255,0.5);
         }
 
         .resume-inner {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 16px;
           width: 100%;
           position: relative;
           z-index: 1;
@@ -56,51 +68,96 @@ function Resume() {
 
         .resume-role {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(2rem, 5vw, 2.8rem);
-          color: #f5e9ff;
+          font-size: clamp(2.2rem, 5vw, 3rem);
+          color: #ffffff;
           line-height: 1;
           letter-spacing: 2px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .resume-sub {
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
+          font-size: 11px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: rgba(233,213,255,0.6);
+          color: rgba(255,255,255,0.9);
           margin: 4px 0 0;
+          font-weight: 500;
         }
 
         .resume-download {
-          background: rgba(243,232,255,0.12);
-          color: #e9d5ff;
+          background: rgba(255,255,255,0.2);
+          color: #ffffff;
           font-family: 'DM Sans', sans-serif;
           font-weight: 600;
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          border: 1px solid rgba(233,213,255,0.2);
-          padding: 8px 14px;
-          border-radius: 8px;
-          display: flex;
+          border: 1px solid rgba(255,255,255,0.4);
+          padding: 10px 18px;
+          border-radius: 12px;
+          display: inline-flex;
           align-items: center;
           gap: 8px;
           cursor: pointer;
-          transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+          transition: all 0.3s ease;
           width: fit-content;
-          margin-top: 4px;
+          margin-top: 8px;
+          backdrop-filter: blur(4px);
         }
+        
         .resume-download:hover {
-          background: rgba(243,232,255,0.22);
-          border-color: rgba(233,213,255,0.5);
-          color: #fff;
+          background: rgba(255,255,255,0.35);
+          border-color: rgba(255,255,255,0.7);
+          transform: translateX(4px);
+        }
+        
+        .resume-download svg {
+          transition: transform 0.3s ease;
+        }
+        
+        .resume-download:hover svg {
+          transform: translateY(2px);
+        }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .resume-3d-card {
+          background: linear-gradient(135deg, var(--theme-primary-light) 0%, var(--theme-primary) 100%);
+          border-color: rgba(255,255,255,0.5);
+          box-shadow: 0 20px 40px rgba(122, 63, 145, 0.2);
+        }
+        
+        [data-theme="light"] .resume-role {
+          color: #ffffff;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="light"] .resume-sub {
+          color: rgba(255,255,255,0.95);
+        }
+        
+        [data-theme="light"] .resume-download {
+          background: rgba(255,255,255,0.25);
+          border-color: rgba(255,255,255,0.5);
+        }
+        
+        [data-theme="light"] .resume-download:hover {
+          background: rgba(255,255,255,0.4);
+          border-color: rgba(255,255,255,0.8);
         }
 
         @media (max-width: 768px) {
-          .resume-3d-card { transform: rotate3d(0.5,-0.5,0.5,45deg); }
+          .resume-3d-card { 
+            transform: rotate3d(0.5,-0.5,0.5,45deg);
+            padding: 24px 20px;
+          }
         }
+        
         @media (max-width: 480px) {
-          .resume-3d-card { transform: rotate3d(0.3,-0.3,0.3,30deg); }
+          .resume-3d-card { 
+            transform: rotate3d(0.3,-0.3,0.3,30deg);
+            padding: 20px 18px;
+          }
         }
 
         /* ── Skills chips ── */
@@ -109,16 +166,25 @@ function Resume() {
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
-          border: 1px solid rgba(255,255,255,0.1);
+          color: var(--theme-text-muted);
+          border: 1px solid var(--theme-border-hover);
           padding: 4px 12px;
           border-radius: 999px;
-          transition: color 0.3s ease, border-color 0.3s ease;
+          transition: all 0.3s ease;
           white-space: nowrap;
         }
         .skill-chip:hover {
-          color: rgba(255,255,255,0.7);
-          border-color: rgba(255,255,255,0.25);
+          color: var(--theme-text-secondary);
+          border-color: var(--theme-border);
+        }
+
+        /* Light theme skill chips */
+        [data-theme="light"] .skill-chip {
+          border-color: var(--theme-border);
+        }
+        [data-theme="light"] .skill-chip:hover {
+          border-color: var(--theme-primary);
+          color: var(--theme-primary);
         }
 
         /* ── Mobile centering ── */
@@ -153,10 +219,10 @@ function Resume() {
         viewport={{ once: true }}
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
-          borderBottom: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
+          borderBottom: "1px solid var(--theme-border)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -187,13 +253,13 @@ function Resume() {
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               padding: "4px 12px",
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid var(--theme-border-hover)",
               borderRadius: "999px",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px",
               letterSpacing: "2px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "var(--theme-text-muted)",
             }}>
               <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
               Resume
@@ -215,9 +281,10 @@ function Resume() {
               lineHeight: 1,
               mb: { xs: 4, md: 6 },
               textAlign: { xs: "center", md: "left" },
+              color: "var(--theme-text-primary)",
             }}>
               A Snapshot of My{" "}
-              <Box component="span" sx={{ color: "rgba(255,255,255,0.25)" }}>
+              <Box component="span" sx={{ color: "var(--theme-text-muted)", opacity: 0.5 }}>
                 Professional Journey.
               </Box>
             </Typography>
@@ -248,7 +315,7 @@ function Resume() {
                   width: { xs: "100%", md: "380px" },
                   maxWidth: "440px",
                   borderRadius: "12px",
-                  border: "1px solid #1c1c1c",
+                  border: "1px solid var(--theme-border)",
                   display: "block",
                   mx: { xs: "auto", md: 0 },
                 }}
@@ -280,7 +347,7 @@ function Resume() {
                   className="resume-desc"
                   sx={{
                     fontFamily: "'DM Sans', sans-serif",
-                    color: "rgba(255,255,255,0.45)",
+                    color: "var(--theme-text-secondary)",
                     fontSize: { xs: "0.88rem", md: "0.95rem" },
                     lineHeight: 1.9,
                     textAlign: { xs: "center", md: "left" },
@@ -319,7 +386,7 @@ function Resume() {
               {/* Divider */}
               <div style={{
                 width: "100%", height: "1px",
-                background: "linear-gradient(to right, rgba(255,255,255,0.08), transparent)",
+                background: "linear-gradient(to right, var(--theme-border-hover), transparent)",
               }} />
 
               {/* 3D Card */}
@@ -340,8 +407,8 @@ function Resume() {
                   <div className="resume-3d-card">
                     <div className="resume-inner">
                       <div>
-                        <div className="resume-role">Jr.</div>
-                        <p className="resume-sub">Frontend Developer</p>
+                        <div className="resume-role">Jr. Frontend</div>
+                        <p className="resume-sub">Developer</p>
                       </div>
                       <button className="resume-download">
                         Download CV

@@ -28,19 +28,16 @@ function AllProjects() {
 
   const filteredProjects = projects
     .filter((project) => {
-      // Origin filter
       const originMatch =
         activeOrigin === "all" ||
         (project.origin &&
           project.origin.toLowerCase().trim() === activeOrigin.toLowerCase().trim());
       
-      // Status filter
       const statusMatch =
         activeStatus === "all" ||
         (project.status &&
           project.status.toLowerCase() === activeStatus.toLowerCase());
       
-      // Search filter - matches project title or company name
       const searchMatch = searchQuery === "" || 
         (project.title && project.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (project.company && project.company.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -59,10 +56,9 @@ function AllProjects() {
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setPage(1); // Reset to first page when searching
+    setPage(1);
   };
 
-  // Get the total number of projects dynamically
   const totalProjectsCount = projects.length;
 
   return (
@@ -77,27 +73,34 @@ function AllProjects() {
           text-transform: uppercase;
           padding: 7px 18px;
           border-radius: 999px;
-          border: 1px solid #1c1c1c;
+          border: 1px solid var(--theme-border);
           background: transparent;
-          color: rgba(255,255,255,0.35);
+          color: var(--theme-text-muted);
           cursor: pointer;
-          transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+          transition: all 0.3s ease;
           white-space: nowrap;
         }
-        .filter-pill:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); }
-        .filter-pill.active { border-color: #fff; color: #000; background: #fff; }
+        .filter-pill:hover { 
+          border-color: var(--theme-border-hover); 
+          color: var(--theme-text-secondary); 
+        }
+        .filter-pill.active { 
+          border-color: var(--theme-primary); 
+          color: var(--theme-bg-primary); 
+          background: var(--theme-primary); 
+        }
 
         .project-card {
           text-decoration: none;
           color: inherit;
-          border: 1px solid #1c1c1c;
-          background: #0d0d0d;
+          border: 1px solid var(--theme-border);
+          background: var(--theme-bg-card);
           display: flex;
           flex-direction: column;
           height: 100%;
           position: relative;
           overflow: hidden;
-          transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease;
+          transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
         .project-card::before {
           content: '';
@@ -111,9 +114,9 @@ function AllProjects() {
         }
         .project-card:hover::before { transform: scaleX(1); }
         .project-card:hover {
-          border-color: rgba(255,255,255,0.12);
+          border-color: var(--theme-border-hover);
           transform: translateY(-4px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+          box-shadow: var(--theme-shadow-lg);
         }
 
         .status-badge {
@@ -128,10 +131,21 @@ function AllProjects() {
           border-radius: 999px;
         }
         .status-badge-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-        .status-active { background: rgba(74,222,128,0.08); color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
-        .status-active .status-badge-dot { background: #4ade80; animation: statusPulse 2s infinite; }
-        .status-inactive { background: rgba(248,113,113,0.08); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
-        .status-inactive .status-badge-dot { background: #f87171; }
+        .status-active { 
+          background: rgba(74,222,128,0.08); 
+          color: var(--theme-success); 
+          border: 1px solid rgba(74,222,128,0.2); 
+        }
+        .status-active .status-badge-dot { 
+          background: var(--theme-success); 
+          animation: statusPulse 2s infinite; 
+        }
+        .status-inactive { 
+          background: rgba(248,113,113,0.08); 
+          color: var(--theme-error); 
+          border: 1px solid rgba(248,113,113,0.2); 
+        }
+        .status-inactive .status-badge-dot { background: var(--theme-error); }
 
         @keyframes statusPulse {
           0%,100% { opacity: 1; transform: scale(1); }
@@ -145,12 +159,15 @@ function AllProjects() {
           text-transform: uppercase;
           padding: 3px 10px;
           border-radius: 999px;
-          border: 1px solid #1c1c1c;
-          color: rgba(255,255,255,0.3);
+          border: 1px solid var(--theme-border);
+          color: var(--theme-text-muted);
           background: transparent;
-          transition: color 0.3s ease, border-color 0.3s ease;
+          transition: all 0.3s ease;
         }
-        .project-card:hover .tech-chip { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); }
+        .project-card:hover .tech-chip { 
+          border-color: var(--theme-border-hover); 
+          color: var(--theme-text-secondary); 
+        }
 
         .page-btn {
           font-family: 'DM Sans', sans-serif;
@@ -159,17 +176,24 @@ function AllProjects() {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border: 1px solid #1c1c1c;
+          border: 1px solid var(--theme-border);
           background: transparent;
-          color: rgba(255,255,255,0.35);
+          color: var(--theme-text-muted);
           cursor: pointer;
           transition: all 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .page-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.3); color: #fff; }
-        .page-btn.active { border-color: #fff; background: #fff; color: #000; }
+        .page-btn:hover:not(:disabled) { 
+          border-color: var(--theme-border-hover); 
+          color: var(--theme-text-primary); 
+        }
+        .page-btn.active { 
+          border-color: var(--theme-primary); 
+          background: var(--theme-primary); 
+          color: var(--theme-bg-primary); 
+        }
         .page-btn:disabled { opacity: 0.2; cursor: not-allowed; }
 
         .page-arrow {
@@ -177,55 +201,101 @@ function AllProjects() {
           font-size: 13px;
           padding: 7px 18px;
           border-radius: 999px;
-          border: 1px solid #1c1c1c;
+          border: 1px solid var(--theme-border);
           background: transparent;
-          color: rgba(255,255,255,0.4);
+          color: var(--theme-text-muted);
           cursor: pointer;
           transition: all 0.2s ease;
           letter-spacing: 1px;
         }
-        .page-arrow:hover:not(:disabled) { border-color: rgba(255,255,255,0.3); color: #fff; }
+        .page-arrow:hover:not(:disabled) { 
+          border-color: var(--theme-border-hover); 
+          color: var(--theme-text-primary); 
+        }
         .page-arrow:disabled { opacity: 0.2; cursor: not-allowed; }
 
         .no-results {
           text-align: center;
           padding: 80px 32px;
-          border: 1px dashed #1c1c1c;
-          background: #0d0d0d;
+          border: 1px dashed var(--theme-border);
+          background: var(--theme-bg-card);
         }
 
+        /* ── Fixed Search Bar Styles ── */
         .search-input {
           font-family: 'DM Sans', sans-serif;
         }
         .search-input .MuiOutlinedInput-root {
-          color: rgba(255,255,255,0.7);
+          color: var(--theme-text-primary);
           font-size: 14px;
           letter-spacing: 0.5px;
+          background-color: var(--theme-bg-secondary);
+          border-radius: 999px;
+          transition: all 0.3s ease;
         }
         .search-input .MuiOutlinedInput-root fieldset {
-          border-color: #1c1c1c;
+          border-color: var(--theme-border);
           border-radius: 999px;
           transition: border-color 0.3s ease;
         }
+        .search-input .MuiOutlinedInput-root:hover {
+          background-color: var(--theme-bg-tertiary);
+        }
         .search-input .MuiOutlinedInput-root:hover fieldset {
-          border-color: rgba(255,255,255,0.25);
+          border-color: var(--theme-border-hover);
+        }
+        .search-input .MuiOutlinedInput-root.Mui-focused {
+          background-color: var(--theme-bg-secondary);
         }
         .search-input .MuiOutlinedInput-root.Mui-focused fieldset {
-          border-color: #fff;
+          border-color: var(--theme-primary);
+          border-width: 1px;
         }
-        .search-input .MuiInputLabel-root {
-          color: rgba(255,255,255,0.3);
-          font-family: 'DM Sans', sans-serif;
-          letter-spacing: 1px;
+        .search-input .MuiInputBase-input {
+          padding: 14px 14px 14px 0;
+          color: var(--theme-text-primary);
+        }
+        .search-input .MuiInputBase-input::placeholder {
+          color: var(--theme-text-muted);
+          opacity: 0.7;
+        }
+        .search-input .MuiInputAdornment-root {
+          margin-left: 16px;
+        }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .search-input .MuiOutlinedInput-root {
+          background-color: #ffffff;
+        }
+        [data-theme="light"] .search-input .MuiOutlinedInput-root:hover {
+          background-color: #fefcf8;
+        }
+        [data-theme="light"] .search-input .MuiInputBase-input {
+          color: var(--theme-text-primary);
+        }
+        
+        [data-theme="light"] .filter-pill {
+          border-color: var(--theme-border);
+        }
+        [data-theme="light"] .filter-pill.active {
+          border-color: var(--theme-primary);
+          background: var(--theme-primary);
+          color: #ffffff;
+        }
+        [data-theme="light"] .project-card {
+          background: var(--theme-bg-card);
+        }
+        [data-theme="light"] .no-results {
+          background: var(--theme-bg-card);
         }
       `}</style>
 
       <Box sx={{
         width: "100%",
-        backgroundColor: "#080808",
-        color: "#fff",
-        borderTop: "1px solid #141414",
-        borderBottom: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)",
+        borderTop: "1px solid var(--theme-border)",
+        borderBottom: "1px solid var(--theme-border)",
       }}>
         <Box sx={{
           maxWidth: "1350px",
@@ -246,13 +316,13 @@ function AllProjects() {
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               padding: "4px 12px",
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid var(--theme-border-hover)",
               borderRadius: "999px",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px",
               letterSpacing: "2px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
+              color: "var(--theme-text-muted)",
             }}>
               <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
               Projects
@@ -280,6 +350,7 @@ function AllProjects() {
                 fontWeight: 400,
                 lineHeight: 0.95,
                 letterSpacing: "3px",
+                color: "var(--theme-text-primary)",
               }}>
                 Selected Work
               </Typography>
@@ -294,7 +365,7 @@ function AllProjects() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(11px, 1vw, 14px)",
-                color: "rgba(255,255,255,0.3)",
+                color: "var(--theme-text-muted)",
                 letterSpacing: "5px",
                 textTransform: "uppercase",
                 pb: { sm: "6px" },
@@ -304,7 +375,7 @@ function AllProjects() {
             </motion.div>
           </Box>
 
-          {/* Search Bar */}
+          {/* Search Bar - Fixed */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -322,16 +393,17 @@ function AllProjects() {
                 value={searchQuery}
                 onChange={handleSearch}
                 className="search-input"
+                variant="outlined"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SearchIcon sx={{ color: "rgba(255,255,255,0.3)", fontSize: "20px" }} />
+                      <SearchIcon sx={{ color: "var(--theme-text-muted)", fontSize: "20px" }} />
                     </InputAdornment>
                   ),
-                }}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: 'rgba(0,0,0,0.3)',
+                  sx: {
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      border: 'none',
+                    }
                   }
                 }}
               />
@@ -355,7 +427,7 @@ function AllProjects() {
                 <p style={{
                   fontFamily: "'DM Sans', sans-serif", fontSize: "14px",
                   letterSpacing: "3px", textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.25)", marginBottom: "12px",
+                  color: "var(--theme-text-muted)", marginBottom: "12px",
                 }}>Company</p>
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                   {ORIGIN_FILTERS.map((f) => (
@@ -370,13 +442,13 @@ function AllProjects() {
                 </Box>
               </Box>
 
-              <Box sx={{ display: { xs: "none", md: "block" }, width: "1px", background: "#1c1c1c", alignSelf: "stretch" }} />
+              <Box sx={{ display: { xs: "none", md: "block" }, width: "1px", background: "var(--theme-border)", alignSelf: "stretch" }} />
 
               <Box>
                 <p style={{
                   fontFamily: "'DM Sans', sans-serif", fontSize: "14px",
                   letterSpacing: "3px", textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.25)", marginBottom: "12px",
+                  color: "var(--theme-text-muted)", marginBottom: "12px",
                 }}>Status</p>
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                   {STATUS_FILTERS.map((f) => (
@@ -404,7 +476,7 @@ function AllProjects() {
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "12px",
                 letterSpacing: "1px",
-                color: "rgba(255,255,255,0.4)",
+                color: "var(--theme-text-muted)",
                 mb: 2,
                 textAlign: "center",
               }}>
@@ -416,7 +488,7 @@ function AllProjects() {
           {/* Divider */}
           <div style={{
             width: "100%", height: "1px",
-            background: "linear-gradient(to right, rgba(255,255,255,0.06), transparent)",
+            background: "linear-gradient(to right, var(--theme-border-hover), transparent)",
             marginBottom: "clamp(24px, 3vw, 36px)",
           }} />
 
@@ -463,7 +535,7 @@ function AllProjects() {
                           <Typography sx={{
                             fontFamily: "'Bebas Neue', sans-serif",
                             fontSize: "clamp(1.2rem, 2vw, 1.6rem)",
-                            letterSpacing: "2px", color: "#fff",
+                            letterSpacing: "2px", color: "var(--theme-text-primary)",
                             lineHeight: 1, mb: "8px", pr: "8px",
                           }}>
                             {project.title || project.company}
@@ -471,7 +543,7 @@ function AllProjects() {
 
                           <Typography sx={{
                             fontFamily: "'DM Sans', sans-serif",
-                            color: "rgba(255,255,255,0.3)", fontSize: "10px",
+                            color: "var(--theme-text-muted)", fontSize: "10px",
                             letterSpacing: "2px", textTransform: "uppercase", mb: "14px",
                           }}>
                             {project.company}{project.ceo && ` · ${project.ceo}`}
@@ -479,7 +551,7 @@ function AllProjects() {
 
                           <Typography sx={{
                             fontFamily: "'DM Sans', sans-serif",
-                            color: "rgba(255,255,255,0.45)", fontSize: "1rem",
+                            color: "var(--theme-text-secondary)", fontSize: "1rem",
                             lineHeight: 1.7, flex: 1, mb: "16px",
                           }}>
                             {project.shortDescription}
@@ -503,7 +575,7 @@ function AllProjects() {
               </motion.div>
             ) : (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="no-results">
-                <Typography sx={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.3)", fontSize: "0.9rem", letterSpacing: "1px" }}>
+                <Typography sx={{ fontFamily: "'DM Sans', sans-serif", color: "var(--theme-text-muted)", fontSize: "0.9rem", letterSpacing: "1px" }}>
                   No projects match the selected filters.
                 </Typography>
               </motion.div>
@@ -558,7 +630,8 @@ function AllProjects() {
                 fontSize: "10px",
                 letterSpacing: "2px",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.2)",
+                color: "var(--theme-text-muted)",
+                opacity: 0.5,
                 mt: "16px",
               }}>
                 Page {page} of {totalPages}

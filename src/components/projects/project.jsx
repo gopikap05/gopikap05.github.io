@@ -43,11 +43,16 @@ function ProjectHero() {
           font-size: 10px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.18);
+          color: var(--theme-text-muted);
           white-space: nowrap;
           display: flex;
           align-items: center;
           gap: 16px;
+          opacity: 0.6;
+          transition: opacity 0.3s ease;
+        }
+        .ph-marquee-item:hover {
+          opacity: 1;
         }
         .ph-marquee-item::after {
           content: '';
@@ -55,6 +60,15 @@ function ProjectHero() {
           height: 3px;
           border-radius: 50%;
           background: rgba(255,59,59,0.4);
+        }
+
+        /* Light theme adjustments */
+        [data-theme="light"] .ph-marquee-item {
+          color: var(--theme-text-secondary);
+          opacity: 0.5;
+        }
+        [data-theme="light"] .ph-marquee-item:hover {
+          opacity: 0.8;
         }
       `}</style>
 
@@ -65,10 +79,10 @@ function ProjectHero() {
         transition={{ duration: 0.8 }}
         sx={{
           width: "100%",
-          backgroundColor: "#080808",
-          color: "#fff",
-          borderTop: "1px solid #141414",
-          borderBottom: "1px solid #141414",
+          backgroundColor: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)",
+          borderTop: "1px solid var(--theme-border)",
+          borderBottom: "1px solid var(--theme-border)",
           overflow: "hidden",
         }}
       >
@@ -96,13 +110,13 @@ function ProjectHero() {
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               padding: "4px 14px",
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid var(--theme-border-hover)",
               borderRadius: "999px",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px",
               letterSpacing: "2.5px",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.3)",
+              color: "var(--theme-text-muted)",
             }}>
               <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
               Selected Work
@@ -122,7 +136,7 @@ function ProjectHero() {
               fontWeight: 400,
               letterSpacing: { xs: "6px", md: "10px" },
               lineHeight: 0.95,
-              color: "#fff",
+              color: "var(--theme-text-primary)",
             }}>
               PROJECTS
             </Typography>
@@ -138,7 +152,7 @@ function ProjectHero() {
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: { xs: "12px", md: "13px" },
-              color: "rgba(255,255,255,0.3)",
+              color: "var(--theme-text-muted)",
               letterSpacing: "3px",
               textTransform: "uppercase",
             }}>
@@ -175,7 +189,7 @@ function ProjectHero() {
                     fontFamily: "'Bebas Neue', sans-serif",
                     fontSize: { xs: "2rem", md: "2.6rem" },
                     letterSpacing: "3px",
-                    color: "#fff",
+                    color: "var(--theme-text-primary)",
                     lineHeight: 1,
                     mb: "4px",
                   }}>
@@ -186,7 +200,7 @@ function ProjectHero() {
                     fontSize: "10px",
                     letterSpacing: "2.5px",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.25)",
+                    color: "var(--theme-text-muted)",
                   }}>
                     {stat.label}
                   </Typography>
@@ -204,7 +218,7 @@ function ProjectHero() {
           transition={{ delay: 1.2, duration: 0.6 }}
         >
           <Box sx={{
-            borderTop: "1px solid #141414",
+            borderTop: "1px solid var(--theme-border)",
             py: "16px",
             overflow: "hidden",
           }}>

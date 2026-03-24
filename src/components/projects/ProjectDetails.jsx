@@ -37,11 +37,11 @@ function ProjectDetails() {
   if (!project) {
     return (
       <Box sx={{
-        width: "100%", minHeight: "100vh", background: "#080808",
-        color: "#fff", display: "flex", alignItems: "center",
+        width: "100%", minHeight: "100vh", background: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)", display: "flex", alignItems: "center",
         justifyContent: "center", px: "5%",
       }}>
-        <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.4)" }}>
+        <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: { xs: "14px", sm: "16px" }, color: "var(--theme-text-muted)" }}>
           Project not found.
         </Typography>
       </Box>
@@ -57,7 +57,7 @@ function ProjectDetails() {
   const recentProjects = [...projects]
     .filter((p) => p.count !== project.count && !relatedCounts.has(p.count))
     .sort((a, b) => b.count - a.count)
-    .slice(0, 3); // Changed from 2 to 3
+    .slice(0, 3);
 
   // Zero-pad project number: 1 → "01", 12 → "12"
   const projectNumber = String(project.count).padStart(2, "0");
@@ -73,23 +73,23 @@ function ProjectDetails() {
           gap: 10px;
           padding: 10px 20px;
           border-radius: 999px;
-          background: #0d0d0d;
-          border: 1px solid #1c1c1c;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
           transition: transform 0.25s ease, border-color 0.25s ease;
           cursor: default;
         }
         .pd-tech-chip:hover {
           transform: translateY(-3px);
-          border-color: #2e2e2e;
+          border-color: var(--theme-border-hover);
         }
 
         .pd-related-card {
           text-decoration: none;
           color: inherit;
           display: block;
-          background: #0d0d0d;
-          border: 1px solid #1c1c1c;
-          border-radius: 16px;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
+          border-radius: 20px;
           padding: 24px;
           position: relative;
           overflow: hidden;
@@ -105,16 +105,19 @@ function ProjectDetails() {
           transform-origin: left;
           transition: transform 0.4s ease;
         }
-        .pd-related-card:hover { border-color: #2e2e2e; transform: translateY(-3px); }
+        .pd-related-card:hover { 
+          border-color: var(--theme-border-hover); 
+          transform: translateY(-3px); 
+        }
         .pd-related-card:hover::before { transform: scaleX(1); }
 
         .pd-recent-card {
           text-decoration: none;
           color: inherit;
           display: block;
-          background: #0d0d0d;
-          border: 1px solid #1c1c1c;
-          border-radius: 16px;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
+          border-radius: 20px;
           padding: 24px;
           position: relative;
           overflow: hidden;
@@ -125,32 +128,58 @@ function ProjectDetails() {
           position: absolute;
           top: 0; left: 0;
           width: 100%; height: 2px;
-          background: linear-gradient(to right, rgba(255,255,255,0.15), transparent);
+          background: linear-gradient(to right, var(--theme-border-hover), transparent);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.4s ease;
         }
-        .pd-recent-card:hover { border-color: #2e2e2e; transform: translateY(-3px); }
+        .pd-recent-card:hover { 
+          border-color: var(--theme-border-hover); 
+          transform: translateY(-3px); 
+        }
         .pd-recent-card:hover::before { transform: scaleX(1); }
 
         .pd-live-link {
-          color: #fff;
+          color: var(--theme-text-primary);
           text-decoration: none;
-          border-bottom: 1px solid #2a2a2a;
+          border-bottom: 1px solid var(--theme-border);
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           word-break: break-all;
           transition: border-color 0.2s ease;
         }
-        .pd-live-link:hover { border-color: #fff; }
+        .pd-live-link:hover { 
+          border-color: var(--theme-text-primary); 
+        }
 
         .pd-section-label {
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
+          font-size: 11px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.25);
+          color: var(--theme-text-muted);
           margin-bottom: 16px;
+        }
+
+        /* Light theme specific adjustments */
+        [data-theme="light"] .pd-tech-chip {
+          background: var(--theme-bg-card);
+        }
+        [data-theme="light"] .pd-recent-card {
+          background: var(--theme-bg-card);
+        }
+        [data-theme="light"] .pd-recent-card:hover {
+          background: var(--theme-bg-secondary);
+        }
+
+        /* Responsive font sizes */
+        @media (max-width: 600px) {
+          .pd-section-label {
+            font-size: 10px;
+          }
+          .pd-live-link {
+            font-size: 13px;
+          }
         }
       `}</style>
 
@@ -164,10 +193,10 @@ function ProjectDetails() {
 
       <Box sx={{
         width: "100%",
-        backgroundColor: "#080808",
-        color: "#fff",
-        borderTop: "1px solid #141414",
-        borderBottom: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        color: "var(--theme-text-primary)",
+        borderTop: "1px solid var(--theme-border)",
+        borderBottom: "1px solid var(--theme-border)",
         px: "5%",
         py: { xs: "48px", sm: "64px", md: "80px" },
       }}>
@@ -186,8 +215,10 @@ function ProjectDetails() {
                 <Box sx={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b" }} />
                 <Typography sx={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "10px", letterSpacing: "2.5px",
-                  textTransform: "uppercase", color: "rgba(255,255,255,0.3)",
+                  fontSize: { xs: "10px", sm: "11px", md: "12px" },
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase", 
+                  color: "var(--theme-text-muted)",
                 }}>
                   {ORIGIN_LABELS[project.origin] || project.origin}
                 </Typography>
@@ -196,12 +227,13 @@ function ProjectDetails() {
               {/* Project number — top right */}
               <Typography sx={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: { xs: "3rem", md: "4.5rem" },
+                fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem" },
                 lineHeight: 0.9,
                 letterSpacing: "4px",
-                color: "rgba(255,255,255,0.06)",
+                color: "var(--theme-text-muted)",
+                opacity: 0.1,
                 userSelect: "none",
-                mt: { xs: "-6px", md: "-10px" },
+                mt: { xs: "-4px", md: "-8px" },
               }}>
                 #{projectNumber}
               </Typography>
@@ -210,11 +242,12 @@ function ProjectDetails() {
             {/* Title */}
             <Typography sx={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: { xs: "clamp(2.2rem, 7vw, 4rem)", md: "clamp(3rem, 5vw, 4.5rem)" },
+              fontSize: { xs: "clamp(2rem, 7vw, 3rem)", sm: "clamp(2.5rem, 8vw, 4rem)", md: "clamp(3rem, 5vw, 4.5rem)" },
               fontWeight: 400,
               letterSpacing: "3px",
               lineHeight: 1,
               mb: 2,
+              color: "var(--theme-text-primary)",
             }}>
               {project.title}
             </Typography>
@@ -222,12 +255,14 @@ function ProjectDetails() {
             {/* Company + CEO */}
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
-              color: "rgba(255,255,255,0.35)", fontSize: "13px",
-              letterSpacing: "1px", mb: 4,
+              color: "var(--theme-text-muted)", 
+              fontSize: { xs: "12px", sm: "13px", md: "14px" },
+              letterSpacing: "1px", 
+              mb: 4,
             }}>
               {project.company}
               {project.ceo && (
-                <span style={{ color: "rgba(255,255,255,0.2)" }}> · CEO: {project.ceo}</span>
+                <span style={{ color: "var(--theme-text-muted)", opacity: 0.6 }}> · CEO: {project.ceo}</span>
               )}
             </Typography>
           </motion.div>
@@ -235,7 +270,7 @@ function ProjectDetails() {
           {/* Divider */}
           <div style={{
             width: "100%", height: "1px",
-            background: "linear-gradient(to right, rgba(255,255,255,0.06), transparent)",
+            background: "linear-gradient(to right, var(--theme-border-hover), transparent)",
             marginBottom: "40px",
           }} />
 
@@ -256,9 +291,9 @@ function ProjectDetails() {
               {/* Short description */}
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: { xs: "16px", md: "18px" },
-                color: "rgba(255,255,255,0.7)",
-                lineHeight: 1.8,
+                fontSize: { xs: "15px", sm: "16px", md: "18px" },
+                color: "var(--theme-text-secondary)",
+                lineHeight: 1.7,
                 mb: 5,
               }}>
                 {project.shortDescription}
@@ -270,9 +305,9 @@ function ProjectDetails() {
                   <p className="pd-section-label">About the Project</p>
                   <Typography sx={{
                     fontFamily: "'DM Sans', sans-serif",
-                    color: "rgba(255,255,255,0.45)",
-                    fontSize: { xs: "14px", md: "15px" },
-                    lineHeight: 1.85,
+                    color: "var(--theme-text-secondary)",
+                    fontSize: { xs: "14px", sm: "14px", md: "15px" },
+                    lineHeight: 1.8,
                   }}>
                     {project.detailedDescription}
                   </Typography>
@@ -299,7 +334,8 @@ function ProjectDetails() {
                         )}
                         <Typography sx={{
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: "12px", color: "rgba(255,255,255,0.55)",
+                          fontSize: { xs: "11px", sm: "12px" },
+                          color: "var(--theme-text-secondary)",
                           letterSpacing: "0.5px",
                         }}>
                           {tech}
@@ -318,9 +354,9 @@ function ProjectDetails() {
               transition={{ duration: 0.6, delay: 0.35 }}
             >
               <Box sx={{
-                background: "#0d0d0d",
-                border: "1px solid #1c1c1c",
-                borderRadius: "16px",
+                background: "var(--theme-bg-card)",
+                border: "1px solid var(--theme-border)",
+                borderRadius: "20px",
                 padding: "28px",
                 display: "flex",
                 flexDirection: "column",
@@ -332,19 +368,20 @@ function ProjectDetails() {
                   <p className="pd-section-label">Status</p>
                   <Box sx={{
                     display: "inline-flex", alignItems: "center", gap: "6px",
-                    px: 2, py: 0.6, borderRadius: "999px",
+                    px: 2, py: 0.8, borderRadius: "999px",
                     backgroundColor: project.status === "active" ? "rgba(74,222,128,0.08)" : "rgba(248,113,113,0.08)",
-                    color: project.status === "active" ? "#4ade80" : "#f87171",
+                    color: project.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
                     border: project.status === "active" ? "1px solid rgba(74,222,128,0.2)" : "1px solid rgba(248,113,113,0.2)",
                   }}>
                     <Box sx={{
                       width: 5, height: 5, borderRadius: "50%",
-                      background: project.status === "active" ? "#4ade80" : "#f87171",
+                      background: project.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
                       animation: project.status === "active" ? "statusPulse 2s infinite" : "none",
                     }} />
                     <Typography sx={{
                       fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "10px", letterSpacing: "1.5px",
+                      fontSize: { xs: "10px", sm: "11px" },
+                      letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}>
                       {project.status === "active" ? "Active" : "Inactive"}
@@ -378,7 +415,8 @@ function ProjectDetails() {
                   <p className="pd-section-label">Worked At</p>
                   <Typography sx={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "13px", color: "rgba(255,255,255,0.5)",
+                    fontSize: { xs: "13px", sm: "14px" },
+                    color: "var(--theme-text-secondary)",
                   }}>
                     {ORIGIN_LABELS[project.origin] || project.origin}
                   </Typography>
@@ -394,7 +432,7 @@ function ProjectDetails() {
             <>
               <div style={{
                 width: "100%", height: "1px",
-                background: "linear-gradient(to right, rgba(255,255,255,0.06), transparent)",
+                background: "linear-gradient(to right, var(--theme-border-hover), transparent)",
                 margin: "56px 0 40px",
               }} />
               <Box>
@@ -402,8 +440,10 @@ function ProjectDetails() {
                 <Box sx={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", flexShrink: 0 }} />
                 <Typography sx={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "10px", letterSpacing: "2.5px",
-                  textTransform: "uppercase", color: "rgba(255,255,255,0.3)",
+                  fontSize: { xs: "10px", sm: "11px" },
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase", 
+                  color: "var(--theme-text-muted)",
                 }}>
                   Recent
                 </Typography>
@@ -411,8 +451,10 @@ function ProjectDetails() {
 
               <Typography sx={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: { xs: "1.8rem", md: "2.5rem" },
-                letterSpacing: "3px", mb: 4,
+                fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem" },
+                letterSpacing: "3px", 
+                mb: 4,
+                color: "var(--theme-text-primary)",
               }}>
                 Latest Projects
               </Typography>
@@ -420,9 +462,9 @@ function ProjectDetails() {
               <Box sx={{
                 display: "grid",
                 gridTemplateColumns: { 
-                  xs: "1fr",           // 1 column on mobile
-                  sm: "repeat(2, 1fr)", // 2 columns on tablet
-                  md: "repeat(3, 1fr)"  // 3 columns on desktop
+                  xs: "1fr",
+                  sm: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)"
                 },
                 gap: "16px",
               }}>
@@ -432,16 +474,19 @@ function ProjectDetails() {
                       <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <Typography sx={{
                           fontFamily: "'Bebas Neue', sans-serif",
-                          fontSize: "0.75rem",
+                          fontSize: { xs: "0.7rem", sm: "0.75rem" },
                           letterSpacing: "2px",
-                          color: "rgba(255,255,255,0.15)",
+                          color: "var(--theme-text-muted)",
+                          opacity: 0.5,
                           lineHeight: 1,
                         }}>
                           #{String(p.count).padStart(2, "0")}
                         </Typography>
                         <Typography sx={{
                           fontFamily: "'Bebas Neue', sans-serif",
-                          fontSize: "1.2rem", letterSpacing: "2px", color: "#fff",
+                          fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
+                          letterSpacing: "2px", 
+                          color: "var(--theme-text-primary)",
                           lineHeight: 1,
                         }}>
                           {p.title}
@@ -449,23 +494,25 @@ function ProjectDetails() {
                       </Box>
                       <Box sx={{
                         width: 6, height: 6, borderRadius: "50%", flexShrink: 0, mt: "3px",
-                        background: p.status === "active" ? "#4ade80" : "#f87171",
+                        background: p.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
                       }} />
                     </Box>
                     <Typography sx={{
                       fontFamily: "'DM Sans', sans-serif",
-                      color: "rgba(255,255,255,0.35)",
-                      fontSize: "13px", lineHeight: 1.7,
+                      color: "var(--theme-text-secondary)",
+                      fontSize: { xs: "12px", sm: "13px" },
+                      lineHeight: 1.6,
                       mb: 2,
                     }}>
                       {p.shortDescription}
                     </Typography>
                     <Typography sx={{
                       fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "10px",
+                      fontSize: { xs: "9px", sm: "10px" },
                       letterSpacing: "2px",
                       textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.18)",
+                      color: "var(--theme-text-muted)",
+                      opacity: 0.6,
                     }}>
                       {ORIGIN_LABELS[p.origin] || p.origin}
                     </Typography>

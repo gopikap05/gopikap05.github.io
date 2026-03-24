@@ -74,11 +74,11 @@ function ThanksNote() {
         .tn-card {
           position: relative;
           height: 100%;
-          background: #0d0d0d;
-          border: 1px solid #1c1c1c;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
           border-radius: 16px;
           padding: 36px 24px 28px 52px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+          box-shadow: var(--theme-shadow-lg);
           transform-style: preserve-3d;
           box-sizing: border-box;
           transition: border-color 0.3s ease;
@@ -100,7 +100,7 @@ function ThanksNote() {
           transform: scaleX(1);
         }
         .tn-card:hover {
-          border-color: rgba(255,255,255,0.12);
+          border-color: var(--theme-border-hover);
         }
 
         .tn-margin-line { 
@@ -117,8 +117,8 @@ function ThanksNote() {
           width: 12px; 
           height: 12px; 
           border-radius: 50%; 
-          background: #080808; 
-          border: 1px solid #1c1c1c;
+          background: var(--theme-bg-primary); 
+          border: 1px solid var(--theme-border);
           left: 50%; 
           transform: translateX(-50%); 
         }
@@ -182,7 +182,7 @@ function ThanksNote() {
           width: 44px; 
           height: 44px; 
           border-radius: 50%; 
-          border: 1.5px solid rgba(255,255,255,0.1); 
+          border: 1.5px solid var(--theme-border-hover); 
           display: flex; 
           align-items: center; 
           justify-content: center; 
@@ -192,16 +192,16 @@ function ThanksNote() {
           position:absolute; 
           width:100%; 
           height:1.5px; 
-          background:rgba(255,255,255,0.08); 
+          background: var(--theme-border-hover); 
         }
         .tn-postmark::before { transform: rotate(-25deg); }
         .tn-postmark::after  { transform: rotate(25deg); }
         .tn-postmark-text { 
           font-family: 'DM Sans', sans-serif; 
-          font-size: 5.5px; 
+          font-size: 6px; 
           letter-spacing: 1px; 
           text-transform: uppercase; 
-          color: rgba(255,255,255,0.2); 
+          color: var(--theme-text-muted); 
           text-align: center; 
           z-index: 1; 
           line-height: 1.4; 
@@ -209,59 +209,59 @@ function ThanksNote() {
         
         .tn-date { 
           font-family: 'Caveat', cursive; 
-          font-size: 13px; 
-          color: rgba(255,255,255,0.28); 
+          font-size: 18px; 
+          color: var(--theme-text-muted); 
           display: block; 
           margin-bottom: 1.2rem; 
         }
         
         .tn-card p { 
           font-family: 'Caveat', cursive; 
-          font-size: 16px; 
-          line-height: 1.2rem; 
-          color: rgba(255,255,255,0.7); 
+          font-size: 18px; 
+          line-height: 1.5rem; 
+          color: var(--theme-text-secondary); 
           margin: 0 0 1.2rem 0; 
         }
         
         .tn-sign { 
           font-family: 'Caveat', cursive; 
-          font-size: 19px; 
+          font-size: 22px; 
           font-weight: 600; 
-          color: rgba(255,255,255,0.4); 
+          color: var(--theme-text-secondary); 
           display: block; 
-          margin-top: 4px; 
+          margin-top: 8px; 
         }
 
         /* Rating box */
         .rate-box {
-          background: #0d0d0d;
-          border: 1px solid #1c1c1c;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
           border-radius: 16px;
-          padding: 28px 24px;
+          padding: 32px 28px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 20px;
+          gap: 24px;
           height: 100%;
           box-sizing: border-box;
           min-height: 260px;
           transition: border-color 0.3s ease;
         }
         .rate-box:hover {
-          border-color: rgba(255,255,255,0.12);
+          border-color: var(--theme-border-hover);
         }
 
         .rate-title {
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
+          font-size: 13px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.3);
+          color: var(--theme-text-muted);
         }
 
         .star-row { display: flex; gap: 12px; }
         .star {
-          font-size: 36px; 
+          font-size: 44px; 
           line-height: 1; 
           cursor: pointer; 
           user-select: none;
@@ -272,22 +272,22 @@ function ThanksNote() {
         .star.lit { color: #f59e0b; transform: scale(1.2); }
         .star:hover { transform: scale(1.3); }
 
-        .rate-dots { display: flex; gap: 6px; align-items: center; }
+        .rate-dots { display: flex; gap: 8px; align-items: center; }
         .rate-dot { 
-          width: 6px; 
-          height: 6px; 
+          width: 8px; 
+          height: 8px; 
           border-radius: 50%; 
-          background: #1c1c1c; 
+          background: var(--theme-border); 
           transition: background 0.2s, transform 0.2s; 
         }
         .rate-dot.lit { background: #f59e0b; transform: scale(1.3); }
 
         .rate-label-text {
           font-family: 'DM Sans', sans-serif;
-          font-size: 13px; 
+          font-size: 16px; 
           letter-spacing: 1px;
-          color: rgba(255,255,255,0.5);
-          min-height: 20px; 
+          color: var(--theme-text-secondary);
+          min-height: 24px; 
           font-weight: 500;
         }
 
@@ -295,45 +295,50 @@ function ThanksNote() {
         .rate-feedback {
           width: 100%;
           box-sizing: border-box;
-          background: #111;
-          border: 1px solid #1c1c1c;
-          border-radius: 10px;
-          padding: 12px 14px;
+          background: var(--theme-bg-secondary);
+          border: 1px solid var(--theme-border);
+          border-radius: 12px;
+          padding: 14px 16px;
           font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          color: rgba(255,255,255,0.65);
+          font-size: 14px;
+          color: var(--theme-text-primary);
           resize: none;
           outline: none;
           transition: border-color 0.25s ease;
           line-height: 1.6;
         }
-        .rate-feedback::placeholder { color: rgba(255,255,255,0.2); }
-        .rate-feedback:focus { border-color: #2e2e2e; }
+        .rate-feedback::placeholder { 
+          color: var(--theme-text-muted); 
+          opacity: 0.5;
+        }
+        .rate-feedback:focus { 
+          border-color: var(--theme-primary); 
+        }
 
         .rate-feedback-label {
           font-family: 'DM Sans', sans-serif;
-          font-size: 9px;
+          font-size: 11px;
           letter-spacing: 2.5px;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.18);
+          color: var(--theme-text-muted);
           align-self: flex-start;
           margin-bottom: -12px;
         }
 
         .rate-btn {
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px; 
+          font-size: 12px; 
           letter-spacing: 3px; 
           text-transform: uppercase;
-          padding: 12px 28px; 
+          padding: 14px 32px; 
           border-radius: 999px;
-          border: 1px solid #1c1c1c; 
+          border: 1px solid var(--theme-border); 
           background: transparent;
-          color: rgba(255,255,255,0.25); 
+          color: var(--theme-text-muted); 
           cursor: not-allowed;
           transition: all 0.25s ease; 
           width: 100%; 
-          max-width: 200px;
+          max-width: 220px;
         }
         .rate-btn.ready { 
           border-color: rgba(255,59,59,0.45); 
@@ -351,34 +356,34 @@ function ThanksNote() {
           display: flex; 
           flex-direction: column; 
           align-items: center; 
-          gap: 12px; 
+          gap: 16px; 
           text-align: center; 
         }
         .rate-success-icon { 
-          font-size: 32px; 
-          color: #4ade80; 
+          font-size: 40px; 
+          color: var(--theme-success); 
         }
         .rate-success-score { 
           font-family: 'DM Sans', sans-serif; 
-          font-size: 13px; 
-          color: #4ade80; 
+          font-size: 16px; 
+          color: var(--theme-success); 
           letter-spacing: 1px; 
         }
         .rate-success-text { 
           font-family: 'DM Sans', sans-serif; 
-          font-size: 11px; 
+          font-size: 13px; 
           letter-spacing: 2px; 
           text-transform: uppercase; 
-          color: rgba(255,255,255,0.4); 
+          color: var(--theme-text-muted); 
           line-height: 1.6; 
         }
       `}</style>
 
       <Box sx={{
         width: "100%",
-        backgroundColor: "#080808",
-        borderTop: "1px solid #141414",
-        borderBottom: "1px solid #141414",
+        backgroundColor: "var(--theme-bg-primary)",
+        borderTop: "1px solid var(--theme-border)",
+        borderBottom: "1px solid var(--theme-border)",
         px: "5%",
         py: { xs: "60px", sm: "72px", md: "90px" },
       }}>
