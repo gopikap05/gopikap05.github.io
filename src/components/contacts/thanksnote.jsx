@@ -246,6 +246,7 @@ function ThanksNote() {
           box-sizing: border-box;
           min-height: 260px;
           transition: border-color 0.3s ease;
+          overflow: visible;
         }
         .rate-box:hover {
           border-color: var(--theme-border-hover);
@@ -259,39 +260,60 @@ function ThanksNote() {
           color: var(--theme-text-muted);
         }
 
-        .star-row { display: flex; gap: 12px; }
-        .star {
-          font-size: 44px; 
-          line-height: 1; 
-          cursor: pointer; 
-          user-select: none;
-          transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), color 0.2s ease;
-          color: #2a2a2a; 
-          display: inline-block;
+        /* Star Rating Styles */
+        .rating-section {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
         }
-        .star.lit { color: #f59e0b; transform: scale(1.2); }
-        .star:hover { transform: scale(1.3); }
-
-        .rate-dots { display: flex; gap: 8px; align-items: center; }
-        .rate-dot { 
+        
+        .rating-dots {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .rating-dot { 
           width: 8px; 
           height: 8px; 
           border-radius: 50%; 
           background: var(--theme-border); 
-          transition: background 0.2s, transform 0.2s; 
+          transition: all 0.2s ease; 
         }
-        .rate-dot.lit { background: #f59e0b; transform: scale(1.3); }
+        
+        .rating-dot.lit { 
+          background: #f59e0b;
+        }
 
-        .rate-label-text {
+        .rating-label {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px; 
           letter-spacing: 1px;
           color: var(--theme-text-secondary);
-          min-height: 24px; 
           font-weight: 500;
+          text-align: center;
+          margin-top: 4px;
         }
 
         /* Feedback textarea */
+        .feedback-wrapper {
+          width: 100%;
+        }
+        
+        .feedback-label {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2.5px;
+          text-transform: uppercase;
+          color: var(--theme-text-muted);
+          display: block;
+          margin-bottom: 12px;
+          text-align: left;
+        }
+        
         .rate-feedback {
           width: 100%;
           box-sizing: border-box;
@@ -312,17 +334,7 @@ function ThanksNote() {
           opacity: 0.5;
         }
         .rate-feedback:focus { 
-          border-color: var(--theme-primary); 
-        }
-
-        .rate-feedback-label {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          letter-spacing: 2.5px;
-          text-transform: uppercase;
-          color: var(--theme-text-muted);
-          align-self: flex-start;
-          margin-bottom: -12px;
+          border-color: #ff3b3b; 
         }
 
         .rate-btn {
@@ -361,12 +373,12 @@ function ThanksNote() {
         }
         .rate-success-icon { 
           font-size: 40px; 
-          color: var(--theme-success); 
+          color: #f59e0b; 
         }
         .rate-success-score { 
           font-family: 'DM Sans', sans-serif; 
           font-size: 16px; 
-          color: var(--theme-success); 
+          color: #f59e0b; 
           letter-spacing: 1px; 
         }
         .rate-success-text { 
@@ -425,6 +437,7 @@ function ThanksNote() {
 
             {/* Rating box */}
             <motion.div
+              style={{ overflow: 'visible' }}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -435,37 +448,66 @@ function ThanksNote() {
                   <>
                     <span className="rate-title">Rate this Portfolio</span>
 
-                    <div className="star-row">
-                      {[1, 2, 3, 4, 5].map((n) => (
-                        <span
-                          key={n}
-                          className={`star ${n <= (hovered || selected) ? "lit" : ""}`}
-                          onMouseEnter={() => setHovered(n)}
-                          onMouseLeave={() => setHovered(0)}
-                          onClick={() => setSelected(n)}
-                        >★</span>
-                      ))}
-                    </div>
+                    <div className="rating-section">
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '10px',
+                        width: '100%',
+                        padding: '0 12px',
+                        boxSizing: 'border-box',
+                      }}>
+                        {[1, 2, 3, 4, 5].map((n) => {
+                          const isLit = n <= (hovered || selected);
+                          return (
+                            <svg
+                              key={n}
+                              width="32"
+                              height="32"
+                              viewBox="0 0 24 24"
+                              style={{ cursor: 'pointer', flexShrink: 0, transition: 'transform 0.2s ease' }}
+                              onMouseEnter={() => setHovered(n)}
+                              onMouseLeave={() => setHovered(0)}
+                              onClick={() => setSelected(n)}
+                              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.2)'}
+                              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                            >
+                              <polygon
+                                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+                                fill={isLit ? '#f59e0b' : 'none'}
+                                stroke={isLit ? '#f59e0b' : '#555'}
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          );
+                        })}
+                      </div>
 
-                    <div className="rate-dots">
-                      {[1, 2, 3, 4, 5].map((n) => (
-                        <div key={n} className={`rate-dot ${n <= (hovered || selected) ? "lit" : ""}`} />
-                      ))}
-                    </div>
+                      <div className="rating-dots">
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <div key={n} className={`rating-dot ${n <= (hovered || selected) ? "lit" : ""}`} />
+                        ))}
+                      </div>
 
-                    <span className="rate-label-text">
-                      {(hovered || selected) ? labels[hovered || selected] : "Select a rating"}
-                    </span>
+                      <div className="rating-label">
+                        {(hovered || selected) ? labels[hovered || selected] : "Select a rating"}
+                      </div>
+                    </div>
 
                     {/* Optional feedback */}
-                    <span className="rate-feedback-label">Feedback — optional</span>
-                    <textarea
-                      className="rate-feedback"
-                      rows={3}
-                      placeholder="Share your thoughts..."
-                      value={feedback}
-                      onChange={(e) => setFeedback(e.target.value)}
-                    />
+                    <div className="feedback-wrapper">
+                      <span className="feedback-label">Feedback — optional</span>
+                      <textarea
+                        className="rate-feedback"
+                        rows={3}
+                        placeholder="Share your thoughts..."
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                      />
+                    </div>
 
                     <button
                       className={`rate-btn ${selected ? "ready" : ""}`}
