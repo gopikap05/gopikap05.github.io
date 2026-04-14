@@ -1,9 +1,8 @@
 // src/data/friska-projects.js
 
 export const friskaProjects = [
-  // Former 55-59 now moved to 49-53
   {
-    count: 49,
+    count: 1,
     id: "friska-ai-billing",
     title: "Friska.Ai | Billing",
     company: "HFWL",
@@ -25,7 +24,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai"],
   },
   {
-    count: 50,
+    count: 2,
     id: "friska-ai-ccm",
     title: "Friska.Ai CCM | Lifestyle Experts",
     company: "HFWL",
@@ -47,7 +46,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai"],
   },
   {
-    count: 51,
+    count: 3,
     id: "friska-ai-lifestyle",
     title: "Friska.Ai | Lifestyle Experts",
     company: "HFWL",
@@ -69,7 +68,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai"],
   },
   {
-    count: 52,
+    count: 4,
     id: "friska-ai-physician",
     title: "Friska.Ai | Physician Portal",
     company: "HFWL",
@@ -91,7 +90,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai"],
   },
   {
-    count: 53,
+    count: 5,
     id: "friska-ai-physician-ccm",
     title: "Friska.Ai | Physician Portal",
     company: "HFWL",
@@ -112,10 +111,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
-  
-  // Former 49-53 now moved to 54-58
   {
-    count: 59,
+    count: 6,
     id: "friska-ai",
     title: "Friska Ai",
     company: "HFWL",
@@ -137,7 +134,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai-billing", "friska-ai-ccm", "friska-ai-lifestyle", "friska-ai-physician", "friska-ai-physician-ccm"],
   },
   {
-    count: 58,
+    count: 7,
     id: "nouriq-ai",
     title: "Nouriq Ai",
     company: "HFWL",
@@ -159,7 +156,7 @@ export const friskaProjects = [
     relatedProjects: [],
   },
   {
-    count: 57,
+    count: 8,
     id: "kliniq-ai",
     title: "Kliniq Ai",
     company: "HFWL",
@@ -181,9 +178,9 @@ export const friskaProjects = [
     relatedProjects: [],
   },
   {
-    count: 56,
+    count: 9,
     id: "hfwl",
-    title: "Hfwl",
+    title: "HFWL",
     company: "HFWL",
     ceo: "Shaji Nair",
 
@@ -203,7 +200,7 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai", "nouriq-ai", "kliniq-ai", "kalari-ai", "endocpm"],
   },
   {
-    count: 55,
+    count: 10,
     id: "kalari-ai",
     title: "Kalari Ai",
     company: "HFWL",
@@ -225,7 +222,7 @@ export const friskaProjects = [
     relatedProjects: [],
   },
   {
-    count: 54,
+    count: 11,
     id: "endocpm",
     title: "Endocpm",
     company: "HFWL",

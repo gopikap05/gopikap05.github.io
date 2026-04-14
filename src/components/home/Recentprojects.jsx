@@ -362,7 +362,7 @@ function RecentProjects() {
                 key={project.count}
                 project={project}
                 index={i}
-                to={`/projects/${project.count}`}
+                to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`}
               />
             ))}
           </Box>

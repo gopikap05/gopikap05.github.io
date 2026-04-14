@@ -44,7 +44,17 @@ function AllProjects() {
       
       return originMatch && statusMatch && searchMatch;
     })
-    .sort((a, b) => b.count - a.count);
+    .sort((a, b) => {
+      const ORIGIN_ORDER = {
+        "freelance": 0,
+        "friska ai": 1,
+        "emilda solutions": 2,
+      };
+      const originA = ORIGIN_ORDER[a.origin?.toLowerCase().trim()] ?? 99;
+      const originB = ORIGIN_ORDER[b.origin?.toLowerCase().trim()] ?? 99;
+      if (originA !== originB) return originA - originB;
+      return a.count - b.count;
+    });
 
   const totalPages = Math.ceil(filteredProjects.length / CARDS_PER_PAGE);
   const paginated = filteredProjects.slice((page - 1) * CARDS_PER_PAGE, page * CARDS_PER_PAGE);
@@ -60,6 +70,15 @@ function AllProjects() {
   };
 
   const totalProjectsCount = projects.length;
+
+  // Function to format origin label
+  const formatOriginLabel = (origin) => {
+    if (!origin) return "";
+    if (origin.toLowerCase() === "emilda solutions") return "Emilda Solutions";
+    if (origin.toLowerCase() === "friska ai") return "Friska AI";
+    if (origin.toLowerCase() === "freelance") return "Freelance";
+    return origin;
+  };
 
   return (
     <>
@@ -146,6 +165,20 @@ function AllProjects() {
           border: 1px solid rgba(248,113,113,0.2); 
         }
         .status-inactive .status-badge-dot { background: var(--theme-error); }
+
+        .origin-badge {
+          display: inline-flex;
+          align-items: center;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          padding: 4px 10px;
+          border-radius: 999px;
+          background: rgba(139, 92, 246, 0.08);
+          color: #8b5cf6;
+          border: 1px solid rgba(139, 92, 246, 0.2);
+        }
 
         @keyframes statusPulse {
           0%,100% { opacity: 1; transform: scale(1); }
@@ -515,7 +548,7 @@ function AllProjects() {
                       transition={{ delay: i * 0.06, duration: 0.5 }}
                       style={{ height: "100%" }}
                     >
-                      <Link to={`/projects/${project.count}`} className="project-card">
+                      <Link to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`} className="project-card">
                         <Box sx={{ padding: "clamp(20px, 2.5vw, 32px)", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "16px" }}>
@@ -526,10 +559,17 @@ function AllProjects() {
                             }}>
                               {String(project.count).padStart(2, "0")}
                             </span>
-                            <span className={`status-badge ${project.status === "active" ? "status-active" : "status-inactive"}`}>
-                              <span className="status-badge-dot" />
-                              {project.status === "active" ? "Active" : "Inactive"}
-                            </span>
+                            <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                              {/* Origin Badge */}
+                              <span className="origin-badge">
+                                {formatOriginLabel(project.origin)}
+                              </span>
+                              {/* Status Badge */}
+                              <span className={`status-badge ${project.status === "active" ? "status-active" : "status-inactive"}`}>
+                                <span className="status-badge-dot" />
+                                {project.status === "active" ? "Active" : "Inactive"}
+                              </span>
+                            </Box>
                           </Box>
 
                           <Typography sx={{

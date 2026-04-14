@@ -1,7 +1,7 @@
 // src/data/projects.js
 import { emildaProjects } from "./emilda-projects";
 import { friskaProjects } from "./friska-projects";
-import { freelanceProjects } from "./freelance-projects"; //  ADD
+import { freelanceProjects } from "./freelance-projects"; 
 
 
 // Combine all projects

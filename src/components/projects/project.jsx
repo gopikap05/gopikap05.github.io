@@ -9,7 +9,7 @@ function ProjectHero() {
     const active = projects.filter(p => p.status === "active").length;
     const companies = [...new Set(projects.map(p => p.origin).filter(Boolean))].length;
     return [
-      { num: `${String(total).padStart(2, "0")}+`, label: "Projects" },
+      { num: String(total).padStart(2, "0"), label: "Projects" },  // Removed the + sign
       { num: String(companies).padStart(2, "0"), label: "Companies" },
       { num: String(active).padStart(2, "0"), label: "Active Now" },
     ];

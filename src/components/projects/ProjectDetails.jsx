@@ -31,8 +31,11 @@ const TECH_ICONS = {
 };
 
 function ProjectDetails() {
-  const { projectId } = useParams();
-  const project = projects.find((p) => p.count === Number(projectId));
+  const { origin, id } = useParams();
+  const project = projects.find((p) =>
+    p.origin.toLowerCase().replace(/\s+/g, '-') === origin &&
+    p.id === id
+  );
 
   if (!project) {
     return (
@@ -469,7 +472,7 @@ function ProjectDetails() {
                 gap: "16px",
               }}>
                 {recentProjects.map((p) => (
-                  <Link key={p.count} to={`/projects/${p.count}`} className="pd-recent-card">
+                  <Link key={p.count} to={`/projects/${p.origin.toLowerCase().replace(/\s+/g, '-')}/${p.count}`} className="pd-recent-card">
                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
                       <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <Typography sx={{

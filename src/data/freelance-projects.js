@@ -1,6 +1,7 @@
 export const freelanceProjects = [
   {
-    count: 60, 
+    count: 1,
+    id: "spei-website",
     title: "SPEI Website",
     company: "SPEI",
     origin: "freelance",
