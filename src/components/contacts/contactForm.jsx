@@ -61,11 +61,11 @@ function ContactForm() {
     }
     setLoading(true);
     emailjs.send("service_3wgg108", "template_wieh09d", {
-      from_name: form.name, 
-      from_email: form.email,
-      from_phone: `+91${form.phone}`,
-      from_company: form.company || "Not provided",
-      message: form.message, 
+      name: form.name,
+      email: form.email,
+      phone: `+91${form.phone}`,
+      company: form.company || "Not provided",
+      message: form.message,
       to_email: form.email,
     }, "tF2Z9ebsNoKBb13kb")
       .then(() => {
