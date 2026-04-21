@@ -1,4 +1,6 @@
 export const freelanceProjects = [
+
+  // SPEI Website
   {
     count: 1,
     id: "spei-website",
@@ -27,4 +29,5 @@ export const freelanceProjects = [
 
     image: "/projects/spei-preview.jpg", 
   },
+
 ];

@@ -1,6 +1,6 @@
-// src/data/friska-projects.js
-
 export const friskaProjects = [
+
+  // Friska.Ai | Billing
   {
     count: 1,
     id: "friska-ai-billing",
@@ -23,6 +23,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
+
+  // Friska.Ai CCM | Lifestyle Experts
   {
     count: 2,
     id: "friska-ai-ccm",
@@ -45,6 +47,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
+
+  // Friska.Ai | Lifestyle Experts
   {
     count: 3,
     id: "friska-ai-lifestyle",
@@ -67,6 +71,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
+
+  // Friska.Ai | Physician Portal
   {
     count: 4,
     id: "friska-ai-physician",
@@ -89,6 +95,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
+
+  // Friska.Ai | Physician Portal (CCM)
   {
     count: 5,
     id: "friska-ai-physician-ccm",
@@ -111,6 +119,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai"],
   },
+
+  // Friska Ai
   {
     count: 6,
     id: "friska-ai",
@@ -124,7 +134,7 @@ export const friskaProjects = [
     detailedDescription:
       "An AI-powered healthcare platform based in Arlington, Virginia, offering innovative solutions for medical billing, lifestyle management, and physician portals. Features integrated tools for healthcare providers and patients. Part of a comprehensive ecosystem of AI-driven health technology services transforming modern healthcare delivery.",
 
-    tech: ["Figma", "WordPress", "Azure"],
+    tech: ["Figma", "WordPress", "Azure", "PHP"],
 
     liveUrl: "https://friska.ai/",
     status: "active",
@@ -133,6 +143,8 @@ export const friskaProjects = [
 
     relatedProjects: ["friska-ai-billing", "friska-ai-ccm", "friska-ai-lifestyle", "friska-ai-physician", "friska-ai-physician-ccm"],
   },
+
+  // Nouriq Ai
   {
     count: 7,
     id: "nouriq-ai",
@@ -146,7 +158,7 @@ export const friskaProjects = [
     detailedDescription:
       "An AI-driven nutrition and wellness platform focused on providing personalized dietary recommendations and health insights. Based in Arlington, Virginia, it leverages artificial intelligence to analyze individual needs and deliver customized nutrition plans. Helps users achieve their wellness goals through data-driven dietary guidance.",
 
-    tech: ["Figma", "WordPress", "Azure"],
+    tech: ["Figma", "WordPress", "Azure", "PHP"],
 
     liveUrl: "https://nouriq.ai/",
     status: "active",
@@ -155,6 +167,8 @@ export const friskaProjects = [
 
     relatedProjects: [],
   },
+
+  // Kliniq Ai
   {
     count: 8,
     id: "kliniq-ai",
@@ -177,6 +191,8 @@ export const friskaProjects = [
 
     relatedProjects: [],
   },
+
+  // HFWL
   {
     count: 9,
     id: "hfwl",
@@ -188,17 +204,19 @@ export const friskaProjects = [
       "AI-powered health and wellness platform for lifestyle optimization.",
 
     detailedDescription:
-      "An AI-powered health and wellness platform offering innovative solutions for lifestyle management and healthcare optimization. Based in Arlington, Virginia, it serves as the parent brand for multiple AI health initiatives. Integates various health services into a cohesive ecosystem for comprehensive wellness management.",
+      "An AI-powered health and wellness platform offering innovative solutions for lifestyle management and healthcare optimization. Based in Arlington, Virginia, it serves as the parent brand for multiple AI health initiatives. Integrates various health services into a cohesive ecosystem for comprehensive wellness management.",
 
-    tech: ["Figma", "WordPress", "Azure"],
+    tech: ["Figma", "WordPress", "Azure", "PHP"],
 
     liveUrl: "https://hfwl.ai/",
     status: "active",
 
     origin: "Friska ai",
 
-    relatedProjects: ["friska-ai", "nouriq-ai", "kliniq-ai", "kalari-ai", "endocpm"],
+    relatedProjects: ["friska-ai", "nouriq-ai", "kliniq-ai", "kalari-ai", "endocpm", "neuralclinic-ai"],
   },
+
+  // Kalari Ai
   {
     count: 10,
     id: "kalari-ai",
@@ -221,6 +239,8 @@ export const friskaProjects = [
 
     relatedProjects: [],
   },
+
+  // Endocpm
   {
     count: 11,
     id: "endocpm",
@@ -243,4 +263,29 @@ export const friskaProjects = [
 
     relatedProjects: [],
   },
+
+  // NeuralClinic Ai
+  {
+    count: 12,
+    id: "neuralclinic-ai",
+    title: "NeuralClinic Ai",
+    company: "HFWL",
+    ceo: "Shaji Nair",
+
+    shortDescription:
+      "AI-integrated platform for multimodal developmental screening and therapy intelligence for pediatric clinics.",
+
+    detailedDescription:
+      "NeuralClinic Ai helps pediatric clinics capture developmental concerns earlier, prepare providers before the visit, and move more families into the right follow-up, referral, or care pathway. It transforms scattered inputs into structured workflows, enabling faster decisions and better outcomes. The platform supports evaluation and management of Autism Spectrum Disorder (ASD), ADHD, OCD, speech & language delay, learning disabilities, sensory processing disorders, and more. Built on global standards (DSM-5, ICD-10, CDC) with clinical validation under psychiatric supervision.",
+
+    tech: ["Figma", "WordPress", "Azure"],
+
+    liveUrl: "https://neuralclinic.ai/",
+    status: "active",
+
+    origin: "Friska ai",
+
+    relatedProjects: [],
+  },
+
 ];

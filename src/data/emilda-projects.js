@@ -1,4 +1,6 @@
 export const emildaProjects = [
+
+  // Global Research Gateway
   {
     count: 1,
     id: "global-research-gateway",
@@ -13,6 +15,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Research Paper Network
   {
     count: 2,
     id: "research-paper-network",
@@ -27,6 +31,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Global Academic Manuscript Hub
   {
     count: 3,
     id: "global-academic-manuscript-hub",
@@ -41,6 +47,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // International Scholarly Submission
   {
     count: 4,
     id: "international-scholarly-submission",
@@ -55,6 +63,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // World Scientific Portal
   {
     count: 5,
     id: "world-scientific-portal",
@@ -69,6 +79,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Route Bio
   {
     count: 6,
     id: "route-bio",
@@ -83,6 +95,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Rashi Maheshwari
   {
     count: 7,
     id: "rashi-maheshwari",
@@ -98,6 +112,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Epiflow
   {
     count: 8,
     id: "epiflow",
@@ -112,6 +128,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Rozapos
   {
     count: 9,
     id: "rozapos",
@@ -126,6 +144,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Lets Plan Inc
   {
     count: 10,
     id: "lets-plan-inc",
@@ -140,6 +160,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Surrolink
   {
     count: 11,
     id: "surrolink",
@@ -154,6 +176,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Emilda Creatives
   {
     count: 12,
     id: "emilda-creatives",
@@ -168,6 +192,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Vitalis Healthcare
   {
     count: 13,
     id: "vitalis-healthcare",
@@ -182,6 +208,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // NGold
   {
     count: 14,
     id: "ngold",
@@ -196,6 +224,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Pearl D3
   {
     count: 15,
     id: "pearl-d3",
@@ -210,6 +240,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Tierra Contracting
   {
     count: 16,
     id: "tierra-contracting",
@@ -224,6 +256,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Rozana Copacking
   {
     count: 17,
     id: "rozana-copacking",
@@ -238,6 +272,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Flavour Infusion Cafe
   {
     count: 18,
     id: "flavour-infusion-cafe",
@@ -252,6 +288,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Nethu Foods
   {
     count: 19,
     id: "nethu-foods",
@@ -266,6 +304,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Bricor
   {
     count: 20,
     id: "bricor",
@@ -280,6 +320,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Seahorse Technology
   {
     count: 21,
     id: "seahorse-technology",
@@ -294,6 +336,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Naushakti Security Force
   {
     count: 22,
     id: "naushakti-security-force",
@@ -308,6 +352,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Kailash Bhavan
   {
     count: 23,
     id: "kailash-bhavan",
@@ -322,6 +368,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Door City
   {
     count: 24,
     id: "door-city",
@@ -336,6 +384,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Elshaddai Ministries
   {
     count: 25,
     id: "elshaddai-ministries",
@@ -350,6 +400,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Emilda
   {
     count: 26,
     id: "emilda",
@@ -364,6 +416,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: ["emilda-creatives"],
   },
+
+  // Auraquill
   {
     count: 27,
     id: "auraquill",
@@ -378,6 +432,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Valley Stay
   {
     count: 28,
     id: "valley-stay",
@@ -392,6 +448,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Universal Journal
   {
     count: 29,
     id: "universal-journal",
@@ -406,6 +464,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: ["global-research-gateway", "research-paper-network"],
   },
+
+  // EZT Meditech
   {
     count: 30,
     id: "ezt-meditech",
@@ -420,6 +480,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // PE Fitness
   {
     count: 31,
     id: "pe-fitness",
@@ -434,20 +496,24 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // BG Farm Cart
   {
     count: 32,
-    id: "agromix-farm",
-    title: "Agromix Farm",
-    company: "Agromix Farm",
+    id: "bg-farm-cart",
+    title: "BG Farm Cart",
+    company: "BG Farm Cart",
     ceo: "Muhammad Sohail",
-    shortDescription: "Agricultural farm showcasing farming operations and products.",
-    detailedDescription: "An agricultural farm website showcasing farming operations...",
+    shortDescription: "Fresh farm products delivered directly to your doorstep — vegetables, fruits, eggs, and more.",
+    detailedDescription: "BG Farm Cart is an online farm-to-home platform offering fresh, chemical-free vegetables, fruits, free-range eggs, and other natural farm products. Customers can browse daily harvests, place orders easily, and get scheduled delivery of farm-fresh produce directly from the farm.",
     tech: ["Figma", "GitHub", "Shopify", "Netlify", "Webflow"],
-    liveUrl: "https://agromixfarm.com/",
+    liveUrl: "https://www.bgfarmcart.com/",
     status: "active",
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Amalgamated Pest
   {
     count: 33,
     id: "amalgamated-pest",
@@ -462,6 +528,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Goleaff
   {
     count: 34,
     id: "goleaff",
@@ -476,6 +544,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Mylanji Studio
   {
     count: 35,
     id: "mylanji-studio",
@@ -490,6 +560,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Indoc Web
   {
     count: 36,
     id: "indoc-web",
@@ -504,6 +576,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: ["indoc-books"],
   },
+
+  // Udhay Groups
   {
     count: 37,
     id: "udhay-groups",
@@ -518,6 +592,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Nexara Glam
   {
     count: 38,
     id: "nexara-glam",
@@ -532,6 +608,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Annorah Loom Studio
   {
     count: 39,
     id: "annorah-loom-studio",
@@ -546,6 +624,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Guardian Medx
   {
     count: 40,
     id: "guardian-medx",
@@ -560,6 +640,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Wanderr Jackets
   {
     count: 41,
     id: "wanderr-jackets",
@@ -574,6 +656,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Indoc Books
   {
     count: 42,
     id: "indoc-books",
@@ -588,6 +672,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: ["indoc-web"],
   },
+
+  // Artation
   {
     count: 43,
     id: "artation",
@@ -602,6 +688,8 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
+  // Two Feathers Home Care
   {
     count: 44,
     id: "two-feathers-home-care",
@@ -616,4 +704,5 @@ export const emildaProjects = [
     origin: "emilda solutions",
     relatedProjects: [],
   },
+
 ];
