@@ -120,9 +120,33 @@ export const friskaProjects = [
     relatedProjects: ["friska-ai"],
   },
 
-  // Friska Ai
+  // Endocpm
   {
     count: 6,
+    id: "endocpm",
+    title: "Endocpm",
+    company: "HFWL",
+    ceo: "Shaji Nair",
+
+    shortDescription:
+      "Specialized healthcare platform for endocrinology care management.",
+
+    detailedDescription:
+      "A specialized healthcare platform focused on endocrinology care and patient management solutions. Based in Arlington, Virginia, it provides tools for medical professionals to manage endocrine disorders effectively. Features patient tracking, treatment plans, and clinical decision support for endocrinology practices.",
+
+    tech: ["Figma", "WordPress", "Azure"],
+
+    liveUrl: "https://endocpm.com/",
+    status: "active",
+
+    origin: "Friska ai",
+
+    relatedProjects: [],
+  },
+
+  // Friska Ai
+  {
+    count: 7,
     id: "friska-ai",
     title: "Friska Ai",
     company: "HFWL",
@@ -146,7 +170,7 @@ export const friskaProjects = [
 
   // Nouriq Ai
   {
-    count: 7,
+    count: 8,
     id: "nouriq-ai",
     title: "Nouriq Ai",
     company: "HFWL",
@@ -170,7 +194,7 @@ export const friskaProjects = [
 
   // Kliniq Ai
   {
-    count: 8,
+    count: 9,
     id: "kliniq-ai",
     title: "Kliniq Ai",
     company: "HFWL",
@@ -194,7 +218,7 @@ export const friskaProjects = [
 
   // HFWL
   {
-    count: 9,
+    count: 10,
     id: "hfwl",
     title: "HFWL",
     company: "HFWL",
@@ -218,7 +242,7 @@ export const friskaProjects = [
 
   // Kalari Ai
   {
-    count: 10,
+    count: 11,
     id: "kalari-ai",
     title: "Kalari Ai",
     company: "HFWL",
@@ -233,30 +257,6 @@ export const friskaProjects = [
     tech: ["Figma", "WordPress", "Azure"],
 
     liveUrl: "https://kalari.ai/",
-    status: "active",
-
-    origin: "Friska ai",
-
-    relatedProjects: [],
-  },
-
-  // Endocpm
-  {
-    count: 11,
-    id: "endocpm",
-    title: "Endocpm",
-    company: "HFWL",
-    ceo: "Shaji Nair",
-
-    shortDescription:
-      "Specialized healthcare platform for endocrinology care management.",
-
-    detailedDescription:
-      "A specialized healthcare platform focused on endocrinology care and patient management solutions. Based in Arlington, Virginia, it provides tools for medical professionals to manage endocrine disorders effectively. Features patient tracking, treatment plans, and clinical decision support for endocrinology practices.",
-
-    tech: ["Figma", "WordPress", "Azure"],
-
-    liveUrl: "https://endocpm.com/",
     status: "active",
 
     origin: "Friska ai",

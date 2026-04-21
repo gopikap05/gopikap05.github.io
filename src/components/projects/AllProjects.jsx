@@ -45,6 +45,7 @@ function AllProjects() {
       return originMatch && statusMatch && searchMatch;
     })
     .sort((a, b) => {
+      // Order by origin: freelance -> friska ai -> emilda solutions
       const ORIGIN_ORDER = {
         "freelance": 0,
         "friska ai": 1,
@@ -53,7 +54,8 @@ function AllProjects() {
       const originA = ORIGIN_ORDER[a.origin?.toLowerCase().trim()] ?? 99;
       const originB = ORIGIN_ORDER[b.origin?.toLowerCase().trim()] ?? 99;
       if (originA !== originB) return originA - originB;
-      return a.count - b.count;
+      // Within same origin, sort by count DESCENDING (highest first)
+      return b.count - a.count;
     });
 
   const totalPages = Math.ceil(filteredProjects.length / CARDS_PER_PAGE);
