@@ -288,4 +288,28 @@ export const friskaProjects = [
     relatedProjects: [],
   },
 
+  // Claritalk Ai
+  {
+    count: 13,
+    id: "claritalk-ai",
+    title: "Claritalk Ai",
+    company: "HFWL",
+    ceo: "Shaji Nair",
+
+    shortDescription:
+      "AI-powered clinical communication platform for secure healthcare messaging and collaboration.",
+
+    detailedDescription:
+      "Claritalk Ai is an AI-powered clinical communication platform designed to streamline secure messaging, collaboration, and workflow coordination among healthcare teams. Built for modern medical environments, it enables real-time text, voice, and video communication while maintaining HIPAA compliance and clinical data security. Features include role-based messaging, on-call scheduling, alert escalations, and integration with EHR systems. The platform reduces clinical response times, minimizes communication gaps, and supports better care coordination across departments. Based on industry standards for secure healthcare communication, Claritalk Ai empowers hospitals, clinics, and practices to improve operational efficiency and patient safety through intelligent, context-aware messaging solutions.",
+
+    tech: ["Figma", "WordPress", "Azure"],
+
+    liveUrl: "https://claritalk.ai/",
+    status: "active",
+
+    origin: "Friska ai",
+
+    relatedProjects: ["friska-ai", "kliniq-ai", "neuralclinic-ai"],
+  },
+
 ];
