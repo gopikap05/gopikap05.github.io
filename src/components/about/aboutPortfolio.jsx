@@ -325,7 +325,7 @@ function AboutPortfolio() {
         borderBottom: "1px solid var(--theme-border)",
       }}>
         <div style={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           width: "100%",
           margin: "0 auto",
           padding: "clamp(60px, 8vw, 100px) clamp(20px, 5%, 96px)",

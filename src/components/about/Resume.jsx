@@ -229,7 +229,7 @@ function Resume() {
       >
         {/* ── CONTAINER ── */}
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           mx: "auto",
           width: "100%",
           px: "clamp(16px, 5%, 96px)",

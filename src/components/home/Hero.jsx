@@ -446,7 +446,7 @@ function HeroSection() {
         {/* ── CONTAINER ── */}
         <Box
           sx={{
-            maxWidth: "1350px",
+            maxWidth: "1440px",
             width: "100%",
             mx: "auto",
             px: { xs: "24px", sm: "36px", md: "52px", lg: "72px", xl: "96px" },
