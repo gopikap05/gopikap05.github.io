@@ -29,18 +29,17 @@ function ProjectCard({ project, index, to }) {
   const handleMouseEnter = useCallback(() => setHovered(true), []);
   const handleMouseLeave = useCallback(() => setHovered(false), []);
 
-  // normalize origin for display
   const originLabel = project.origin
     ? project.origin.charAt(0).toUpperCase() + project.origin.slice(1)
     : "";
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 0 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: index * 0.12 }}
-      style={{ display: "flex" }}
+      style={{ display: "flex", height: "100%", width: "100%" }}
     >
       <Link
         to={to}
@@ -49,7 +48,6 @@ function ProjectCard({ project, index, to }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
-          display: "block",
           width: "100%",
           textDecoration: "none",
           position: "relative",
@@ -58,9 +56,11 @@ function ProjectCard({ project, index, to }) {
           backgroundColor: "var(--theme-bg-card)",
           cursor: "none",
           boxSizing: "border-box",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        {/* Revolving conic gradient bg */}
         <div
           className="card-gradient-bg"
           style={{
@@ -72,7 +72,6 @@ function ProjectCard({ project, index, to }) {
           }}
         />
 
-        {/* Dark overlay so text stays readable */}
         <div style={{
           position: "absolute",
           inset: 0,
@@ -80,7 +79,6 @@ function ProjectCard({ project, index, to }) {
           zIndex: 1,
         }} />
 
-        {/* Accent top line sweep */}
         <div style={{
           position: "absolute",
           top: 0, left: 0,
@@ -92,7 +90,6 @@ function ProjectCard({ project, index, to }) {
           zIndex: 2,
         }} />
 
-        {/* Magnetic cursor circle */}
         <motion.div
           style={{
             position: "absolute",
@@ -126,19 +123,18 @@ function ProjectCard({ project, index, to }) {
           }}>View</span>
         </motion.div>
 
-        {/* Card content */}
-        <div style={{
+        <div className="project-card-content" style={{
           position: "relative",
           zIndex: 3,
-          padding: "32px",
+          padding: "30px",
           minHeight: "200px",
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           gap: "8px",
+          height: "100%",
         }}>
 
-          {/* Index number - RED color, LARGER SIZE */}
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "28px",
@@ -150,7 +146,6 @@ function ProjectCard({ project, index, to }) {
             {String(project.count).padStart(2, "0")}
           </div>
 
-          {/* Title */}
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(1.3rem, 2.5vw, 1.75rem)",
@@ -162,7 +157,6 @@ function ProjectCard({ project, index, to }) {
             {project.title || project.company}
           </div>
 
-          {/* Company · CEO */}
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
             color: "var(--theme-text-muted)",
@@ -175,14 +169,13 @@ function ProjectCard({ project, index, to }) {
             {project.ceo && ` · ${project.ceo}`}
           </div>
 
-          {/* Origin · Status row */}
           <div style={{
             display: "flex",
             alignItems: "center",
             gap: "12px",
             marginBottom: "20px",
+            flexWrap: "wrap",
           }}>
-            {/* Origin badge - PURPLE */}
             <span style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px",
@@ -197,7 +190,6 @@ function ProjectCard({ project, index, to }) {
               {originLabel}
             </span>
 
-            {/* Status badge */}
             <span style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "10px",
@@ -230,12 +222,12 @@ function ProjectCard({ project, index, to }) {
             </span>
           </div>
 
-          {/* Short description */}
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
             color: "var(--theme-text-secondary)",
             fontSize: "0.9rem",
             lineHeight: 1.7,
+            flex: 1,
           }}>
             {project.shortDescription}
           </div>
@@ -249,14 +241,13 @@ function ProjectCard({ project, index, to }) {
 function RecentProjects() {
   const navigate = useNavigate();
 
-  // Pick latest from each origin in order: freelance → friska ai → emilda solutions
   const originOrder = ["freelance", "friska ai", "emilda solutions"];
 
   const recentProjects = originOrder.map((origin) => {
     return projects
       .filter((p) => p.origin.toLowerCase() === origin.toLowerCase())
-      .sort((a, b) => b.count - a.count)[0]; // highest count = most recent
-  }).filter(Boolean); // safety: remove undefined if an origin has no projects
+      .sort((a, b) => b.count - a.count)[0];
+  }).filter(Boolean);
 
   return (
     <>
@@ -345,6 +336,67 @@ function RecentProjects() {
         }
         .animated-button:hover .btn-arrow { transform: translateX(6px); }
         .animated-button:active { transform: scale(0.97); }
+
+        /* Mobile horizontal scroll */
+@media (max-width: 768px) {
+  .projects-grid {
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .projects-grid::-webkit-scrollbar { height: 3px; }
+  .projects-grid::-webkit-scrollbar-track {
+    background: var(--theme-border);
+    border-radius: 3px;
+  }
+  .projects-grid::-webkit-scrollbar-thumb {
+    background: var(--theme-primary);
+    border-radius: 3px;
+  }
+
+  .projects-scroll-track {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 24px;
+    width: max-content;
+  }
+
+  .projects-scroll-track > * {
+    width: 280px !important;
+    min-width: 280px !important;
+    flex-shrink: 0 !important;
+    height: 360px !important;
+  }
+
+  .mobile-scroll-hint {
+    display: flex !important;
+  }
+}
+
+.project-card-content {
+  padding: 20px !important;
+}
+        
+        /* Desktop */
+        @media (min-width: 769px) {
+          .projects-grid {
+            overflow: visible;
+          }
+          
+          .projects-scroll-track {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            width: 100%;
+          }
+          
+          .mobile-scroll-hint {
+            display: none !important;
+          }
+        }
       `}</style>
 
       <Box sx={{
@@ -353,7 +405,7 @@ function RecentProjects() {
         color: "var(--theme-text-primary)",
         borderTop: "1px solid var(--theme-border)",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible",
       }}>
         <Box sx={{
           maxWidth: "1440px",
@@ -364,7 +416,6 @@ function RecentProjects() {
           pb: { xs: "80px", sm: "100px", md: "120px" },
         }}>
 
-          {/* Top label - Dot changed to RED */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -377,7 +428,6 @@ function RecentProjects() {
             </div>
           </motion.div>
 
-          {/* Heading row */}
           <Box sx={{
             display: "flex",
             alignItems: { xs: "flex-start", sm: "flex-end" },
@@ -403,35 +453,59 @@ function RecentProjects() {
                 Latest Work
               </Typography>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-            >
-            </motion.div>
           </Box>
 
-          {/* Cards grid */}
-          <Box sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
-            gap: { xs: "24px", md: "28px" },
-            mb: { xs: 6, md: 8 },
+          <div className="projects-grid">
+            <div className="projects-scroll-track">
+              {recentProjects.map((project, i) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={i}
+                  to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Scroll hint - single arrow */}
+          <div className="mobile-scroll-hint" style={{
+            display: "none",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "8px",
+            marginTop: "24px",
+            marginBottom: "0",
           }}>
-            {recentProjects.map((project, i) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={i}
-                to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`}
-              />
-            ))}
-          </Box>
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "9px",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              color: "var(--theme-text-muted)",
+              opacity: 0.6,
+            }}>
+              Swipe to see more
+            </span>
+            <motion.div
+              animate={{ x: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                fontSize: "14px",
+                color: "var(--theme-text-muted)",
+                opacity: 0.6,
+              }}
+            >
+              →
+            </motion.div>
+          </div>
 
-          {/* CTA Button */}
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {/* CTA Button with top margin on desktop */}
+          <Box sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: { xs: 2, md: 6 }
+          }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

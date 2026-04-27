@@ -381,7 +381,7 @@ function HeroSection() {
         transition={{ duration: 1 }}
         sx={{
           width: "100%",
-          minHeight: { xs: "520px", sm: "600px", md: "80vh" },
+          minHeight: { xs: "450px", sm: "600px", md: "80vh" },
           height: { xs: "auto", md: "80vh" },
           backgroundColor: "var(--theme-bg-primary)",
           color: "var(--theme-text-primary)",

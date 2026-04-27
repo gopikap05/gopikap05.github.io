@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import Breadcrumbs from "../components/common/breadcrumbs";
-import AboutMe from "../components/about/Aboutme";
+import AboutMeHero from "../components/about/AboutMeHero";
+import AboutMeFAQ from "../components/about/AboutMeFAQ";
 import Resume from "../components/about/Resume";
 import AboutPortfolio from "../components/about/aboutPortfolio";
 
@@ -14,7 +15,8 @@ function About() {
         ]}
       />
 
-      <AboutMe />
+      <AboutMeHero />
+      <AboutMeFAQ />
       <Resume />
       <AboutPortfolio />
     </Box>

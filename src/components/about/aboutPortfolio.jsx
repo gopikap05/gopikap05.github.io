@@ -5,6 +5,7 @@ const blocks = [
     label: "01",
     title: "Typography",
     tag: "Visual Language",
+    themeNote: "Same for both themes",
     content: [
       { type: "p", text: "Primary font: Bebas Neue for display headings — bold, editorial, and architectural. DM Sans for body — clean, geometric, and readable." },
       { type: "p", text: "Bold headings establish hierarchy. Controlled letter spacing ensures consistent navigation and section identity." },
@@ -14,14 +15,15 @@ const blocks = [
     label: "02",
     title: "Color System",
     tag: "Palette & Depth",
+    themeNote: "Dark: #080808 / Light: #FFFFFF",
     content: [
       { type: "p", text: "Dark-first design approach using layered depth and selective accent highlights." },
       {
         type: "ul", items: [
-          "Base Background — #080808",
-          "Surface Panels — #0d0d0d",
-          "Borders — #141414 / #1c1c1c",
-          "Accent Red — #ff3b3b",
+          "Base Background — Dark: #080808 / Light: #FFFFFF",
+          "Surface Panels — Dark: #0d0d0d / Light: #F2EAF7",
+          "Borders — Dark: #141414 / #1c1c1c / Light: #C59DD9",
+          "Accent Red — #ff3b3b (Same for both)",
           "Gradient — Yellow → Pink → Purple",
         ],
       },
@@ -31,6 +33,7 @@ const blocks = [
     label: "03",
     title: "Tech Stack",
     tag: "Tools & Libraries",
+    themeNote: "Same for both themes",
     content: [
       {
         type: "ul", items: [
@@ -49,6 +52,7 @@ const blocks = [
     label: "04",
     title: "Highlights",
     tag: "Craft & Detail",
+    themeNote: "Same for both themes",
     content: [
       {
         type: "ul", items: [
@@ -65,14 +69,31 @@ const blocks = [
   },
 ];
 
-const colors = [
-  "#ffffff", "#aaaaaa", "#1a1a1a", "#111111",
-  "#ff3b3b", "#3b82f6", "#8b5cf6", "#10b981",
-  "#ffdb3b", "#fe53bb", "#0044ff", "#f97316",
+// Dark theme colors
+const darkColors = [
+  "#ffffff",     // White
+  "#ff3b3b",     // Red (primary accent)
+  "#8b5cf6",     // Purple (secondary accent)
+  "#fe53bb",     // Pink (gradients)
+  "#ffdb3b",     // Yellow (gradients)
+  "#0044ff",     // Deep Blue (gradients)
+  "#f97316",     // Orange (stars)
+  "#4ade80",     // Green (success/active status)
+  "#f87171",     // Red (error/inactive status)
 ];
 
-/* Each card gets a unique animation delay so the scanlines feel staggered */
-const scanDelays = ["0s", "1.4s", "2.8s", "0.7s"];
+// Light theme colors
+const lightColors = [
+  "#2B0D3E",     // Deep Purple (primary text)
+  "#7A3F91",     // Royal Amethyst (primary)
+  "#C59DD9",     // Soft Lavender (primary light)
+  "#F2EAF7",     // Very Light Lavender (bg secondary)
+  "#FFFFFF",     // White (bg primary)
+  "#ff3b3b",     // Red (accent)
+  "#8b5cf6",     // Purple (secondary accent)
+  "#4ade80",     // Green (success)
+  "#f87171",     // Red (error)
+];
 
 function Block({ block, index }) {
   return (
@@ -83,11 +104,8 @@ function Block({ block, index }) {
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* looping scan line — unique delay per card */}
-      <div
-        className="bcard-scan"
-        style={{ animationDelay: scanDelays[index] }}
-      />
+      {/* subtle corner accent */}
+      <div className="bcard-corner" />
 
       {/* meta */}
       <div className="bcard-meta">
@@ -97,6 +115,11 @@ function Block({ block, index }) {
 
       {/* title */}
       <h3 className="bcard-title">{block.title}</h3>
+
+      {/* theme note badge */}
+      <div className="bcard-theme-note">
+        <span className="theme-badge">{block.themeNote}</span>
+      </div>
 
       {/* static rule */}
       <div className="bcard-rule" />
@@ -115,6 +138,9 @@ function Block({ block, index }) {
           )
         )}
       </div>
+
+      {/* hover gradient overlay */}
+      <div className="bcard-overlay" />
     </motion.div>
   );
 }
@@ -155,24 +181,68 @@ function AboutPortfolio() {
         .item-color:hover::before { opacity: 1; visibility: visible; }
         .item-color:active::after { transform: scale(1.05); }
         .item-color:focus::before { content: "✅ Copied"; }
-        .item-color:hover + * { transform: scale(1.3); z-index: 9999; }
-        .item-color:hover + * + * { transform: scale(1.15); z-index: 999; }
-        .item-color:has(+ *:hover) { transform: scale(1.3); z-index: 9999; }
-        .item-color:has(+ * + *:hover) { transform: scale(1.15); z-index: 999; }
-        .color-strip {
-          display: flex; justify-content: center; flex-wrap: wrap;
-          gap: clamp(2px, 0.4vw, 4px);
-          padding: clamp(24px, 4vw, 48px) 0;
-          transform-style: preserve-3d; transform: perspective(1000px);
+        
+        /* Color strips container - side by side on desktop */
+        .palettes-container {
+          display: flex;
+          gap: clamp(20px, 4vw, 48px);
+          margin-top: clamp(24px, 3vw, 36px);
+          flex-direction: column;
         }
-        @media (max-width: 600px) { .color-strip { gap: 2px; } }
-
-        /* ── SCAN LINE ANIMATION ── */
-        @keyframes scan {
-          0%   { top: -2px; opacity: 0; }
-          5%   { opacity: 1; }
-          95%  { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
+        
+        @media (min-width: 768px) {
+          .palettes-container {
+            flex-direction: row;
+          }
+          .palette-col {
+            flex: 1;
+          }
+        }
+        
+        .palette-col {
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
+          border-radius: 2px;
+          padding: clamp(16px, 2vw, 24px);
+          transition: border-color 0.3s ease;
+        }
+        
+        .palette-col:hover {
+          border-color: var(--theme-border-hover);
+        }
+        
+        .palette-title {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--theme-text-muted);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        
+        .palette-badge {
+          font-size: 9px;
+          letter-spacing: 2px;
+          padding: 2px 8px;
+          border-radius: 999px;
+          background: rgba(255,59,59,0.1);
+          color: rgba(255,59,59,0.7);
+        }
+        
+        .color-strip {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: clamp(2px, 0.4vw, 4px);
+          transform-style: preserve-3d;
+          transform: perspective(1000px);
+        }
+        
+        @media (max-width: 600px) { 
+          .color-strip { gap: 2px; }
         }
 
         /* ── 2×2 GRID ── */
@@ -190,32 +260,71 @@ function AboutPortfolio() {
           background: var(--theme-bg-card);
           border: 1px solid var(--theme-border);
           border-radius: 2px;
-          padding: clamp(28px, 4vw, 52px);
+          padding: clamp(28px, 4vw, 32px);
           position: relative;
           overflow: hidden;
-          transition: border-color 0.3s ease;
-        }
-        .bcard:hover {
-          border-color: var(--theme-border-hover);
+          transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        /* The looping scan line */
-        .bcard-scan {
+        .bcard:hover {
+          border-color: var(--theme-border-hover);
+          transform: translateY(-4px);
+        }
+
+        /* Theme note badge */
+        .bcard-theme-note {
+          margin-bottom: clamp(12px, 1.5vw, 16px);
+          position: relative;
+          z-index: 2;
+        }
+        
+        .theme-badge {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 12px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          padding: 2px 8px;
+          border-radius: 999px;
+          background: rgba(255,59,59,0.08);
+          color: rgba(255,59,59,0.6);
+          border: 1px solid rgba(255,59,59,0.15);
+          display: inline-block;
+        }
+
+        /* Corner accent */
+        .bcard-corner {
           position: absolute;
+          top: 0;
           left: 0;
-          width: 100%;
-          height: 1px;
-          background: linear-gradient(
-            to right,
-            transparent 0%,
-            rgba(255,59,59,0.0) 20%,
-            rgba(255,59,59,0.35) 50%,
-            rgba(255,59,59,0.0) 80%,
-            transparent 100%
-          );
-          animation: scan 4s linear infinite;
+          width: 0;
+          height: 0;
+          border-top: 2px solid transparent;
+          border-left: 2px solid transparent;
+          transition: all 0.35s ease;
           pointer-events: none;
           z-index: 1;
+        }
+
+        .bcard:hover .bcard-corner {
+          border-top-color: rgba(255, 59, 59, 0.6);
+          border-left-color: rgba(255, 59, 59, 0.6);
+          width: 24px;
+          height: 24px;
+        }
+
+        /* Hover gradient overlay */
+        .bcard-overlay {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 59, 59, 0.03), transparent 70%);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .bcard:hover .bcard-overlay {
+          opacity: 1;
         }
 
         .bcard-meta {
@@ -232,6 +341,12 @@ function AboutPortfolio() {
           font-size: 11px;
           letter-spacing: 3px;
           color: rgba(255,59,59,0.5);
+          transition: letter-spacing 0.3s ease;
+        }
+
+        .bcard:hover .bcard-num {
+          letter-spacing: 4px;
+          color: rgba(255,59,59,0.8);
         }
 
         .bcard-tag {
@@ -246,16 +361,26 @@ function AboutPortfolio() {
           transition: all 0.3s ease;
         }
 
+        .bcard:hover .bcard-tag {
+          border-color: rgba(255, 59, 59, 0.4);
+          color: rgba(255, 59, 59, 0.7);
+        }
+
         .bcard-title {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(2.2rem, 5vw, 3.6rem);
+          font-size: clamp(2.2rem, 5vw, 3.4rem);
           font-weight: 400;
           letter-spacing: 3px;
           color: var(--theme-text-primary);
-          margin: 0 0 clamp(14px, 2vw, 20px);
+          margin: 0 0 clamp(6px, 1vw, 10px);
           line-height: 0.95;
           position: relative;
           z-index: 2;
+          transition: letter-spacing 0.25s ease;
+        }
+
+        .bcard:hover .bcard-title {
+          letter-spacing: 4px;
         }
 
         .bcard-rule {
@@ -265,6 +390,7 @@ function AboutPortfolio() {
           margin-bottom: clamp(16px, 2.5vw, 26px);
           position: relative;
           z-index: 2;
+          transition: width 0.3s ease;
         }
 
         .bcard-body {
@@ -294,6 +420,7 @@ function AboutPortfolio() {
           line-height: 1.7;
           padding-left: 16px;
           position: relative;
+          transition: transform 0.2s ease, color 0.2s ease;
         }
         .bcard-li::before {
           content: '';
@@ -301,6 +428,17 @@ function AboutPortfolio() {
           left: 0; top: 11px;
           width: 5px; height: 1px;
           background: rgba(255,59,59,0.4);
+          transition: width 0.2s ease, background 0.2s ease;
+        }
+
+        .bcard:hover .bcard-li::before {
+          width: 8px;
+          background: rgba(255,59,59,0.8);
+        }
+
+        .bcard-li:hover {
+          transform: translateX(4px);
+          color: var(--theme-text-primary);
         }
 
         /* Light theme specific adjustments */
@@ -314,6 +452,13 @@ function AboutPortfolio() {
         [data-theme="light"] .bcard-li {
           color: var(--theme-text-secondary);
           opacity: 0.8;
+        }
+        [data-theme="light"] .bcard:hover .bcard-corner {
+          border-top-color: rgba(255, 59, 59, 0.8);
+          border-left-color: rgba(255, 59, 59, 0.8);
+        }
+        [data-theme="light"] .palette-col {
+          background: var(--theme-bg-card);
         }
       `}</style>
 
@@ -389,7 +534,7 @@ function AboutPortfolio() {
             margin: "clamp(40px, 6vw, 72px) 0 0",
           }} />
 
-          {/* Color palette */}
+          {/* Color palettes - Side by side on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -398,23 +543,52 @@ function AboutPortfolio() {
           >
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: "10px", letterSpacing: "3px",
+              fontSize: "16px", letterSpacing: "3px",
               textTransform: "uppercase",
               color: "var(--theme-text-muted)",
               margin: "clamp(24px, 3vw, 36px) 0 0",
             }}>
-              Palette
+              Color Palettes
             </p>
-            <div className="color-strip">
-              {colors.map((color) => (
-                <button
-                  key={color}
-                  className="item-color"
-                  style={{ "--color": color }}
-                  aria-label={color}
-                  onClick={() => navigator.clipboard?.writeText(color)}
-                />
-              ))}
+            
+            <div className="palettes-container">
+              {/* Dark Theme Palette */}
+              <div className="palette-col">
+                <div className="palette-title">
+                  <span>Dark Theme</span>
+                  <span className="palette-badge">9 colors</span>
+                </div>
+                <div className="color-strip">
+                  {darkColors.map((color) => (
+                    <button
+                      key={color}
+                      className="item-color"
+                      style={{ "--color": color }}
+                      aria-label={color}
+                      onClick={() => navigator.clipboard?.writeText(color)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Light Theme Palette */}
+              <div className="palette-col">
+                <div className="palette-title">
+                  <span>Light Theme</span>
+                  <span className="palette-badge">9 colors</span>
+                </div>
+                <div className="color-strip">
+                  {lightColors.map((color) => (
+                    <button
+                      key={color}
+                      className="item-color"
+                      style={{ "--color": color }}
+                      aria-label={color}
+                      onClick={() => navigator.clipboard?.writeText(color)}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
