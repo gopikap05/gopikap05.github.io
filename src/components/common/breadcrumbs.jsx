@@ -17,7 +17,7 @@ function Breadcrumbs({ items }) {
       {/* ── CONTAINER ── */}
       <Box
         sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           width: "100%",
           mx: "auto",
           display: "flex",
@@ -71,8 +71,8 @@ function Breadcrumbs({ items }) {
                   >
                     {item.label}
                   </Link>
-                  <span style={{ 
-                    margin: "0 12px", 
+                  <span style={{
+                    margin: "0 12px",
                     color: "var(--theme-text-primary)",
                     opacity: 0.5,
                     fontSize: "inherit",

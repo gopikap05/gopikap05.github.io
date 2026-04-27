@@ -399,7 +399,7 @@ function ThanksNote() {
         px: "5%",
         py: { xs: "60px", sm: "72px", md: "90px" },
       }}>
-        <Box sx={{ maxWidth: "1350px", width: "100%", mx: "auto" }}>
+        <Box sx={{ maxWidth: "1440px", width: "100%", mx: "auto" }}>
           <div className="tn-grid">
 
             {/* Note card */}

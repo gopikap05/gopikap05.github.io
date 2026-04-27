@@ -3,8 +3,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
-const MotionTypography = motion(Typography);
-const MotionBox = motion(Box);
+// Use motion.create() — motion() factory is deprecated in newer framer-motion
+const MotionTypography = motion.create(Typography);
+const MotionBox = motion.create(Box);
 
 function HeroSection() {
   const sectionRef = useRef(null);
@@ -34,6 +35,21 @@ function HeroSection() {
   }, []);
 
   const nameLetters = "GOPIKA".split("");
+
+  // Animation variants for each letter - bounce loop
+  const letterVariants = {
+    initial: { y: 0 },
+    animate: (i) => ({
+      y: [0, -15, 0],
+      transition: {
+        duration: 1.2,
+        delay: i * 0.1,
+        repeat: Infinity,
+        repeatDelay: 1.5,
+        ease: "easeInOut",
+      },
+    }),
+  };
 
   return (
     <>
@@ -143,21 +159,10 @@ function HeroSection() {
           }
         }
 
-        /* ── Name letters ── */
+        /* ── Name letters - No hover effect, loop animation ── */
         .name-letter {
           display: inline-block;
-          transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), color 0.25s ease;
           cursor: default;
-        }
-        .name-letter:hover {
-          transform: translateY(-8px) skewX(-2deg);
-          color: var(--theme-text-secondary);
-        }
-        @media (hover: none) {
-          .name-letter:hover {
-            transform: none;
-            color: inherit;
-          }
         }
 
         /* ── Scanline subtle overlay ── */
@@ -463,20 +468,18 @@ function HeroSection() {
 
           {/* Name + Cube row */}
           <div className="name-cube-row">
-            {/* Name with per-letter hover */}
+            {/* Name with per-letter bounce loop animation */}
             <MotionBox style={{ y: nameY }}>
               <h1 className="name-heading">
                 {nameLetters.map((letter, i) => (
                   <motion.span
                     key={i}
                     className="name-letter"
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.7,
-                      delay: 0.7 + i * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+                    custom={i}
+                    variants={letterVariants}
+                    initial="initial"
+                    animate="animate"
+                    style={{ display: "inline-block" }}
                   >
                     {letter}
                   </motion.span>

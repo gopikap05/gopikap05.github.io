@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -131,16 +132,29 @@ function CTASection() {
         }
 
         /* ── Marquee ── */
+        .cta-marquee-wrapper {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          overflow: hidden;
+          pointer-events: none;
+          z-index: 0;
+          opacity: 0.8;
+        }
+
         .cta-marquee-track {
           display: flex;
           gap: 48px;
-          animation: marquee 18s linear infinite;
-          white-space: nowrap;
+          animation: ctaMarquee 25s linear infinite;
+          width: max-content;
         }
-        @keyframes marquee {
+
+        @keyframes ctaMarquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to { transform: translateX(-50%); }
         }
+
         .cta-marquee-item {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(48px, 7vw, 96px);
@@ -162,7 +176,7 @@ function CTASection() {
           opacity: 0.08;
         }
         
-        /* Light theme marquee - more visible */
+        /* Light theme marquee */
         [data-theme="light"] .cta-marquee-item {
           color: var(--theme-primary);
           opacity: 0.3;
@@ -219,30 +233,24 @@ function CTASection() {
         />
 
         {/* Scrolling background marquee */}
-        <Box sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          width: "200%",
-          overflow: "hidden",
-          pointerEvents: "none",
-          zIndex: 0,
-          opacity: 0.8,
-        }}>
+        <div className="cta-marquee-wrapper">
           <div className="cta-marquee-track">
-            {["LET'S WORK", "·", "GET IN TOUCH", "·", "HIRE ME", "·", "COLLABORATE", "·",
-              "LET'S WORK", "·", "GET IN TOUCH", "·", "HIRE ME", "·", "COLLABORATE", "·"].map((word, i) => (
-              <span key={i} className={`cta-marquee-item ${i % 4 === 0 ? "filled" : ""}`}>
-                {word}
-              </span>
+            {[...Array(2)].map((_, repeatIndex) => (
+              <React.Fragment key={repeatIndex}>
+                {["LET'S WORK", "·", "GET IN TOUCH", "·", "HIRE ME", "·", "COLLABORATE", "·"].map((word, i) => (
+                  <span key={`${repeatIndex}-${i}`} className={`cta-marquee-item ${i % 4 === 0 ? "filled" : ""}`}>
+                    {word}
+                  </span>
+                ))}
+              </React.Fragment>
             ))}
           </div>
-        </Box>
+        </div>
 
         {/* ── CONTAINER ── */}
         <Box
           sx={{
-            maxWidth: "1350px",
+            maxWidth: "1440px",
             width: "100%",
             mx: "auto",
             px: "clamp(16px, 5%, 96px)",
@@ -261,7 +269,6 @@ function CTASection() {
             maxWidth: "min(820px, 100%)",
             mx: "auto",
           }}>
-
             {/* Tag */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -301,10 +308,10 @@ function CTASection() {
             >
               <Typography sx={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: { xs: "clamp(2.2rem, 8vw, 4rem)", md: "clamp(3rem, 5.5vw, 5.5rem)" },
+                fontSize: { xs: "clamp(1.5rem, 6vw, 2.8rem)", md: "clamp(2rem, 4vw, 3.5rem)" },
                 fontWeight: 400,
                 lineHeight: 1.05,
-                letterSpacing: "3px",
+                letterSpacing: "2px",
                 mb: { xs: 2, md: 3 },
                 color: "var(--theme-text-primary)",
               }}>
@@ -366,7 +373,6 @@ function CTASection() {
                 </div>
               </button>
             </motion.div>
-
           </Box>
         </Box>
       </Box>

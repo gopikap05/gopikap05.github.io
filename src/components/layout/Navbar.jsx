@@ -155,11 +155,11 @@ function Navbar() {
           sx={{
             width: "100%",
             height: { xs: "56px", sm: "62px", md: "70px" },
-            backgroundColor: scrolled 
-              ? `var(--theme-bg-primary)` 
+            backgroundColor: scrolled
+              ? `var(--theme-bg-primary)`
               : "var(--theme-bg-primary)",
-            borderBottom: scrolled 
-              ? "1px solid var(--theme-border-hover)" 
+            borderBottom: scrolled
+              ? "1px solid var(--theme-border-hover)"
               : "1px solid var(--theme-border)",
             backdropFilter: scrolled ? "blur(12px)" : "none",
             transition: "background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
@@ -169,7 +169,7 @@ function Navbar() {
           }}
         >
           <Box sx={{
-            maxWidth: "1350px",
+            maxWidth: "1440px",
             width: "100%",
             mx: "auto",
             display: "flex",
@@ -224,7 +224,7 @@ function Navbar() {
                   </Link>
                 );
               })}
-              
+
               {/* Theme Toggle for Desktop */}
               <ThemeToggle />
             </Box>

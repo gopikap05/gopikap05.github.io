@@ -203,7 +203,7 @@ function ProjectDetails() {
         px: "5%",
         py: { xs: "48px", sm: "64px", md: "80px" },
       }}>
-        <Box sx={{ maxWidth: "1350px", mx: "auto", width: "100%" }}>
+        <Box sx={{ maxWidth: "1440px", mx: "auto", width: "100%" }}>
 
           {/* Hero top row — title block + project number */}
           <motion.div
@@ -212,7 +212,7 @@ function ProjectDetails() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Eyebrow + project number */}
-            <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", mb: 2 }}>
+            <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
               {/* Eyebrow */}
               <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <Box sx={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b" }} />
@@ -220,7 +220,7 @@ function ProjectDetails() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: { xs: "10px", sm: "11px", md: "12px" },
                   letterSpacing: "2.5px",
-                  textTransform: "uppercase", 
+                  textTransform: "uppercase",
                   color: "var(--theme-text-muted)",
                 }}>
                   {ORIGIN_LABELS[project.origin] || project.origin}
@@ -249,7 +249,7 @@ function ProjectDetails() {
               fontWeight: 400,
               letterSpacing: "3px",
               lineHeight: 1,
-              mb: 2,
+              mb: 1.5,
               color: "var(--theme-text-primary)",
             }}>
               {project.title}
@@ -258,9 +258,9 @@ function ProjectDetails() {
             {/* Company + CEO */}
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
-              color: "var(--theme-text-muted)", 
+              color: "var(--theme-text-muted)",
               fontSize: { xs: "12px", sm: "13px", md: "14px" },
-              letterSpacing: "1px", 
+              letterSpacing: "1px",
               mb: 4,
             }}>
               {project.company}
@@ -439,89 +439,89 @@ function ProjectDetails() {
                 margin: "56px 0 40px",
               }} />
               <Box>
-              <Box sx={{ display: "flex", alignItems: "center", gap: "6px", mb: 1.5 }}>
-                <Box sx={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", flexShrink: 0 }} />
+                <Box sx={{ display: "flex", alignItems: "center", gap: "6px", mb: 1.5 }}>
+                  <Box sx={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", flexShrink: 0 }} />
+                  <Typography sx={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: { xs: "10px", sm: "11px" },
+                    letterSpacing: "2.5px",
+                    textTransform: "uppercase",
+                    color: "var(--theme-text-muted)",
+                  }}>
+                    Recent
+                  </Typography>
+                </Box>
+
                 <Typography sx={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: { xs: "10px", sm: "11px" },
-                  letterSpacing: "2.5px",
-                  textTransform: "uppercase", 
-                  color: "var(--theme-text-muted)",
+                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem" },
+                  letterSpacing: "3px",
+                  mb: 4,
+                  color: "var(--theme-text-primary)",
                 }}>
-                  Recent
+                  Latest Projects
                 </Typography>
-              </Box>
 
-              <Typography sx={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: { xs: "1.6rem", sm: "2rem", md: "2.2rem" },
-                letterSpacing: "3px", 
-                mb: 4,
-                color: "var(--theme-text-primary)",
-              }}>
-                Latest Projects
-              </Typography>
-
-              <Box sx={{
-                display: "grid",
-                gridTemplateColumns: { 
-                  xs: "1fr",
-                  sm: "repeat(2, 1fr)",
-                  md: "repeat(3, 1fr)"
-                },
-                gap: "16px",
-              }}>
-                {recentProjects.map((p) => (
-                  <Link key={p.count} to={`/projects/${p.origin.toLowerCase().replace(/\s+/g, '-')}/${p.count}`} className="pd-recent-card">
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <Typography sx={{
-                          fontFamily: "'Bebas Neue', sans-serif",
-                          fontSize: { xs: "0.7rem", sm: "0.75rem" },
-                          letterSpacing: "2px",
-                          color: "var(--theme-text-muted)",
-                          opacity: 0.5,
-                          lineHeight: 1,
-                        }}>
-                          #{String(p.count).padStart(2, "0")}
-                        </Typography>
-                        <Typography sx={{
-                          fontFamily: "'Bebas Neue', sans-serif",
-                          fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
-                          letterSpacing: "2px", 
-                          color: "var(--theme-text-primary)",
-                          lineHeight: 1,
-                        }}>
-                          {p.title}
-                        </Typography>
+                <Box sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "repeat(2, 1fr)",
+                    md: "repeat(3, 1fr)"
+                  },
+                  gap: "16px",
+                }}>
+                  {recentProjects.map((p) => (
+                    <Link key={p.count} to={`/projects/${p.origin.toLowerCase().replace(/\s+/g, '-')}/${p.count}`} className="pd-recent-card">
+                      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                          <Typography sx={{
+                            fontFamily: "'Bebas Neue', sans-serif",
+                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                            letterSpacing: "2px",
+                            color: "var(--theme-text-muted)",
+                            opacity: 0.5,
+                            lineHeight: 1,
+                          }}>
+                            #{String(p.count).padStart(2, "0")}
+                          </Typography>
+                          <Typography sx={{
+                            fontFamily: "'Bebas Neue', sans-serif",
+                            fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
+                            letterSpacing: "2px",
+                            color: "var(--theme-text-primary)",
+                            lineHeight: 1,
+                          }}>
+                            {p.title}
+                          </Typography>
+                        </Box>
+                        <Box sx={{
+                          width: 6, height: 6, borderRadius: "50%", flexShrink: 0, mt: "3px",
+                          background: p.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
+                        }} />
                       </Box>
-                      <Box sx={{
-                        width: 6, height: 6, borderRadius: "50%", flexShrink: 0, mt: "3px",
-                        background: p.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
-                      }} />
-                    </Box>
-                    <Typography sx={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      color: "var(--theme-text-secondary)",
-                      fontSize: { xs: "12px", sm: "13px" },
-                      lineHeight: 1.6,
-                      mb: 2,
-                    }}>
-                      {p.shortDescription}
-                    </Typography>
-                    <Typography sx={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: { xs: "9px", sm: "10px" },
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                      color: "var(--theme-text-muted)",
-                      opacity: 0.6,
-                    }}>
-                      {ORIGIN_LABELS[p.origin] || p.origin}
-                    </Typography>
-                  </Link>
-                ))}
-              </Box>
+                      <Typography sx={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        color: "var(--theme-text-secondary)",
+                        fontSize: { xs: "12px", sm: "13px" },
+                        lineHeight: 1.6,
+                        mb: 2,
+                      }}>
+                        {p.shortDescription}
+                      </Typography>
+                      <Typography sx={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: { xs: "9px", sm: "10px" },
+                        letterSpacing: "2px",
+                        textTransform: "uppercase",
+                        color: "var(--theme-text-muted)",
+                        opacity: 0.6,
+                      }}>
+                        {ORIGIN_LABELS[p.origin] || p.origin}
+                      </Typography>
+                    </Link>
+                  ))}
+                </Box>
               </Box>
             </>
           )}

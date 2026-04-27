@@ -8,9 +8,9 @@ import { freelanceProjects } from "./freelance-projects";
 const projects = [...emildaProjects, ...friskaProjects, ...freelanceProjects];
 
 // Log to verify data
-console.log("Total projects loaded:", projects.length);
-console.log("Sample origins:", projects.map(p => p.origin).slice(0, 5));
-console.log("Sample statuses:", projects.map(p => p.status).slice(0, 5));
+// console.log("Total projects loaded:", projects.length);
+// console.log("Sample origins:", projects.map(p => p.origin).slice(0, 5));
+// console.log("Sample statuses:", projects.map(p => p.status).slice(0, 5));
 
 export default projects;
 

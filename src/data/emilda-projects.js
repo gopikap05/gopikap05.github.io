@@ -673,25 +673,9 @@ export const emildaProjects = [
     relatedProjects: ["indoc-web"],
   },
 
-  // Artation
-  {
-    count: 43,
-    id: "artation",
-    title: "Artation",
-    company: "Artation",
-    ceo: null,
-    shortDescription: "Artistic platform showcasing creative works and portfolios.",
-    detailedDescription: "An artistic platform showcasing creative works, art collections...",
-    tech: ["Figma", "WordPress", "Hostinger"],
-    liveUrl: "https://artation.in/",
-    status: "active",
-    origin: "emilda solutions",
-    relatedProjects: [],
-  },
-
   // Two Feathers Home Care
   {
-    count: 44,
+    count: 43,
     id: "two-feathers-home-care",
     title: "Two Feathers Home Care",
     company: "Two Feathers Home Care",
@@ -701,6 +685,22 @@ export const emildaProjects = [
     tech: ["Figma", "WordPress", "Hostinger"],
     liveUrl: "https://twofeathershomecare.com/",
     status: "inactive",
+    origin: "emilda solutions",
+    relatedProjects: [],
+  },
+
+  // Artation
+  {
+    count: 44,
+    id: "artation",
+    title: "Artation",
+    company: "Artation",
+    ceo: null,
+    shortDescription: "Artistic platform showcasing creative works and portfolios.",
+    detailedDescription: "An artistic platform showcasing creative works, art collections...",
+    tech: ["Figma", "WordPress", "Hostinger"],
+    liveUrl: "https://artation.in/",
+    status: "active",
     origin: "emilda solutions",
     relatedProjects: [],
   },

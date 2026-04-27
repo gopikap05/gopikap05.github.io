@@ -32,16 +32,16 @@ function AllProjects() {
         activeOrigin === "all" ||
         (project.origin &&
           project.origin.toLowerCase().trim() === activeOrigin.toLowerCase().trim());
-      
+
       const statusMatch =
         activeStatus === "all" ||
         (project.status &&
           project.status.toLowerCase() === activeStatus.toLowerCase());
-      
-      const searchMatch = searchQuery === "" || 
+
+      const searchMatch = searchQuery === "" ||
         (project.title && project.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (project.company && project.company.toLowerCase().includes(searchQuery.toLowerCase()));
-      
+
       return originMatch && statusMatch && searchMatch;
     })
     .sort((a, b) => {
@@ -333,7 +333,7 @@ function AllProjects() {
         borderBottom: "1px solid var(--theme-border)",
       }}>
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           mx: "auto",
           width: "100%",
           px: "clamp(16px, 5%, 96px)",

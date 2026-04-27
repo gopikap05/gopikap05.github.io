@@ -7,13 +7,16 @@ function ProjectHero() {
   const stats = useMemo(() => {
     const total = projects.length;
     const active = projects.filter(p => p.status === "active").length;
-    const companies = [...new Set(projects.map(p => p.origin).filter(Boolean))].length;
+    const brands = [...new Set(projects.map(p => p.company).filter(Boolean))].length;
     return [
-      { num: String(total).padStart(2, "0"), label: "Projects" },  // Removed the + sign
-      { num: String(companies).padStart(2, "0"), label: "Companies" },
+      { num: String(total).padStart(2, "0"), label: "Projects" },
+      { num: String(brands).padStart(2, "0"), label: "Brands" },
       { num: String(active).padStart(2, "0"), label: "Active Now" },
     ];
   }, []);
+
+  // Split PROJECTS into individual letters
+  const projectsLetters = "PROJECTS".split("");
 
   return (
     <>
@@ -31,13 +34,18 @@ function ProjectHero() {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
         }
+
         .ph-marquee-track {
           display: flex;
           gap: 48px;
-          animation: marquee 18s linear infinite;
+          animation: marquee 35s linear infinite;
           width: max-content;
         }
-        .ph-marquee-track:hover { animation-play-state: paused; }
+
+        .ph-marquee-track:hover { 
+          animation-play-state: running; 
+        }
+
         .ph-marquee-item {
           font-family: 'DM Sans', sans-serif;
           font-size: 10px;
@@ -51,9 +59,11 @@ function ProjectHero() {
           opacity: 0.6;
           transition: opacity 0.3s ease;
         }
+
         .ph-marquee-item:hover {
           opacity: 1;
         }
+
         .ph-marquee-item::after {
           content: '';
           width: 3px;
@@ -67,8 +77,21 @@ function ProjectHero() {
           color: var(--theme-text-secondary);
           opacity: 0.5;
         }
+
         [data-theme="light"] .ph-marquee-item:hover {
           opacity: 0.8;
+        }
+
+        /* Projects letter hover animation - same as About Me and Contact */
+        .projects-char {
+          display: inline-block;
+          transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+          cursor: default;
+        }
+        
+        .projects-char:hover {
+          transform: translateY(-10px);
+          color: var(--theme-text-muted);
         }
       `}</style>
 
@@ -86,8 +109,33 @@ function ProjectHero() {
           overflow: "hidden",
         }}
       >
+        {/* Corner decorations - same as About Me and Contact */}
+        <div style={{
+          position: "absolute", top: 24, left: 24,
+          width: 28, height: 28,
+          borderTop: "1px solid var(--theme-border-hover)",
+          borderLeft: "1px solid var(--theme-border-hover)",
+        }} />
+        <div style={{
+          position: "absolute", bottom: 24, right: 24,
+          width: 28, height: 28,
+          borderBottom: "1px solid var(--theme-border-hover)",
+          borderRight: "1px solid var(--theme-border-hover)",
+        }} />
+
+        {/* Ambient glow - same as About Me and Contact */}
+        <div style={{
+          position: "absolute",
+          width: "400px", height: "400px",
+          background: "radial-gradient(circle, var(--theme-primary-light) 0%, transparent 70%)",
+          filter: "blur(80px)",
+          top: "-100px", right: "-100px",
+          pointerEvents: "none",
+          opacity: 0.1,
+        }} />
+
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           width: "100%",
           mx: "auto",
           px: "5%",
@@ -99,7 +147,6 @@ function ProjectHero() {
           minHeight: { xs: "auto", md: "calc(100vh - 80px)" },
           justifyContent: "center",
         }}>
-
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -108,7 +155,9 @@ function ProjectHero() {
             style={{ marginBottom: "28px" }}
           >
             <div style={{
-              display: "inline-flex", alignItems: "center", gap: "6px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
               padding: "4px 14px",
               border: "1px solid var(--theme-border-hover)",
               borderRadius: "999px",
@@ -118,12 +167,18 @@ function ProjectHero() {
               textTransform: "uppercase",
               color: "var(--theme-text-muted)",
             }}>
-              <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
+              <span style={{
+                width: 4,
+                height: 4,
+                borderRadius: "50%",
+                background: "#ff3b3b",
+                display: "inline-block"
+              }} />
               Selected Work
             </div>
           </motion.div>
 
-          {/* Main heading */}
+          {/* Main heading with per-letter hover animation */}
           <motion.div
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -138,7 +193,11 @@ function ProjectHero() {
               lineHeight: 0.95,
               color: "var(--theme-text-primary)",
             }}>
-              PROJECTS
+              {projectsLetters.map((char, i) => (
+                <span key={i} className="projects-char">
+                  {char}
+                </span>
+              ))}
             </Typography>
           </motion.div>
 
@@ -208,7 +267,6 @@ function ProjectHero() {
               ))}
             </Box>
           </motion.div>
-
         </Box>
 
         {/* Marquee strip */}
@@ -224,14 +282,22 @@ function ProjectHero() {
           }}>
             <div className="ph-marquee-track">
               {[...Array(2)].map((_, ri) =>
-                ["Emilda Solutions", "Friska AI", "Freelance", "React", "Node.js", "UI/UX", "Full Stack", "Emilda Solutions", "Friska AI", "Freelance", "React", "Node.js", "UI/UX", "Full Stack"].map((item, i) => (
-                  <span key={`${ri}-${i}`} className="ph-marquee-item">{item}</span>
+                [
+                  "VS Code", "WordPress", "GitHub", "Firebase", "React JS",
+                  "JavaScript", "Node JS", "MUI", "Figma", "Azure",
+                  "Antigravity", "Email JS", "TypeScript", "Framer Motion",
+                  "Netlify", "Shopify", "Git", "Webflow", "JSON",
+                  "API Integration", "Google Analytics", "Google Search Console",
+                  "SEO", "Responsiveness"
+                ].map((item, i) => (
+                  <span key={`${ri}-${i}`} className="ph-marquee-item">
+                    {item}
+                  </span>
                 ))
               )}
             </div>
           </Box>
         </motion.div>
-
       </Box>
     </>
   );

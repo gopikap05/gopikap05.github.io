@@ -16,7 +16,7 @@ import AppLoader from "./components/common/AppLoader";
 import CustomCursor from "./components/common/CustomCursor";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import ThemeSettings from "./pages/ThemeSettings";
-
+import BackToTop from "./components/common/BackToTop";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,6 @@ function App() {
       infinite: false,
     });
 
-    // Make lenis available globally
     window.lenis = lenis;
 
     function raf(time) {
@@ -57,10 +56,11 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{ position: "relative" }}> {/*  Added wrapper */}
       <CustomCursor />
       <Navbar />
       <ScrollToTop />
+      <BackToTop />
 
       <Routes>
         <Route path="/theme" element={<ThemeSettings />} />
@@ -72,7 +72,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

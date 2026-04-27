@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -42,22 +43,23 @@ function Footer() {
           border-top: 1px solid var(--theme-border);
           border-bottom: 1px solid var(--theme-border);
           padding: 6px 0;
+          width: 100%;
+          position: relative;
         }
         .footer-marquee-track {
           display: flex;
-          animation: fMarquee 22s linear infinite;
-          white-space: nowrap;
+          gap: 48px;
+          animation: fMarquee 25s linear infinite;
           width: max-content;
         }
         @keyframes fMarquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to { transform: translateX(-50%); }
         }
         .footer-marquee-name {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(32px, 6vw, 80px);
           letter-spacing: 2px;
-          padding: 0 clamp(12px, 2vw, 28px);
           user-select: none;
           flex-shrink: 0;
         }
@@ -107,7 +109,7 @@ function Footer() {
         }
         .footer-meta {
           font-family: 'DM Sans', sans-serif;
-          font-size: 12px;
+          font-size: 14px;
           letter-spacing: 1.5px;
           white-space: nowrap;
           font-weight: 400;
@@ -187,7 +189,7 @@ function Footer() {
       >
         {/* ── Main content ── */}
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           mx: "auto",
           width: "100%",
           px: { xs: "20px", sm: "36px", md: "52px", lg: "96px" },
@@ -274,7 +276,7 @@ function Footer() {
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <span style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "9px",
+                    fontSize: "10px",
                     letterSpacing: "2px",
                     textTransform: "uppercase",
                     color: "rgba(255,59,59,0.5)",
@@ -297,23 +299,28 @@ function Footer() {
           }} />
         </Box>
 
-        {/* ── Marquee ── */}
+        {/* ── Marquee (Fixed) ── */}
         <div className="footer-marquee-wrap">
           <div className="footer-marquee-track">
-            {Array.from({ length: 16 }, (_, i) => (
-              <span
-                key={i}
-                className={`footer-marquee-name ${i % 4 === 2 ? "solid" : ""}`}
-              >
-                {i % 2 === 0 ? "GOPIKA" : "·"}
-              </span>
+            {[...Array(2)].map((_, repeatIndex) => (
+              <React.Fragment key={repeatIndex}>
+                {Array.from({ length: 8 }, (_, i) => (
+                  <span
+                    key={`${repeatIndex}-${i}`}
+                    className={`footer-marquee-name ${i % 4 === 2 ? "solid" : ""}`}
+                    style={{ padding: "0 clamp(12px, 2vw, 28px)" }}
+                  >
+                    {i % 2 === 0 ? "GOPIKA" : "·"}
+                  </span>
+                ))}
+              </React.Fragment>
             ))}
           </div>
         </div>
 
         {/* ── Bottom bar ── */}
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           mx: "auto",
           width: "100%",
           px: { xs: "20px", sm: "36px", md: "52px", lg: "96px" },

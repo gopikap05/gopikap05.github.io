@@ -102,16 +102,16 @@ function Social() {
         }}
       >
         {/* BG text - Now more visible */}
-        <motion.div 
-          style={{ 
-            y, 
-            position: "absolute", 
-            inset: 0, 
-            display: "flex", 
-            alignItems: "center", 
-            justifyContent: "center", 
-            pointerEvents: "none", 
-            zIndex: 0 
+        <motion.div
+          style={{
+            y,
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+            zIndex: 0
           }}
         >
           <Typography sx={{
@@ -132,7 +132,7 @@ function Social() {
           </Typography>
         </motion.div>
 
-        <Box sx={{ maxWidth: "1350px", mx: "auto", position: "relative", zIndex: 1, width: "100%" }}>
+        <Box sx={{ maxWidth: "1440px", mx: "auto", position: "relative", zIndex: 1, width: "100%" }}>
 
           {/* Header */}
           <motion.div style={{ opacity }}>

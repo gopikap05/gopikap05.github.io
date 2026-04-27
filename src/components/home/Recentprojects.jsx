@@ -5,6 +5,10 @@ import { useState, useRef, useCallback } from "react";
 import projects from "../../data/projects";
 
 const SPRING_CFG = { stiffness: 300, damping: 25, mass: 0.4 };
+const ACCENT_COLOR = "#8B5CF6";
+const ACCENT_COLOR_RGB = "139, 92, 246";
+const RED_COLOR = "#ff3b3b";
+const RED_COLOR_RGB = "255, 59, 59";
 
 function ProjectCard({ project, index, to }) {
   const cardRef = useRef(null);
@@ -25,13 +29,18 @@ function ProjectCard({ project, index, to }) {
   const handleMouseEnter = useCallback(() => setHovered(true), []);
   const handleMouseLeave = useCallback(() => setHovered(false), []);
 
+  // normalize origin for display
+  const originLabel = project.origin
+    ? project.origin.charAt(0).toUpperCase() + project.origin.slice(1)
+    : "";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: index * 0.12 }}
-      style={{ height: "320px" }}
+      style={{ display: "flex" }}
     >
       <Link
         to={to}
@@ -41,7 +50,7 @@ function ProjectCard({ project, index, to }) {
         onMouseLeave={handleMouseLeave}
         style={{
           display: "block",
-          height: "90%",
+          width: "100%",
           textDecoration: "none",
           position: "relative",
           overflow: "hidden",
@@ -71,19 +80,19 @@ function ProjectCard({ project, index, to }) {
           zIndex: 1,
         }} />
 
-        {/* Red top line sweep */}
+        {/* Accent top line sweep */}
         <div style={{
           position: "absolute",
           top: 0, left: 0,
           width: "100%", height: "2px",
-          background: "linear-gradient(to right, #ff3b3b, transparent)",
+          background: `linear-gradient(to right, ${ACCENT_COLOR}, transparent)`,
           transform: hovered ? "scaleX(1)" : "scaleX(0)",
           transformOrigin: "left",
           transition: "transform 0.5s ease",
           zIndex: 2,
         }} />
 
-        {/* Magnetic cursor circle — smooth spring */}
+        {/* Magnetic cursor circle */}
         <motion.div
           style={{
             position: "absolute",
@@ -121,53 +130,116 @@ function ProjectCard({ project, index, to }) {
         <div style={{
           position: "relative",
           zIndex: 3,
-          padding: "28px",
-          height: "100%",
+          padding: "32px",
+          minHeight: "200px",
           boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
+          gap: "8px",
         }}>
+
+          {/* Index number - RED color, LARGER SIZE */}
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "12px",
-            letterSpacing: "3px",
-            color: "rgba(255,59,59,0.8)",
-            marginBottom: "14px",
+            fontSize: "28px",
+            letterSpacing: "4px",
+            color: `rgba(${RED_COLOR_RGB}, 0.8)`,
+            marginBottom: "16px",
+            lineHeight: 1,
           }}>
-            {String(index + 1).padStart(2, "0")}
+            {String(project.count).padStart(2, "0")}
           </div>
 
+          {/* Title */}
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(1.3rem, 2.5vw, 1.75rem)",
             letterSpacing: "2px",
             color: "var(--theme-text-primary)",
             lineHeight: 1,
-            marginBottom: "10px",
+            marginBottom: "12px",
           }}>
             {project.title || project.company}
           </div>
 
+          {/* Company · CEO */}
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
             color: "var(--theme-text-muted)",
-            fontSize: "11px",
+            fontSize: "12px",
             letterSpacing: "2px",
             textTransform: "uppercase",
-            marginBottom: "14px",
+            marginBottom: "10px",
           }}>
             {project.company}
             {project.ceo && ` · ${project.ceo}`}
           </div>
 
+          {/* Origin · Status row */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "20px",
+          }}>
+            {/* Origin badge - PURPLE */}
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "10px",
+              fontWeight: 600,
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              color: `rgba(${ACCENT_COLOR_RGB}, 0.7)`,
+              border: `1px solid rgba(${ACCENT_COLOR_RGB}, 0.3)`,
+              borderRadius: "999px",
+              padding: "4px 12px",
+            }}>
+              {originLabel}
+            </span>
+
+            {/* Status badge */}
+            <span style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "10px",
+              fontWeight: 600,
+              letterSpacing: "1.5px",
+              textTransform: "uppercase",
+              color: project.status === "active"
+                ? "rgba(34,197,94,0.85)"
+                : "rgba(156,163,175,0.7)",
+              border: `1px solid ${project.status === "active"
+                ? "rgba(34,197,94,0.3)"
+                : "rgba(156,163,175,0.25)"}`,
+              borderRadius: "999px",
+              padding: "4px 12px",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+            }}>
+              <span style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                background: project.status === "active"
+                  ? "rgba(34,197,94,0.85)"
+                  : "rgba(156,163,175,0.6)",
+                display: "inline-block",
+                flexShrink: 0,
+              }} />
+              {project.status}
+            </span>
+          </div>
+
+          {/* Short description */}
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
             color: "var(--theme-text-secondary)",
-            fontSize: "0.88rem",
+            fontSize: "0.9rem",
             lineHeight: 1.7,
           }}>
             {project.shortDescription}
           </div>
+
         </div>
       </Link>
     </motion.div>
@@ -177,16 +249,20 @@ function ProjectCard({ project, index, to }) {
 function RecentProjects() {
   const navigate = useNavigate();
 
-  const recentProjects = [...projects]
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 3);
+  // Pick latest from each origin in order: freelance → friska ai → emilda solutions
+  const originOrder = ["freelance", "friska ai", "emilda solutions"];
+
+  const recentProjects = originOrder.map((origin) => {
+    return projects
+      .filter((p) => p.origin.toLowerCase() === origin.toLowerCase())
+      .sort((a, b) => b.count - a.count)[0]; // highest count = most recent
+  }).filter(Boolean); // safety: remove undefined if an origin has no projects
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&display=swap');
 
-        /* Revolving gradient using CSS animation on background-position */
         @keyframes gradientRevolve {
           0%   { background-position: 0% 50%; }
           50%  { background-position: 100% 50%; }
@@ -196,44 +272,42 @@ function RecentProjects() {
         .card-gradient-bg {
           background: linear-gradient(
             270deg,
-            rgba(255,59,59,0.35),
-            rgba(168,85,247,0.3),
-            rgba(59,130,246,0.3),
-            rgba(255,59,59,0.35)
+            rgba(139, 92, 246, 0.35),
+            rgba(168, 85, 247, 0.3),
+            rgba(59, 130, 246, 0.3),
+            rgba(139, 92, 246, 0.35)
           );
           background-size: 400% 400%;
           animation: gradientRevolve 4s ease infinite;
         }
 
-        /* ── Section tag ── */
         .projects-tag {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 4px 12px;
+          gap: 8px;
+          padding: 6px 16px;
           border: 1px solid var(--theme-border-hover);
           border-radius: 999px;
           font-family: 'DM Sans', sans-serif;
-          font-size: 10px;
+          font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
           color: var(--theme-text-muted);
-          margin-bottom: clamp(28px, 4vw, 48px);
+          margin-bottom: clamp(40px, 6vw, 64px);
         }
 
-        /* ── CTA Button ── */
         .animated-button {
           position: relative;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 14px 40px;
+          padding: 16px 48px;
           border: 1px solid var(--theme-border-hover);
           background: transparent;
           border-radius: 100px;
           font-family: 'DM Sans', sans-serif;
           font-weight: 600;
-          font-size: 0.8rem;
+          font-size: 0.85rem;
           letter-spacing: 3px;
           text-transform: uppercase;
           color: var(--theme-text-primary);
@@ -253,27 +327,26 @@ function RecentProjects() {
           border-radius: inherit;
         }
         .animated-button:hover .btn-bg { transform: scaleX(1); }
-        .animated-button:hover { 
-          color: var(--theme-bg-primary); 
-          border-color: var(--theme-text-primary); 
-          border-radius: 10px; 
+        .animated-button:hover {
+          color: var(--theme-bg-primary);
+          border-color: var(--theme-text-primary);
+          border-radius: 10px;
         }
         .animated-button .btn-text {
           position: relative;
           z-index: 1;
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
         }
         .animated-button .btn-arrow {
           display: inline-block;
           transition: transform 0.4s ease;
         }
-        .animated-button:hover .btn-arrow { transform: translateX(5px); }
+        .animated-button:hover .btn-arrow { transform: translateX(6px); }
         .animated-button:active { transform: scale(0.97); }
       `}</style>
 
-      {/* ── SECTION ── */}
       <Box sx={{
         width: "100%",
         backgroundColor: "var(--theme-bg-primary)",
@@ -283,15 +356,15 @@ function RecentProjects() {
         overflow: "hidden",
       }}>
         <Box sx={{
-          maxWidth: "1350px",
+          maxWidth: "1440px",
           width: "100%",
           mx: "auto",
-          px: "clamp(16px, 5%, 96px)",
-          pt: { xs: "60px", sm: "70px", md: "80px" },
-          pb: { xs: "60px", sm: "70px", md: "80px" },
+          px: "clamp(20px, 5%, 96px)",
+          pt: { xs: "80px", sm: "100px", md: "120px" },
+          pb: { xs: "80px", sm: "100px", md: "120px" },
         }}>
 
-          {/* Top label */}
+          {/* Top label - Dot changed to RED */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -299,7 +372,7 @@ function RecentProjects() {
             transition={{ duration: 0.6 }}
           >
             <div className="projects-tag">
-              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: RED_COLOR, display: "inline-block" }} />
               Recent Projects
             </div>
           </motion.div>
@@ -310,7 +383,7 @@ function RecentProjects() {
             alignItems: { xs: "flex-start", sm: "flex-end" },
             justifyContent: "space-between",
             flexDirection: { xs: "column", sm: "row" },
-            gap: { xs: "12px", sm: 0 },
+            gap: { xs: "16px", sm: 0 },
             mb: { xs: 4, md: 6 },
           }}>
             <motion.div
@@ -337,29 +410,19 @@ function RecentProjects() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              <Typography sx={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "clamp(11px, 1vw, 13px)",
-                color: "var(--theme-text-muted)",
-                letterSpacing: "2px",
-                textTransform: "uppercase",
-                pb: { sm: "8px" },
-              }}>
-                {recentProjects.length} Projects
-              </Typography>
             </motion.div>
           </Box>
 
-          {/* Cards */}
+          {/* Cards grid */}
           <Box sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
-            gap: { xs: "16px", md: "20px" },
-            mb: { xs: 0, md: 0 },
+            gap: { xs: "24px", md: "28px" },
+            mb: { xs: 6, md: 8 },
           }}>
             {recentProjects.map((project, i) => (
               <ProjectCard
-                key={project.count}
+                key={project.id}
                 project={project}
                 index={i}
                 to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`}
@@ -384,6 +447,7 @@ function RecentProjects() {
               </button>
             </motion.div>
           </Box>
+
         </Box>
       </Box>
     </>

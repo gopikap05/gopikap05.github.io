@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
+const MotionBox = motion.create(Box);
+const MotionTypography = motion.create(Typography);
 
 function AboutSection() {
   const paragraphRef = useRef(null);
@@ -24,7 +24,7 @@ function AboutSection() {
   const lineWidth = useTransform(sectionProgress, [0, 1], ["0%", "100%"]);
 
   const text =
-    "Currently building scalable frontend systems using React and TypeScript. Passionate about performance, UI clarity, and creating production-ready web experiences.";
+    "Currently building scalable frontend systems using React, TypeScript, and WordPress. Passionate about performance, UI clarity, and creating production-ready web experiences.";
 
   const words = text.split(" ");
 
@@ -141,6 +141,7 @@ function AboutSection() {
           overflow: hidden;
           transition: border-color 0.3s ease;
           background: var(--theme-bg-primary);
+          flex: 1;
         }
         .stat-card::before {
           content: '';
@@ -183,6 +184,7 @@ function AboutSection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.8 }}
+        style={{ position: "relative" }}
         sx={{
           width: "100%",
           backgroundColor: "var(--theme-bg-primary)",
@@ -207,7 +209,7 @@ function AboutSection() {
         {/* ── CONTAINER ── */}
         <Box
           sx={{
-            maxWidth: "1350px",
+            maxWidth: "1440px",
             width: "100%",
             mx: "auto",
             px: "clamp(16px, 5%, 96px)",
@@ -243,7 +245,7 @@ function AboutSection() {
             alignItems: "start",
           }}>
 
-            {/* Left: Heading */}
+            {/* Left: Heading only - SMALLER FONT SIZE */}
             <Box>
               <MotionTypography
                 initial={{ opacity: 0, y: 50 }}
@@ -252,9 +254,9 @@ function AboutSection() {
                 transition={{ duration: 0.9, delay: 0.2 }}
                 sx={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: { xs: "clamp(1.6rem, 5vw, 2.2rem)", md: "clamp(2rem, 3vw, 3rem)" },
+                  fontSize: { xs: "clamp(1.2rem, 4vw, 1.8rem)", md: "clamp(1.5rem, 2.2vw, 2.2rem)" },
                   fontWeight: 600,
-                  lineHeight: 1.25,
+                  lineHeight: 1.35,
                   letterSpacing: "-0.5px",
                   color: "var(--theme-text-primary)",
                 }}
@@ -285,40 +287,14 @@ function AboutSection() {
                 </Box>{" "}
                 I focus on clean interfaces, sharp decisions, and fast execution.
               </MotionTypography>
-
-              {/* Stat cards */}
-              <Box sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "1px",
-                mt: { xs: "32px", md: "48px" },
-                background: "var(--theme-border-hover)",
-              }}>
-                {[
-                  { number: "2+", label: "Years Exp." },
-                  { number: "30+", label: "Projects" },
-                  { number: "100%", label: "Dedication" },
-                ].map((stat, i) => (
-                  <motion.div
-                    key={i}
-                    className="stat-card"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }}
-                  >
-                    <div className="stat-number">{stat.number}</div>
-                    <div className="stat-label">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </Box>
             </Box>
 
-            {/* Right: Scroll-reveal paragraph + button */}
+            {/* Right: Scroll-reveal paragraph + Stat cards + Button */}
             <Box sx={{ pt: { lg: "8px" } }}>
               <motion.div
                 ref={paragraphRef}
                 style={{
+                  position: "relative",
                   marginBottom: "clamp(2rem, 4vw, 3rem)",
                   lineHeight: 1.9,
                 }}
@@ -345,6 +321,34 @@ function AboutSection() {
                     </motion.span>
                   );
                 })}
+              </motion.div>
+
+              {/* Stat cards - moved to right side above button */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                style={{ marginBottom: "24px" }}
+              >
+                <Box sx={{
+                  display: "flex",
+                  gap: "1px",
+                  background: "var(--theme-border-hover)",
+                }}>
+                  {[
+                    { number: "2+", label: "Years Exp." },
+                    { number: "50+", label: "Projects" },
+                  ].map((stat, i) => (
+                    <div
+                      key={i}
+                      className="stat-card"
+                    >
+                      <div className="stat-number">{stat.number}</div>
+                      <div className="stat-label">{stat.label}</div>
+                    </div>
+                  ))}
+                </Box>
               </motion.div>
 
               {/* Gooey Button */}

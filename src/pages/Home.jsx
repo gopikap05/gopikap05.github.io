@@ -6,7 +6,7 @@ import CTASection from "../components/home/Cta";
 
 function Home() {
   return (
-    <>
+    <div style={{ position: "relative" }}> {/*  Added wrapper */}
       <Breadcrumbs
         items={[
           { label: "Home" }
@@ -17,7 +17,7 @@ function Home() {
       <AboutSection />
       <RecentProjects />
       <CTASection />
-    </>
+    </div>
   );
 }
 
