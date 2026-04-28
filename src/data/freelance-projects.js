@@ -14,6 +14,15 @@ export const freelanceProjects = [
     status: "active",
     origin: "freelance",
     relatedProjects: [],
+    testimonials: [
+      {
+        name: "K Palanisamy",
+        role: "CEO",
+        company: "SPEI",
+        content: "Gopika delivered a modern, responsive platform that perfectly represents our brand. Her attention to detail and technical expertise were impressive throughout the project. The website has received excellent feedback from our clients and partners.",
+        rating: 5
+      },
+    ]
   },
 
   // Sansera - SCM Task Manager
@@ -24,12 +33,21 @@ export const freelanceProjects = [
     company: "Sansera",
     ceo: "",
     shortDescription: "A cloud based task management dashboard for Sansera's Supply Chain Management operations, enabling real-time tracking of pending tasks.",
-    detailedDescription: "Built for Sansera's internal SCM team, this Firebase hosted web application provides a real-time dashboard for tracking and managing pending supply chain tasks fetched directly from the cloud. The interface is built with React, TypeScript and Material-UI, delivering a structured and data driven layout optimized for operational efficiency. Firebase handles both backend data storage and live hosting, ensuring reliability and low latency updates throughout. Designed for daily use by supply chain personnel, the dashboard brings clarity and control to task queue management and workflow progress tracking.",
-    tech: ["VS Code", "GitHub", "Firebase", "React", "Node.js", "Material-UI", "TypeScript", "Git"],
+    detailedDescription: "Built for Sansera's internal SCM team, this Firebase hosted web application provides a real-time dashboard for tracking and managing pending supply chain tasks fetched directly from the cloud. The platform has significantly improved task visibility and reduced response times for the SCM operations team.",
+    tech: ["VS Code", "GitHub", "Firebase", "React", "Node.js", "Material-UI", "Git"],
     liveUrl: "https://pending-tasks-app.web.app/dashboard",
     status: "active",
     origin: "freelance",
     relatedProjects: [],
+    testimonials: [
+      {
+        name: "Varun VMS",
+        role: "Assistant Manager",
+        company: "Sansera",
+        content: "The dashboard reduced our task completion time by 40%. Gopika understood our requirements perfectly and delivered a robust solution.",
+        rating: 5
+      },
+    ]
   },
 
 ];

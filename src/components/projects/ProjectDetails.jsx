@@ -116,7 +116,7 @@ function ProjectDetails() {
           border-radius: 999px;
           background: var(--theme-bg-card);
           border: 1px solid var(--theme-border);
-          transition: transform 0.25s ease, border-color 0.25s ease;
+          transition: border-color 0.25s ease;
           cursor: default;
         }
         .pd-tech-chip:hover {
@@ -151,64 +151,64 @@ function ProjectDetails() {
         }
         .pd-related-card:hover::before { transform: scaleX(1); }
         
-.pd-recent-card {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  background: var(--theme-bg-card);
-  border: 1px solid var(--theme-border);
-  border-radius: 20px;
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  height: 100%;
-}
-.pd-recent-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #ff3b3b, #ff8c3b, #ff3b3b);
-  background-size: 200% 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-.pd-recent-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 100% 100%, rgba(255, 59, 59, 0.05), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-.pd-recent-card:hover { 
-  border-color: #ff3b3b;
-  box-shadow: 0 10px 30px -10px rgba(255, 59, 59, 0.2);
-}
-.pd-recent-card:hover::before { 
-  transform: scaleX(1);
-  animation: shimmer 1s ease infinite;
-}
-.pd-recent-card:hover::after {
-  opacity: 1;
-}
+        .pd-recent-card {
+          text-decoration: none;
+          color: inherit;
+          display: block;
+          background: var(--theme-bg-card);
+          border: 1px solid var(--theme-border);
+          border-radius: 20px;
+          padding: 24px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          height: 100%;
+        }
+        .pd-recent-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(90deg, #ff3b3b, #ff8c3b, #ff3b3b);
+          background-size: 200% 100%;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.4s ease;
+        }
+        .pd-recent-card::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at 100% 100%, rgba(255, 59, 59, 0.05), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+        }
+        .pd-recent-card:hover { 
+          border-color: #ff3b3b;
+          box-shadow: 0 10px 30px -10px rgba(255, 59, 59, 0.2);
+        }
+        .pd-recent-card:hover::before { 
+          transform: scaleX(1);
+          animation: shimmer 1s ease infinite;
+        }
+        .pd-recent-card:hover::after {
+          opacity: 1;
+        }
 
-@keyframes shimmer {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 200% 0%;
-  }
-}
+        @keyframes shimmer {
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: 200% 0%;
+          }
+        }
 
         .pd-live-link {
           color: var(--theme-text-primary);
@@ -484,6 +484,81 @@ function ProjectDetails() {
                           {tech}
                         </Typography>
                       </div>
+                    ))}
+                  </Box>
+                </Box>
+              )}
+
+              {/* Testimonials Section */}
+              {project.testimonials && project.testimonials.length > 0 && (
+                <Box sx={{ mb: 6 }}>
+                  <p className="pd-section-label">Client Feedback</p>
+                  <Box sx={{
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", md: "repeat(1, 1fr)" },
+                    gap: "20px",
+                  }}>
+                    {project.testimonials.map((testimonial, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        style={{
+                          background: "var(--theme-bg-card)",
+                          border: "1px solid var(--theme-border)",
+                          borderRadius: "16px",
+                          padding: "24px",
+                        }}
+                      >
+                        {/* Stars Rating */}
+                        <Box sx={{ display: "flex", gap: "4px", mb: 2 }}>
+                          {[...Array(5)].map((_, i) => (
+                            <Box
+                              key={i}
+                              sx={{
+                                color: i < testimonial.rating ? "#ffe600ff" : "var(--theme-border)",
+                                fontSize: "18px",
+                              }}
+                            >
+                              ★
+                            </Box>
+                          ))}
+                        </Box>
+
+                        {/* Testimonial Message */}
+                        <Typography sx={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontSize: "16px",
+                          lineHeight: 1.7,
+                          color: "var(--theme-text-secondary)",
+                          mb: 3,
+                          fontStyle: "italic",
+                        }}>
+                          "{testimonial.content}"
+                        </Typography>
+
+                        {/* Author Info */}
+                        <Box>
+                          <Typography sx={{
+                            fontFamily: "'DM Sans', sans-serif",
+                            fontSize: "15px",
+                            fontWeight: 600,
+                            color: "var(--theme-text-primary)",
+                            mb: 0.5,
+                          }}>
+                            {testimonial.name}
+                          </Typography>
+                          <Typography sx={{
+                            fontFamily: "'DM Sans', sans-serif",
+                            fontSize: "14px",
+                            letterSpacing: "1px",
+                            color: "var(--theme-text-muted)",
+                          }}>
+                            {testimonial.role} · {testimonial.company}
+                          </Typography>
+                        </Box>
+                      </motion.div>
                     ))}
                   </Box>
                 </Box>
