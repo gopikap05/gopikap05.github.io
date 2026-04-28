@@ -1,0 +1,26 @@
+API
+Antigravity
+Figma
+Firebase
+Framer Motion
+Git
+GitHub
+Google Analytics
+Google Search Console
+Hostinger
+Lenis
+Lottie
+Material-UI
+Netlify
+Node.js
+/NPM
+PHP
+Razorpay
+React
+SEO
+Shopify
+TypeScript
+/Vite
+VS Code
+Webflow
+WordPress

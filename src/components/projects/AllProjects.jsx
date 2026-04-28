@@ -45,7 +45,6 @@ function AllProjects() {
       return originMatch && statusMatch && searchMatch;
     })
     .sort((a, b) => {
-      // Order by origin: freelance -> friska ai -> emilda solutions
       const ORIGIN_ORDER = {
         "freelance": 0,
         "friska ai": 1,
@@ -54,7 +53,6 @@ function AllProjects() {
       const originA = ORIGIN_ORDER[a.origin?.toLowerCase().trim()] ?? 99;
       const originB = ORIGIN_ORDER[b.origin?.toLowerCase().trim()] ?? 99;
       if (originA !== originB) return originA - originB;
-      // Within same origin, sort by count DESCENDING (highest first)
       return b.count - a.count;
     });
 
@@ -73,7 +71,6 @@ function AllProjects() {
 
   const totalProjectsCount = projects.length;
 
-  // Function to format origin label
   const formatOriginLabel = (origin) => {
     if (!origin) return "";
     if (origin.toLowerCase() === "emilda solutions") return "Emilda Solutions";
@@ -121,23 +118,100 @@ function AllProjects() {
           height: 100%;
           position: relative;
           overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
         }
+
+        /* Top gradient border */
         .project-card::before {
           content: '';
           position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 2px;
-          background: linear-gradient(to right, #ff3b3b, transparent);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.5s ease;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #ff3b3b, #ff8c3b, #ff6b3b, #ff3b3b);
+          background-size: 300% 100%;
+          transform: translateX(-100%);
+          transition: transform 0.6s ease;
+          z-index: 2;
         }
-        .project-card:hover::before { transform: scaleX(1); }
-        .project-card:hover {
-          border-color: var(--theme-border-hover);
-          transform: translateY(-4px);
-          box-shadow: var(--theme-shadow-lg);
+
+        .project-card:hover::before {
+          transform: translateX(0);
+          animation: gradientMove 1.5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+          0% { background-position: 0% 0%; }
+          100% { background-position: 300% 0%; }
+        }
+
+        /* Small overlay on hover - only at bottom */
+        .card-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(135deg, #cf6767ff, #5f2714ff);
+          transform: translateY(100%);
+          transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          z-index: 10;
+        }
+
+        .project-card:hover .card-overlay {
+          transform: translateY(0);
+        }
+
+        .view-text {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          letter-spacing: 3px;
+          font-weight: 600;
+          text-transform: uppercase;
+          color: white;
+        }
+
+        .view-arrow {
+          color: white;
+          font-size: 18px;
+          transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .view-arrow {
+          transform: translateX(6px);
+        }
+
+        /* Corner accent */
+        .corner-accent {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50px;
+          height: 50px;
+          overflow: hidden;
+          z-index: 3;
+          pointer-events: none;
+        }
+
+        .corner-accent::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 70px;
+          height: 70px;
+          background: linear-gradient(135deg, rgba(255, 59, 59, 0.2) 0%, transparent 50%);
+          transform: rotate(45deg) translate(10px, -35px);
+          transition: all 0.4s ease;
+        }
+
+        .project-card:hover .corner-accent::before {
+          background: linear-gradient(135deg, rgba(255, 59, 59, 0.5) 0%, transparent 50%);
         }
 
         .status-badge {
@@ -150,6 +224,8 @@ function AllProjects() {
           text-transform: uppercase;
           padding: 4px 10px;
           border-radius: 999px;
+          position: relative;
+          z-index: 5;
         }
         .status-badge-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
         .status-active { 
@@ -180,6 +256,8 @@ function AllProjects() {
           background: rgba(139, 92, 246, 0.08);
           color: #8b5cf6;
           border: 1px solid rgba(139, 92, 246, 0.2);
+          position: relative;
+          z-index: 5;
         }
 
         @keyframes statusPulse {
@@ -198,6 +276,8 @@ function AllProjects() {
           color: var(--theme-text-muted);
           background: transparent;
           transition: all 0.3s ease;
+          position: relative;
+          z-index: 5;
         }
         .project-card:hover .tech-chip { 
           border-color: var(--theme-border-hover); 
@@ -256,7 +336,7 @@ function AllProjects() {
           background: var(--theme-bg-card);
         }
 
-        /* ── Fixed Search Bar Styles ── */
+        /* Search Bar Styles */
         .search-input {
           font-family: 'DM Sans', sans-serif;
         }
@@ -298,17 +378,13 @@ function AllProjects() {
           margin-left: 16px;
         }
 
-        /* Light theme specific adjustments */
+        /* Light theme */
         [data-theme="light"] .search-input .MuiOutlinedInput-root {
           background-color: #ffffff;
         }
         [data-theme="light"] .search-input .MuiOutlinedInput-root:hover {
           background-color: #fefcf8;
         }
-        [data-theme="light"] .search-input .MuiInputBase-input {
-          color: var(--theme-text-primary);
-        }
-        
         [data-theme="light"] .filter-pill {
           border-color: var(--theme-border);
         }
@@ -410,7 +486,7 @@ function AllProjects() {
             </motion.div>
           </Box>
 
-          {/* Search Bar - Fixed */}
+          {/* Search Bar */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -500,20 +576,13 @@ function AllProjects() {
             </Box>
           </motion.div>
 
-          {/* Results count indicator */}
+          {/* Results count */}
           {searchQuery && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <Typography sx={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "12px",
-                letterSpacing: "1px",
-                color: "var(--theme-text-muted)",
-                mb: 2,
-                textAlign: "center",
+                fontFamily: "'DM Sans', sans-serif", fontSize: "12px",
+                letterSpacing: "1px", color: "var(--theme-text-muted)",
+                mb: 2, textAlign: "center",
               }}>
                 Found {filteredProjects.length} project{filteredProjects.length !== 1 ? "s" : ""} matching "{searchQuery}"
               </Typography>
@@ -551,7 +620,11 @@ function AllProjects() {
                       style={{ height: "100%" }}
                     >
                       <Link to={`/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`} className="project-card">
-                        <Box sx={{ padding: "clamp(20px, 2.5vw, 32px)", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
+                        {/* Corner accent */}
+                        <div className="corner-accent" />
+                        
+                        {/* Content */}
+                        <Box sx={{ padding: "clamp(20px, 2.5vw, 32px)", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box", position: "relative", zIndex: 5 }}>
 
                           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: "16px" }}>
                             <span style={{
@@ -562,11 +635,9 @@ function AllProjects() {
                               {String(project.count).padStart(2, "0")}
                             </span>
                             <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                              {/* Origin Badge */}
                               <span className="origin-badge">
                                 {formatOriginLabel(project.origin)}
                               </span>
-                              {/* Status Badge */}
                               <span className={`status-badge ${project.status === "active" ? "status-active" : "status-inactive"}`}>
                                 <span className="status-badge-dot" />
                                 {project.status === "active" ? "Active" : "Inactive"}
@@ -610,6 +681,12 @@ function AllProjects() {
                             </Box>
                           )}
                         </Box>
+
+                        {/* Small overlay on hover - only at bottom */}
+                        <div className="card-overlay">
+                          <span className="view-text">View Project</span>
+                          <span className="view-arrow">→</span>
+                        </div>
                       </Link>
                     </motion.div>
                   ))}
@@ -626,56 +703,18 @@ function AllProjects() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
               <Box sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                mt: { xs: "40px", md: "56px" },
-                flexWrap: "wrap",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                gap: "8px", mt: { xs: "40px", md: "56px" }, flexWrap: "wrap",
               }}>
-                <button
-                  className="page-arrow"
-                  disabled={page === 1}
-                  onClick={() => setPage((p) => p - 1)}
-                >
-                  ← Prev
-                </button>
-
+                <button className="page-arrow" disabled={page === 1} onClick={() => setPage((p) => p - 1)}>← Prev</button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <button
-                    key={p}
-                    className={`page-btn ${page === p ? "active" : ""}`}
-                    onClick={() => setPage(p)}
-                  >
-                    {p}
-                  </button>
+                  <button key={p} className={`page-btn ${page === p ? "active" : ""}`} onClick={() => setPage(p)}>{p}</button>
                 ))}
-
-                <button
-                  className="page-arrow"
-                  disabled={page === totalPages}
-                  onClick={() => setPage((p) => p + 1)}
-                >
-                  Next →
-                </button>
+                <button className="page-arrow" disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}>Next →</button>
               </Box>
-
-              <Typography sx={{
-                textAlign: "center",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "10px",
-                letterSpacing: "2px",
-                textTransform: "uppercase",
-                color: "var(--theme-text-muted)",
-                opacity: 0.5,
-                mt: "16px",
-              }}>
+              <Typography sx={{ textAlign: "center", fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--theme-text-muted)", opacity: 0.5, mt: "16px" }}>
                 Page {page} of {totalPages}
               </Typography>
             </motion.div>

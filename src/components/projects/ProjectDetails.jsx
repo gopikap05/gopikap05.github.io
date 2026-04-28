@@ -12,6 +12,24 @@ import vscode from "../../assets/tech icons/vs code.svg";
 import webflow from "../../assets/tech icons/webflow.svg";
 import wordpress from "../../assets/tech icons/wordpress.svg";
 import hostinger from "../../assets/tech icons/hostinge.png";
+import firebase from "../../assets/tech icons/firebase.png";
+import antigravity from "../../assets/tech icons/antigravity.png";
+import mui from "../../assets/tech icons/mui.png";
+import nodejs from "../../assets/tech icons/node js.png";
+// import npm from "../../assets/tech icons/npm.svg";
+import php from "../../assets/tech icons/php.svg";
+import react from "../../assets/tech icons/react.svg";
+// import vite from "../../assets/tech icons/vite.svg";
+import typescript from "../../assets/tech icons/typescript.svg";
+import razorpay from "../../assets/tech icons/razor pay.png";
+import api from "../../assets/tech icons/api.png";
+import lenis from "../../assets/tech icons/lenis.png";
+import lottie from "../../assets/tech icons/lottie.webp";
+import seo from "../../assets/tech icons/seo.png";
+import framerMotion from "../../assets/tech icons/framer motion.svg";
+import git from "../../assets/tech icons/git.png";
+import googleAnalytics from "../../assets/tech icons/Google Analytics.png";
+import googleSearchConsole from "../../assets/tech icons/google search console.webp";
 
 const ORIGIN_LABELS = {
   "emilda solutions": "Emilda Solutions",
@@ -28,6 +46,24 @@ const TECH_ICONS = {
   Webflow: webflow,
   WordPress: wordpress,
   Hostinger: hostinger,
+  Firebase: firebase,
+  Antigravity: antigravity,
+  "Material-UI": mui,
+  "Node.js": nodejs,
+  // NPM: npm,
+  PHP: php,
+  React: react,
+  // Vite: vite,
+  TypeScript: typescript,
+  "Razorpay": razorpay,
+  API: api,
+  Lenis: lenis,
+  Lottie: lottie,
+  SEO: seo,
+  "Framer Motion": framerMotion,
+  Git: git,
+  "Google Analytics": googleAnalytics,
+  "Google Search Console": googleSearchConsole,
 };
 
 function ProjectDetails() {
@@ -55,12 +91,14 @@ function ProjectDetails() {
     project.relatedProjects?.includes(p.id)
   );
 
-  // 3 most recent, excluding current + already shown in related
-  const relatedCounts = new Set(relatedProjects.map((p) => p.count));
+  // Get related projects from the same origin only (freelance/emilda/friska)
   const recentProjects = [...projects]
-    .filter((p) => p.count !== project.count && !relatedCounts.has(p.count))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 3);
+    .filter((p) =>
+      p.origin === project.origin && // Same origin
+      p.id !== project.id // Exclude current project
+    )
+    .sort((a, b) => b.count - a.count) // Most recent first
+    .slice(0, 3); // Get top 3
 
   // Zero-pad project number: 1 → "01", 12 → "12"
   const projectNumber = String(project.count).padStart(2, "0");
@@ -82,7 +120,6 @@ function ProjectDetails() {
           cursor: default;
         }
         .pd-tech-chip:hover {
-          transform: translateY(-3px);
           border-color: var(--theme-border-hover);
         }
 
@@ -113,34 +150,65 @@ function ProjectDetails() {
           transform: translateY(-3px); 
         }
         .pd-related-card:hover::before { transform: scaleX(1); }
+        
+.pd-recent-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+}
+.pd-recent-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff3b3b, #ff8c3b, #ff3b3b);
+  background-size: 200% 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.pd-recent-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 100% 100%, rgba(255, 59, 59, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.pd-recent-card:hover { 
+  border-color: #ff3b3b;
+  box-shadow: 0 10px 30px -10px rgba(255, 59, 59, 0.2);
+}
+.pd-recent-card:hover::before { 
+  transform: scaleX(1);
+  animation: shimmer 1s ease infinite;
+}
+.pd-recent-card:hover::after {
+  opacity: 1;
+}
 
-        .pd-recent-card {
-          text-decoration: none;
-          color: inherit;
-          display: block;
-          background: var(--theme-bg-card);
-          border: 1px solid var(--theme-border);
-          border-radius: 20px;
-          padding: 24px;
-          position: relative;
-          overflow: hidden;
-          transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-        .pd-recent-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 2px;
-          background: linear-gradient(to right, var(--theme-border-hover), transparent);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.4s ease;
-        }
-        .pd-recent-card:hover { 
-          border-color: var(--theme-border-hover); 
-          transform: translateY(-3px); 
-        }
-        .pd-recent-card:hover::before { transform: scaleX(1); }
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
 
         .pd-live-link {
           color: var(--theme-text-primary);
@@ -157,11 +225,83 @@ function ProjectDetails() {
 
         .pd-section-label {
           font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
+          font-size: 14px;
           letter-spacing: 3px;
           text-transform: uppercase;
           color: var(--theme-text-muted);
-          margin-bottom: 16px;
+          margin-bottom: 14px;
+          font-weight:700;
+        }
+
+        /* Mobile horizontal scroll for recent projects */
+        .pd-recent-scroll {
+          overflow-x: auto;
+          overflow-y: visible;
+          scrollbar-width: thin;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .pd-recent-scroll::-webkit-scrollbar {
+          height: 3px;
+        }
+
+        .pd-recent-scroll::-webkit-scrollbar-track {
+          background: var(--theme-border);
+          border-radius: 3px;
+        }
+
+        .pd-recent-scroll::-webkit-scrollbar-thumb {
+          background: #ff3b3b;
+          border-radius: 3px;
+        }
+
+        .pd-recent-track {
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
+          gap: 16px;
+          width: max-content;
+        }
+
+        .pd-recent-track > * {
+          width: 280px;
+          min-width: 280px;
+          flex-shrink: 0;
+        }
+
+        /* Desktop grid */
+        @media (min-width: 769px) {
+          .pd-recent-scroll {
+            overflow: visible;
+          }
+          
+          .pd-recent-track {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+          }
+          
+          .pd-recent-track > * {
+            width: auto;
+            min-width: auto;
+          }
+        }
+
+        /* Hide scroll hint on desktop by default */
+        .mobile-scroll-hint {
+          display: none !important;
+        }
+
+        /* Show scroll hint only on mobile where horizontal scroll exists */
+        @media (max-width: 768px) {
+          .mobile-scroll-hint {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+          }
         }
 
         /* Light theme specific adjustments */
@@ -178,7 +318,7 @@ function ProjectDetails() {
         /* Responsive font sizes */
         @media (max-width: 600px) {
           .pd-section-label {
-            font-size: 10px;
+            font-size: 14px;
           }
           .pd-live-link {
             font-size: 13px;
@@ -331,13 +471,13 @@ function ProjectDetails() {
                             alt={tech}
                             sx={{
                               width: "16px", height: "16px",
-                              filter: tech === "WordPress" || tech === "Hostinger" ? "none" : "invert(1)",
+                              filter: "none",
                             }}
                           />
                         )}
                         <Typography sx={{
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: { xs: "11px", sm: "12px" },
+                          fontSize: { xs: "12px", sm: "14px" },
                           color: "var(--theme-text-secondary)",
                           letterSpacing: "0.5px",
                         }}>
@@ -401,15 +541,27 @@ function ProjectDetails() {
                 {/* Live URL */}
                 {project.liveUrl && (
                   <Box>
-                    <p className="pd-section-label">Website</p>
-                    <a
+                    <p className="pd-section-label">Website Link</p>
+
+                    <Typography
+                      component="a"
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="pd-live-link"
+                      sx={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: { xs: "14px", sm: "16px", md: "18px" },
+                        color: "#1976d2",
+                        textDecoration: "none",
+                        wordBreak: "break-all",
+                        "&:hover": {
+                          textDecoration: "underline",
+                          color: "#1565c0",
+                        },
+                      }}
                     >
                       {project.liveUrl.replace("https://", "").replace("http://", "")}
-                    </a>
+                    </Typography>
                   </Box>
                 )}
 
@@ -418,7 +570,7 @@ function ProjectDetails() {
                   <p className="pd-section-label">Worked At</p>
                   <Typography sx={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: { xs: "13px", sm: "14px" },
+                    fontSize: { xs: "14px", sm: "16px" },
                     color: "var(--theme-text-secondary)",
                   }}>
                     {ORIGIN_LABELS[project.origin] || project.origin}
@@ -430,7 +582,7 @@ function ProjectDetails() {
 
           </Box>
 
-          {/* ── Recent Projects ── */}
+          {/* ── Recent Projects with Horizontal Scroll ── */}
           {recentProjects.length > 0 && (
             <>
               <div style={{
@@ -459,69 +611,94 @@ function ProjectDetails() {
                   mb: 4,
                   color: "var(--theme-text-primary)",
                 }}>
-                  Latest Projects
+                  Related Projects
                 </Typography>
 
-                <Box sx={{
-                  display: "grid",
-                  gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "repeat(2, 1fr)",
-                    md: "repeat(3, 1fr)"
-                  },
-                  gap: "16px",
-                }}>
-                  {recentProjects.map((p) => (
-                    <Link key={p.count} to={`/projects/${p.origin.toLowerCase().replace(/\s+/g, '-')}/${p.count}`} className="pd-recent-card">
-                      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                          <Typography sx={{
-                            fontFamily: "'Bebas Neue', sans-serif",
-                            fontSize: { xs: "0.7rem", sm: "0.75rem" },
-                            letterSpacing: "2px",
-                            color: "var(--theme-text-muted)",
-                            opacity: 0.5,
-                            lineHeight: 1,
-                          }}>
-                            #{String(p.count).padStart(2, "0")}
-                          </Typography>
-                          <Typography sx={{
-                            fontFamily: "'Bebas Neue', sans-serif",
-                            fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
-                            letterSpacing: "2px",
-                            color: "var(--theme-text-primary)",
-                            lineHeight: 1,
-                          }}>
-                            {p.title}
-                          </Typography>
+                {/* Horizontal scroll wrapper */}
+                <div className="pd-recent-scroll">
+                  <div className="pd-recent-track">
+                    {recentProjects.map((p) => (
+                      <Link
+                        key={p.count}
+                        to={`/projects/${p.origin.toLowerCase().replace(/\s+/g, '-')}/${p.id}`}
+                        className="pd-recent-card"
+                      >
+                        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1.5 }}>
+                          <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            <Typography sx={{
+                              fontFamily: "'Bebas Neue', sans-serif",
+                              fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                              letterSpacing: "2px",
+                              color: "var(--theme-text-muted)",
+                              opacity: 0.5,
+                              lineHeight: 1,
+                            }}>
+                              #{String(p.count).padStart(2, "0")}
+                            </Typography>
+                            <Typography sx={{
+                              fontFamily: "'Bebas Neue', sans-serif",
+                              fontSize: { xs: "1rem", sm: "1.1rem", md: "1.2rem" },
+                              letterSpacing: "2px",
+                              color: "var(--theme-text-primary)",
+                              lineHeight: 1,
+                            }}>
+                              {p.title}
+                            </Typography>
+                          </Box>
+                          <Box sx={{
+                            width: 6, height: 6, borderRadius: "50%", flexShrink: 0, mt: "3px",
+                            background: p.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
+                          }} />
                         </Box>
-                        <Box sx={{
-                          width: 6, height: 6, borderRadius: "50%", flexShrink: 0, mt: "3px",
-                          background: p.status === "active" ? "var(--theme-success)" : "var(--theme-error)",
-                        }} />
-                      </Box>
-                      <Typography sx={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        color: "var(--theme-text-secondary)",
-                        fontSize: { xs: "12px", sm: "13px" },
-                        lineHeight: 1.6,
-                        mb: 2,
-                      }}>
-                        {p.shortDescription}
-                      </Typography>
-                      <Typography sx={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: { xs: "9px", sm: "10px" },
-                        letterSpacing: "2px",
-                        textTransform: "uppercase",
-                        color: "var(--theme-text-muted)",
-                        opacity: 0.6,
-                      }}>
-                        {ORIGIN_LABELS[p.origin] || p.origin}
-                      </Typography>
-                    </Link>
-                  ))}
-                </Box>
+                        <Typography sx={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          color: "var(--theme-text-secondary)",
+                          fontSize: { xs: "12px", sm: "13px" },
+                          lineHeight: 1.6,
+                          mb: 2,
+                        }}>
+                          {p.shortDescription}
+                        </Typography>
+                        <Typography sx={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontSize: { xs: "9px", sm: "10px" },
+                          letterSpacing: "2px",
+                          textTransform: "uppercase",
+                          color: "var(--theme-text-muted)",
+                          opacity: 0.6,
+                        }}>
+                          {ORIGIN_LABELS[p.origin] || p.origin}
+                        </Typography>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scroll hint for mobile - only visible on mobile */}
+                <div className="mobile-scroll-hint">
+                  <span style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: "9px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: "var(--theme-text-muted)",
+                    opacity: 0.6,
+                  }}>
+                    Swipe to see more
+                  </span>
+                  <motion.div
+                    animate={{ x: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                      fontSize: "14px",
+                      color: "var(--theme-text-muted)",
+                      opacity: 0.6,
+                    }}
+                  >
+                    →
+                  </motion.div>
+                </div>
+
               </Box>
             </>
           )}
