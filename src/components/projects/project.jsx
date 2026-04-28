@@ -46,22 +46,18 @@ function ProjectHero() {
           animation-play-state: running; 
         }
 
+        /* CONTRAST FIX: Marquee items - changed from muted to secondary */
         .ph-marquee-item {
           font-family: 'DM Sans', sans-serif;
           font-size: 10px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           white-space: nowrap;
           display: flex;
           align-items: center;
           gap: 16px;
-          opacity: 0.6;
           transition: opacity 0.3s ease;
-        }
-
-        .ph-marquee-item:hover {
-          opacity: 1;
         }
 
         .ph-marquee-item::after {
@@ -75,11 +71,6 @@ function ProjectHero() {
         /* Light theme adjustments */
         [data-theme="light"] .ph-marquee-item {
           color: var(--theme-text-secondary);
-          opacity: 0.5;
-        }
-
-        [data-theme="light"] .ph-marquee-item:hover {
-          opacity: 0.8;
         }
 
         /* Projects letter hover animation - same as About Me and Contact */
@@ -107,6 +98,7 @@ function ProjectHero() {
           borderTop: "1px solid var(--theme-border)",
           borderBottom: "1px solid var(--theme-border)",
           overflow: "hidden",
+          position: "relative",
         }}
       >
         {/* Corner decorations - same as About Me and Contact */}
@@ -165,7 +157,7 @@ function ProjectHero() {
               fontSize: "10px",
               letterSpacing: "2.5px",
               textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
             }}>
               <span style={{
                 width: 4,
@@ -211,7 +203,7 @@ function ProjectHero() {
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: { xs: "12px", md: "13px" },
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
               letterSpacing: "3px",
               textTransform: "uppercase",
             }}>
@@ -259,7 +251,7 @@ function ProjectHero() {
                     fontSize: "10px",
                     letterSpacing: "2.5px",
                     textTransform: "uppercase",
-                    color: "var(--theme-text-muted)",
+                    color: "var(--theme-text-secondary)",
                   }}>
                     {stat.label}
                   </Typography>

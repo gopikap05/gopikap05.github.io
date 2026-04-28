@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../components/common/breadcrumbs";
 import ContactHero from "../components/contacts/ContactHero";
 import ContactForm from "../components/contacts/contactForm";
@@ -7,7 +8,32 @@ import Social from "../components/contacts/Social";
 
 function Contact() {
   return (
-    <Box sx={{ backgroundColor: "#000", minHeight: "100vh" }}>
+    <Box
+      id="main-content"
+      tabIndex="-1"
+      role="main"
+      style={{ outline: "none" }}
+      sx={{ backgroundColor: "#000", minHeight: "100vh" }}
+    >
+      {/* Hidden heading for screen readers - provides proper landmark structure */}
+      <h1 style={{
+        position: "absolute",
+        width: "1px",
+        height: "1px",
+        padding: 0,
+        margin: "-1px",
+        overflow: "hidden",
+        clip: "rect(0, 0, 0, 0)",
+        border: 0,
+        whiteSpace: "nowrap"
+      }}>
+        Contact Gopika P - Get in Touch
+      </h1>
+
+      <Helmet>
+        <meta name="description" content="Get in touch with Gopika P — feel free to reach out for collaborations, inquiries, or just to say hello. Connect via contact form or social media." />
+      </Helmet>
+
       <Breadcrumbs
         items={[
           { label: "Home", path: "/" },

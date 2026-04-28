@@ -159,7 +159,7 @@ function ProjectCard({ project, index, to }) {
 
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
-            color: "var(--theme-text-muted)",
+            color: "var(--theme-text-secondary)", // CHANGED: was muted, now secondary for better contrast
             fontSize: "12px",
             letterSpacing: "2px",
             textTransform: "uppercase",
@@ -182,7 +182,7 @@ function ProjectCard({ project, index, to }) {
               fontWeight: 600,
               letterSpacing: "1.5px",
               textTransform: "uppercase",
-              color: `rgba(${ACCENT_COLOR_RGB}, 0.7)`,
+              color: `rgba(${ACCENT_COLOR_RGB}, 0.8)`, // CHANGED: was 0.7, now 0.8 for better contrast
               border: `1px solid rgba(${ACCENT_COLOR_RGB}, 0.3)`,
               borderRadius: "999px",
               padding: "4px 12px",
@@ -197,8 +197,8 @@ function ProjectCard({ project, index, to }) {
               letterSpacing: "1.5px",
               textTransform: "uppercase",
               color: project.status === "active"
-                ? "rgba(34,197,94,0.85)"
-                : "rgba(156,163,175,0.7)",
+                ? "rgba(34,197,94,1)" // CHANGED: was 0.85, now 1 for better contrast
+                : "rgba(156,163,175,0.9)", // CHANGED: was 0.7, now 0.9 for better contrast
               border: `1px solid ${project.status === "active"
                 ? "rgba(34,197,94,0.3)"
                 : "rgba(156,163,175,0.25)"}`,
@@ -213,8 +213,8 @@ function ProjectCard({ project, index, to }) {
                 height: "6px",
                 borderRadius: "50%",
                 background: project.status === "active"
-                  ? "rgba(34,197,94,0.85)"
-                  : "rgba(156,163,175,0.6)",
+                  ? "rgba(34,197,94,1)" // CHANGED: was 0.85, now 1
+                  : "rgba(156,163,175,0.9)", // CHANGED: was 0.6, now 0.9
                 display: "inline-block",
                 flexShrink: 0,
               }} />
@@ -224,7 +224,7 @@ function ProjectCard({ project, index, to }) {
 
           <div style={{
             fontFamily: "'DM Sans', sans-serif",
-            color: "var(--theme-text-secondary)",
+            color: "var(--theme-text-primary)", // CHANGED: was secondary, now primary for better contrast
             fontSize: "0.9rem",
             lineHeight: 1.7,
             flex: 1,
@@ -397,6 +397,15 @@ function RecentProjects() {
             display: none !important;
           }
         }
+
+        /* CONTRAST FIX: Swipe hint text */
+        .swipe-hint-text {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--theme-text-secondary); /* CHANGED: was muted with opacity */
+        }
       `}</style>
 
       <Box sx={{
@@ -468,7 +477,7 @@ function RecentProjects() {
             </div>
           </div>
 
-          {/* Scroll hint - single arrow */}
+          {/* Scroll hint - CONTRAST FIXED */}
           <div className="mobile-scroll-hint" style={{
             display: "none",
             justifyContent: "center",
@@ -477,14 +486,7 @@ function RecentProjects() {
             marginTop: "24px",
             marginBottom: "0",
           }}>
-            <span style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "9px",
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
-              opacity: 0.6,
-            }}>
+            <span className="swipe-hint-text">
               Swipe to see more
             </span>
             <motion.div
@@ -492,8 +494,7 @@ function RecentProjects() {
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 fontSize: "14px",
-                color: "var(--theme-text-muted)",
-                opacity: 0.6,
+                color: "var(--theme-text-secondary)",
               }}
             >
               →

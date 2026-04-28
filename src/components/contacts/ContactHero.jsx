@@ -19,7 +19,7 @@ function ContactHero() {
         
         .contact-hero-char:hover {
           transform: translateY(-10px);
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
         }
       `}</style>
 
@@ -95,7 +95,7 @@ function ContactHero() {
               fontSize: "12px",
               letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
             }}>
               Get In Touch
             </span>
@@ -134,7 +134,7 @@ function ContactHero() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(12px, 1.1vw, 14px)",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
               letterSpacing: "3px",
               textTransform: "uppercase",
               textAlign: "center",

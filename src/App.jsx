@@ -56,23 +56,29 @@ function App() {
   }
 
   return (
-    <div style={{ position: "relative" }}> {/*  Added wrapper */}
-      <CustomCursor />
-      <Navbar />
-      <ScrollToTop />
-      <BackToTop />
+    <>
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+      <div style={{ position: "relative" }}>
+        <CustomCursor />
+        <Navbar />
+        <ScrollToTop />
+        <BackToTop />
 
-      <Routes>
-        <Route path="/theme" element={<ThemeSettings />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:origin/:id" element={<ProjectDetails />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+        {/* Main landmark is now inside each page component */}
+        <Routes>
+          <Route path="/theme" element={<ThemeSettings />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:origin/:id" element={<ProjectDetails />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

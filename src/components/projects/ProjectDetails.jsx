@@ -75,12 +75,17 @@ function ProjectDetails() {
 
   if (!project) {
     return (
-      <Box sx={{
-        width: "100%", minHeight: "100vh", background: "var(--theme-bg-primary)",
-        color: "var(--theme-text-primary)", display: "flex", alignItems: "center",
-        justifyContent: "center", px: "5%",
-      }}>
-        <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: { xs: "14px", sm: "16px" }, color: "var(--theme-text-muted)" }}>
+      <Box 
+        id="main-content"
+        tabIndex="-1"
+        style={{ outline: "none" }}
+        sx={{
+          width: "100%", minHeight: "100vh", background: "var(--theme-bg-primary)",
+          color: "var(--theme-text-primary)", display: "flex", alignItems: "center",
+          justifyContent: "center", px: "5%",
+        }}
+      >
+        <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: { xs: "14px", sm: "16px" }, color: "var(--theme-text-secondary)" }}>
           Project not found.
         </Typography>
       </Box>
@@ -104,7 +109,22 @@ function ProjectDetails() {
   const projectNumber = String(project.count).padStart(2, "0");
 
   return (
-    <>
+    <div id="main-content" tabIndex="-1" style={{ outline: "none" }}>
+      {/* Hidden heading for screen readers - provides proper landmark structure */}
+      <h1 style={{ 
+        position: "absolute", 
+        width: "1px", 
+        height: "1px", 
+        padding: 0, 
+        margin: "-1px", 
+        overflow: "hidden",
+        clip: "rect(0, 0, 0, 0)",
+        border: 0,
+        whiteSpace: "nowrap"
+      }}>
+        {project.title} - Project Details | Gopika P Portfolio
+      </h1>
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
 
@@ -228,7 +248,7 @@ function ProjectDetails() {
           font-size: 14px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           margin-bottom: 14px;
           font-weight:700;
         }
@@ -361,7 +381,7 @@ function ProjectDetails() {
                   fontSize: { xs: "10px", sm: "11px", md: "12px" },
                   letterSpacing: "2.5px",
                   textTransform: "uppercase",
-                  color: "var(--theme-text-muted)",
+                  color: "var(--theme-text-secondary)",
                 }}>
                   {ORIGIN_LABELS[project.origin] || project.origin}
                 </Typography>
@@ -395,17 +415,18 @@ function ProjectDetails() {
               {project.title}
             </Typography>
 
-            {/* Company + CEO */}
+            {/* Company + Location + CEO - FIXED: removed opacity */}
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
               fontSize: { xs: "12px", sm: "13px", md: "14px" },
               letterSpacing: "1px",
               mb: 4,
             }}>
               {project.company}
+              {project.location && ` · ${project.location}`}
               {project.ceo && (
-                <span style={{ color: "var(--theme-text-muted)", opacity: 0.6 }}> · CEO: {project.ceo}</span>
+                <span style={{ color: "var(--theme-text-secondary)" }}> · CEO: {project.ceo}</span>
               )}
             </Typography>
           </motion.div>
@@ -457,7 +478,7 @@ function ProjectDetails() {
                 </Box>
               )}
 
-              {/* Tech stack */}
+              {/* Tech stack - FIXED: aspect ratio for images */}
               {project.tech?.length > 0 && (
                 <Box sx={{ mb: 6 }}>
                   <p className="pd-section-label">Tech Used</p>
@@ -470,7 +491,10 @@ function ProjectDetails() {
                             src={TECH_ICONS[tech]}
                             alt={tech}
                             sx={{
-                              width: "16px", height: "16px",
+                              width: "20px",
+                              height: "auto",
+                              maxHeight: "20px",
+                              objectFit: "contain",
                               filter: "none",
                             }}
                           />
@@ -553,9 +577,9 @@ function ProjectDetails() {
                             fontFamily: "'DM Sans', sans-serif",
                             fontSize: "14px",
                             letterSpacing: "1px",
-                            color: "var(--theme-text-muted)",
+                            color: "var(--theme-text-secondary)",
                           }}>
-                            {testimonial.role} · {testimonial.company}
+                            {testimonial.role} · {testimonial.company} {project.location && `· ${project.location}`}
                           </Typography>
                         </Box>
                       </motion.div>
@@ -613,7 +637,7 @@ function ProjectDetails() {
                   `}</style>
                 </Box>
 
-                {/* Live URL */}
+                {/* Live URL - FIXED: changed link color */}
                 {project.liveUrl && (
                   <Box>
                     <p className="pd-section-label">Website Link</p>
@@ -626,12 +650,11 @@ function ProjectDetails() {
                       sx={{
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                        color: "#1976d2",
-                        textDecoration: "none",
+                        color: "var(--theme-text-secondary)",
+                        textDecoration: "underline",
                         wordBreak: "break-all",
                         "&:hover": {
-                          textDecoration: "underline",
-                          color: "#1565c0",
+                          color: "var(--theme-text-primary)",
                         },
                       }}
                     >
@@ -651,6 +674,20 @@ function ProjectDetails() {
                     {ORIGIN_LABELS[project.origin] || project.origin}
                   </Typography>
                 </Box>
+
+                {/* Location */}
+                {project.location && (
+                  <Box>
+                    <p className="pd-section-label">Location</p>
+                    <Typography sx={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: { xs: "14px", sm: "16px" },
+                      color: "var(--theme-text-secondary)",
+                    }}>
+                      {project.location}
+                    </Typography>
+                  </Box>
+                )}
 
               </Box>
             </motion.div>
@@ -673,7 +710,7 @@ function ProjectDetails() {
                     fontSize: { xs: "10px", sm: "11px" },
                     letterSpacing: "2.5px",
                     textTransform: "uppercase",
-                    color: "var(--theme-text-muted)",
+                    color: "var(--theme-text-secondary)",
                   }}>
                     Recent
                   </Typography>
@@ -704,8 +741,7 @@ function ProjectDetails() {
                               fontFamily: "'Bebas Neue', sans-serif",
                               fontSize: { xs: "0.7rem", sm: "0.75rem" },
                               letterSpacing: "2px",
-                              color: "var(--theme-text-muted)",
-                              opacity: 0.5,
+                              color: "var(--theme-text-secondary)",
                               lineHeight: 1,
                             }}>
                               #{String(p.count).padStart(2, "0")}
@@ -739,8 +775,7 @@ function ProjectDetails() {
                           fontSize: { xs: "9px", sm: "10px" },
                           letterSpacing: "2px",
                           textTransform: "uppercase",
-                          color: "var(--theme-text-muted)",
-                          opacity: 0.6,
+                          color: "var(--theme-text-secondary)",
                         }}>
                           {ORIGIN_LABELS[p.origin] || p.origin}
                         </Typography>
@@ -749,15 +784,14 @@ function ProjectDetails() {
                   </div>
                 </div>
 
-                {/* Scroll hint for mobile - only visible on mobile */}
+                {/* Scroll hint for mobile - fixed */}
                 <div className="mobile-scroll-hint">
                   <span style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: "9px",
                     letterSpacing: "2px",
                     textTransform: "uppercase",
-                    color: "var(--theme-text-muted)",
-                    opacity: 0.6,
+                    color: "var(--theme-text-secondary)",
                   }}>
                     Swipe to see more
                   </span>
@@ -766,8 +800,7 @@ function ProjectDetails() {
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     style={{
                       fontSize: "14px",
-                      color: "var(--theme-text-muted)",
-                      opacity: 0.6,
+                      color: "var(--theme-text-secondary)",
                     }}
                   >
                     →
@@ -780,7 +813,7 @@ function ProjectDetails() {
 
         </Box>
       </Box>
-    </>
+    </div>
   );
 }
 

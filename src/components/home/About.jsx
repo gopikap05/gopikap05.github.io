@@ -302,7 +302,7 @@ function AboutSection() {
                 {words.map((word, index) => {
                   const start = index / words.length;
                   const end = start + 1.5 / words.length;
-                  const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
+                  const opacity = useTransform(scrollYProgress, [start, end], [0.45, 1]); // CHANGED: was 0.15, now 0.45 for better initial visibility
                   const y = useTransform(scrollYProgress, [start, end], [8, 0]);
                   return (
                     <motion.span
@@ -314,7 +314,7 @@ function AboutSection() {
                         marginRight: "0.4em",
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)",
-                        color: "var(--theme-text-secondary)",
+                        color: "var(--theme-text-primary)", // CHANGED: was secondary, now primary for better contrast
                       }}
                     >
                       {word}

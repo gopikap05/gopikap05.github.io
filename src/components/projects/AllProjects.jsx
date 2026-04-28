@@ -93,14 +93,14 @@ function AllProjects() {
           border-radius: 999px;
           border: 1px solid var(--theme-border);
           background: transparent;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           cursor: pointer;
           transition: all 0.3s ease;
           white-space: nowrap;
         }
         .filter-pill:hover { 
           border-color: var(--theme-border-hover); 
-          color: var(--theme-text-secondary); 
+          color: var(--theme-text-primary); 
         }
         .filter-pill.active { 
           border-color: var(--theme-primary); 
@@ -273,7 +273,7 @@ function AllProjects() {
           padding: 3px 10px;
           border-radius: 999px;
           border: 1px solid var(--theme-border);
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           background: transparent;
           transition: all 0.3s ease;
           position: relative;
@@ -281,7 +281,7 @@ function AllProjects() {
         }
         .project-card:hover .tech-chip { 
           border-color: var(--theme-border-hover); 
-          color: var(--theme-text-secondary); 
+          color: var(--theme-text-primary); 
         }
 
         .page-btn {
@@ -293,7 +293,7 @@ function AllProjects() {
           border-radius: 50%;
           border: 1px solid var(--theme-border);
           background: transparent;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           cursor: pointer;
           transition: all 0.2s ease;
           display: flex;
@@ -318,7 +318,7 @@ function AllProjects() {
           border-radius: 999px;
           border: 1px solid var(--theme-border);
           background: transparent;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           cursor: pointer;
           transition: all 0.2s ease;
           letter-spacing: 1px;
@@ -433,7 +433,7 @@ function AllProjects() {
               fontSize: "10px",
               letterSpacing: "2px",
               textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
             }}>
               <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />
               Projects
@@ -476,7 +476,7 @@ function AllProjects() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "clamp(11px, 1vw, 14px)",
-                color: "var(--theme-text-muted)",
+                color: "var(--theme-text-secondary)",
                 letterSpacing: "5px",
                 textTransform: "uppercase",
                 pb: { sm: "6px" },
@@ -538,7 +538,7 @@ function AllProjects() {
                 <p style={{
                   fontFamily: "'DM Sans', sans-serif", fontSize: "14px",
                   letterSpacing: "3px", textTransform: "uppercase",
-                  color: "var(--theme-text-muted)", marginBottom: "12px",
+                  color: "var(--theme-text-secondary)", marginBottom: "12px",
                 }}>Company</p>
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                   {ORIGIN_FILTERS.map((f) => (
@@ -559,7 +559,7 @@ function AllProjects() {
                 <p style={{
                   fontFamily: "'DM Sans', sans-serif", fontSize: "14px",
                   letterSpacing: "3px", textTransform: "uppercase",
-                  color: "var(--theme-text-muted)", marginBottom: "12px",
+                  color: "var(--theme-text-secondary)", marginBottom: "12px",
                 }}>Status</p>
                 <Box sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                   {STATUS_FILTERS.map((f) => (
@@ -581,7 +581,7 @@ function AllProjects() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif", fontSize: "12px",
-                letterSpacing: "1px", color: "var(--theme-text-muted)",
+                letterSpacing: "1px", color: "var(--theme-text-secondary)",
                 mb: 2, textAlign: "center",
               }}>
                 Found {filteredProjects.length} project{filteredProjects.length !== 1 ? "s" : ""} matching "{searchQuery}"
@@ -656,7 +656,7 @@ function AllProjects() {
 
                           <Typography sx={{
                             fontFamily: "'DM Sans', sans-serif",
-                            color: "var(--theme-text-muted)", fontSize: "10px",
+                            color: "var(--theme-text-secondary)", fontSize: "10px",
                             letterSpacing: "2px", textTransform: "uppercase", mb: "14px",
                           }}>
                             {project.company}{project.ceo && ` · ${project.ceo}`}
@@ -694,7 +694,7 @@ function AllProjects() {
               </motion.div>
             ) : (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="no-results">
-                <Typography sx={{ fontFamily: "'DM Sans', sans-serif", color: "var(--theme-text-muted)", fontSize: "0.9rem", letterSpacing: "1px" }}>
+                <Typography sx={{ fontFamily: "'DM Sans', sans-serif", color: "var(--theme-text-secondary)", fontSize: "0.9rem", letterSpacing: "1px" }}>
                   No projects match the selected filters.
                 </Typography>
               </motion.div>
@@ -708,13 +708,14 @@ function AllProjects() {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 gap: "8px", mt: { xs: "40px", md: "56px" }, flexWrap: "wrap",
               }}>
-                <button className="page-arrow" disabled={page === 1} onClick={() => setPage((p) => p - 1)}>← Prev</button>
+                 <button className="page-arrow" disabled={page === 1} onClick={() => setPage((p) => p - 1)} aria-label="Previous page">← Prev</button>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <button key={p} className={`page-btn ${page === p ? "active" : ""}`} onClick={() => setPage(p)}>{p}</button>
                 ))}
-                <button className="page-arrow" disabled={page === totalPages} onClick={() => setPage((p) => p + 1)}>Next →</button>
+                <button className="page-arrow" disabled={page === totalPages} onClick={() => setPage((p) => p + 1)} aria-label="Next page">Next →</button>
               </Box>
-              <Typography sx={{ textAlign: "center", fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--theme-text-muted)", opacity: 0.5, mt: "16px" }}>
+              {/* CONTRAST FIX: Page text - changed from muted to secondary */}
+              <Typography sx={{ textAlign: "center", fontFamily: "'DM Sans', sans-serif", fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "var(--theme-text-secondary)", mt: "16px" }}>
                 Page {page} of {totalPages}
               </Typography>
             </motion.div>

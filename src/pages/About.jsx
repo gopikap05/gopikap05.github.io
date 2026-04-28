@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 import Breadcrumbs from "../components/common/breadcrumbs";
 import AboutMeHero from "../components/about/AboutMeHero";
 import AboutMeFAQ from "../components/about/AboutMeFAQ";
@@ -7,7 +8,26 @@ import AboutPortfolio from "../components/about/aboutPortfolio";
 
 function About() {
   return (
-    <Box>
+    <Box id="main-content" tabIndex="-1" style={{ outline: "none" }}>
+      {/* Hidden heading for screen readers - provides proper landmark structure */}
+      <h1 style={{
+        position: "absolute",
+        width: "1px",
+        height: "1px",
+        padding: 0,
+        margin: "-1px",
+        overflow: "hidden",
+        clip: "rect(0, 0, 0, 0)",
+        border: 0,
+        whiteSpace: "nowrap"
+      }}>
+        About Gopika P - Web Developer Portfolio
+      </h1>
+
+      <Helmet>
+        <meta name="description" content="Learn more about Gopika P — my background, skills, resume, portfolio highlights, and frequently asked questions. Explore my journey and work in web development." />
+      </Helmet>
+
       <Breadcrumbs
         items={[
           { label: "Home", path: "/" },

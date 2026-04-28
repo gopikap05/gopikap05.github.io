@@ -179,6 +179,21 @@ function ContactForm() {
           py: { xs: "60px", sm: "70px", md: "90px" },
         }}
       >
+        {/* Hidden heading for screen readers */}
+        <h2 style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          padding: 0,
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0, 0, 0, 0)",
+          border: 0,
+          whiteSpace: "nowrap"
+        }}>
+          Contact Form - Send me a message
+        </h2>
+
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -197,7 +212,7 @@ function ContactForm() {
               <Typography sx={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: "10px", letterSpacing: "2.5px",
-                textTransform: "uppercase", color: "var(--theme-text-muted)",
+                textTransform: "uppercase", color: "var(--theme-text-secondary)",
               }}>
                 Contact
               </Typography>

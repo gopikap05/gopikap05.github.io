@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -7,30 +7,33 @@ import { Link } from "react-router-dom";
 import projects from "../../data/projects";
 
 function Testimonials() {
-  // Extract testimonials from projects that have them
+  // Extract testimonials from projects that have them with error handling
   const testimonialsData = projects
-    .filter(project => project.testimonials && project.testimonials.length > 0)
-    .flatMap(project => 
+    ?.filter(project => project?.testimonials && project.testimonials.length > 0)
+    ?.flatMap(project => 
       project.testimonials.map(testimonial => ({
         id: `${project.id}-${testimonial.name}`,
         name: testimonial.name,
         role: testimonial.role,
-        company: project.company,
+        company: project.company || "",
+        location: project.location || "", // Added location with fallback
         content: testimonial.content,
-        rating: testimonial.rating,
-        projectLink: `/projects/${project.origin.toLowerCase().replace(/\s+/g, '-')}/${project.id}`
+        rating: testimonial.rating || 5,
+        projectLink: `/projects/${project.origin?.toLowerCase().replace(/\s+/g, '-') || 'freelance'}/${project.id}`
       }))
-    );
+    ) || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 2;
   const totalPages = Math.ceil(testimonialsData.length / itemsPerPage);
 
   const nextSlide = () => {
+    if (totalPages === 0) return;
     setCurrentIndex((prev) => (prev + 1) % totalPages);
   };
 
   const prevSlide = () => {
+    if (totalPages === 0) return;
     setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
@@ -45,7 +48,7 @@ function Testimonials() {
   };
 
   // Don't render if no testimonials
-  if (testimonialsData.length === 0) {
+  if (!testimonialsData || testimonialsData.length === 0) {
     return null;
   }
 
@@ -92,6 +95,7 @@ function Testimonials() {
         .testimonial-card:hover {
           border-color: #ff3b3b;
           background: linear-gradient(135deg, rgba(255, 59, 59, 0.04), rgba(255, 140, 59, 0.02));
+          transform: translateY(-4px);
         }
         
         .star-filled {
@@ -106,7 +110,7 @@ function Testimonials() {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           line-height: 1.7;
-          color: var(--theme-text-secondary);
+          color: var(--theme-text-primary); /* CHANGED: was secondary, now primary for better contrast */
           margin-bottom: 28px;
           font-style: italic;
           flex: 1;
@@ -124,7 +128,7 @@ function Testimonials() {
           font-family: 'DM Sans', sans-serif;
           font-size: 12px;
           letter-spacing: 1px;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary); /* CHANGED: was muted, now secondary for better contrast */
         }
 
         .view-project-link {
@@ -138,7 +142,7 @@ function Testimonials() {
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary); /* CHANGED: was muted, now secondary for better contrast */
           transition: all 0.3s ease;
         }
 
@@ -191,6 +195,14 @@ function Testimonials() {
           background: #ff3b3b;
         }
 
+        /* CHANGED: Bottom note text contrast fix */
+        .testimonials-note {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          letter-spacing: 1.5px;
+          color: var(--theme-text-secondary); /* CHANGED: was muted with opacity 0.6, now secondary with full opacity */
+        }
+
         @media (max-width: 768px) {
           .testimonial-card {
             padding: 20px;
@@ -208,6 +220,9 @@ function Testimonials() {
           .nav-button {
             width: 36px;
             height: 36px;
+          }
+          .testimonials-note {
+            font-size: 11px;
           }
         }
       `}</style>
@@ -263,14 +278,16 @@ function Testimonials() {
             </motion.div>
 
             {/* Navigation Buttons */}
-            <Box sx={{ display: "flex", gap: "12px" }}>
-              <button className="nav-button" onClick={prevSlide} aria-label="Previous testimonial">
-                <ChevronLeftIcon sx={{ fontSize: "24px" }} />
-              </button>
-              <button className="nav-button" onClick={nextSlide} aria-label="Next testimonial">
-                <ChevronRightIcon sx={{ fontSize: "24px" }} />
-              </button>
-            </Box>
+            {totalPages > 1 && (
+              <Box sx={{ display: "flex", gap: "12px" }}>
+                <button className="nav-button" onClick={prevSlide} aria-label="Previous testimonial">
+                  <ChevronLeftIcon sx={{ fontSize: "24px" }} />
+                </button>
+                <button className="nav-button" onClick={nextSlide} aria-label="Next testimonial">
+                  <ChevronRightIcon sx={{ fontSize: "24px" }} />
+                </button>
+              </Box>
+            )}
           </Box>
 
           {/* Testimonials Slider */}
@@ -287,8 +304,8 @@ function Testimonials() {
                 gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
                 gap: "24px",
               }}>
-                {getCurrentTestimonials().map((testimonial) => (
-                  <Link key={testimonial.id} to={testimonial.projectLink} className="testimonial-card">
+                {getCurrentTestimonials().map((testimonial, idx) => (
+                  <Link key={testimonial.id || idx} to={testimonial.projectLink} className="testimonial-card">
                     {/* Stars Rating */}
                     <Box sx={{ display: "flex", gap: "6px", mb: 3 }}>
                       {[...Array(5)].map((_, i) => (
@@ -309,7 +326,7 @@ function Testimonials() {
                         {testimonial.name}
                       </Typography>
                       <Typography className="testimonial-meta">
-                        {testimonial.role} · {testimonial.company}
+                        {testimonial.role} · {testimonial.company} {testimonial.location && `· ${testimonial.location}`}
                       </Typography>
                     </Box>
 
@@ -325,40 +342,37 @@ function Testimonials() {
           </AnimatePresence>
 
           {/* Dot Indicators */}
-          <Box sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px",
-            mt: "40px",
-          }}>
-            {Array.from({ length: totalPages }).map((_, idx) => (
-              <div
-                key={idx}
-                className={`dot-indicator ${currentIndex === idx ? "active" : ""}`}
-                onClick={() => goToSlide(idx)}
-                style={{ cursor: "pointer" }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </Box>
+          {totalPages > 1 && (
+            <Box sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              mt: "40px",
+            }}>
+              {Array.from({ length: totalPages }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`dot-indicator ${currentIndex === idx ? "active" : ""}`}
+                  onClick={() => goToSlide(idx)}
+                  style={{ cursor: "pointer" }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Go to slide ${idx + 1}`}
+                  onKeyPress={(e) => e.key === 'Enter' && goToSlide(idx)}
+                />
+              ))}
+            </Box>
+          )}
 
-          {/* Note about testimonials location */}
+          {/* Note about testimonials location - CONTRAST FIXED */}
           <Box sx={{
             textAlign: "center",
             mt: "32px",
             pt: "24px",
             borderTop: "1px solid var(--theme-border)",
           }}>
-            <Typography sx={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "14px",
-              letterSpacing: "1.5px",
-              color: "var(--theme-text-muted)",
-              opacity: 0.6,
-            }}>
+            <Typography className="testimonials-note">
               💬 These testimonials are also featured on their respective project pages under the "Client Feedback" section
             </Typography>
           </Box>

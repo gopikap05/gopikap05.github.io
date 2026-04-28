@@ -203,6 +203,25 @@ function CTASection() {
           border-bottom: 1px solid var(--theme-border-hover);
           border-right: 1px solid var(--theme-border-hover);
         }
+
+        /* CONTRAST FIX: Available for work tag */
+        .cta-available-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--theme-text-secondary); /* CHANGED: was muted */
+        }
+
+        /* CONTRAST FIX: Subtitle text */
+        .cta-subtitle {
+          font-family: 'DM Sans', sans-serif;
+          color: var(--theme-text-secondary); /* CHANGED: was muted */
+          font-size: clamp(0.9rem, 1vw, 1.05rem);
+          line-height: 1.8;
+          max-width: 520px;
+          margin: 0 auto;
+        }
       `}</style>
 
       {/* ── SECTION ── */}
@@ -269,7 +288,7 @@ function CTASection() {
             maxWidth: "min(820px, 100%)",
             mx: "auto",
           }}>
-            {/* Tag */}
+            {/* Tag - CONTRAST FIXED */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -288,13 +307,7 @@ function CTASection() {
                 background: "#fe53bb",
                 animation: "pulse_3011 2.5s infinite",
               }} />
-              <span style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "10px",
-                letterSpacing: "3px",
-                textTransform: "uppercase",
-                color: "var(--theme-text-muted)",
-              }}>
+              <span className="cta-available-tag">
                 Available for work
               </span>
             </motion.div>
@@ -330,22 +343,14 @@ function CTASection() {
               </Typography>
             </motion.div>
 
-            {/* Subtitle */}
+            {/* Subtitle - CONTRAST FIXED */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.35 }}
             >
-              <Typography sx={{
-                fontFamily: "'DM Sans', sans-serif",
-                color: "var(--theme-text-muted)",
-                mb: { xs: 4, md: 5 },
-                fontSize: { xs: "0.9rem", md: "1.05rem" },
-                lineHeight: 1.8,
-                maxWidth: "520px",
-                mx: "auto",
-              }}>
+              <Typography className="cta-subtitle">
                 Open to freelance projects, collaborations, and full-time opportunities.
               </Typography>
             </motion.div>

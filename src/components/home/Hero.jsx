@@ -354,14 +354,15 @@ function HeroSection() {
           white-space: nowrap;
         }
 
-        /* ── Role label ── */
+        /* ── Role label - UPDATED FOR BETTER CONTRAST ── */
         .role-label {
           font-family: 'DM Sans', sans-serif;
           font-size: clamp(12px, 2vw, 16px);
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--theme-text-secondary);
+          color: var(--theme-text-primary);
           white-space: nowrap;
+          font-weight: 500;
         }
         @media (max-width: 900px) { .role-label { letter-spacing: 2.5px; } }
         @media (max-width: 600px) { .role-label { letter-spacing: 2px; } }
@@ -511,12 +512,12 @@ function HeroSection() {
             style={{ transformOrigin: "left" }}
           />
 
-          {/* Bottom row: index label + role */}
+          {/* Bottom row: index label + role - UPDATED OPACITY VALUES */}
           <div className="tagline-row">
             <motion.span
               className="index-label"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 1.8 }}
             >
               Junior
@@ -526,7 +527,7 @@ function HeroSection() {
               className="role-label"
               style={{ y: subtitleY }}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 0.8, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.5 }}
             >
               Frontend Developer
