@@ -16,7 +16,7 @@ function Testimonials() {
         name: testimonial.name,
         role: testimonial.role,
         company: project.company || "",
-        location: project.location || "", // Added location with fallback
+        location: project.location || "",
         content: testimonial.content,
         rating: testimonial.rating || 5,
         projectLink: `/projects/${project.origin?.toLowerCase().replace(/\s+/g, '-') || 'freelance'}/${project.id}`
@@ -24,7 +24,7 @@ function Testimonials() {
     ) || [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 2;
+  const itemsPerPage = 1; // CHANGED: from 2 to 1
   const totalPages = Math.ceil(testimonialsData.length / itemsPerPage);
 
   const nextSlide = () => {
@@ -74,7 +74,7 @@ function Testimonials() {
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           margin-bottom: clamp(40px, 6vw, 24px);
         }
 
@@ -90,12 +90,13 @@ function Testimonials() {
           text-decoration: none;
           color: inherit;
           cursor: pointer;
+          max-width: 80%;
+          margin: 0 auto;
         }
         
         .testimonial-card:hover {
           border-color: #ff3b3b;
           background: linear-gradient(135deg, rgba(255, 59, 59, 0.04), rgba(255, 140, 59, 0.02));
-          transform: translateY(-4px);
         }
         
         .star-filled {
@@ -110,7 +111,7 @@ function Testimonials() {
           font-family: 'DM Sans', sans-serif;
           font-size: 16px;
           line-height: 1.7;
-          color: var(--theme-text-primary); /* CHANGED: was secondary, now primary for better contrast */
+          color: var(--theme-text-primary);
           margin-bottom: 28px;
           font-style: italic;
           flex: 1;
@@ -128,7 +129,7 @@ function Testimonials() {
           font-family: 'DM Sans', sans-serif;
           font-size: 12px;
           letter-spacing: 1px;
-          color: var(--theme-text-secondary); /* CHANGED: was muted, now secondary for better contrast */
+          color: var(--theme-text-secondary);
         }
 
         .view-project-link {
@@ -142,7 +143,7 @@ function Testimonials() {
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-secondary); /* CHANGED: was muted, now secondary for better contrast */
+          color: var(--theme-text-secondary);
           transition: all 0.3s ease;
         }
 
@@ -195,12 +196,11 @@ function Testimonials() {
           background: #ff3b3b;
         }
 
-        /* CHANGED: Bottom note text contrast fix */
         .testimonials-note {
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           letter-spacing: 1.5px;
-          color: var(--theme-text-secondary); /* CHANGED: was muted with opacity 0.6, now secondary with full opacity */
+          color: var(--theme-text-secondary);
         }
 
         @media (max-width: 768px) {
@@ -290,7 +290,7 @@ function Testimonials() {
             )}
           </Box>
 
-          {/* Testimonials Slider */}
+          {/* Testimonials Slider - Now shows 1 item at a time */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -300,14 +300,13 @@ function Testimonials() {
               transition={{ duration: 0.4, ease: "easeInOut" }}
             >
               <Box sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
-                gap: "24px",
+                display: "flex",
+                justifyContent: "center",
               }}>
                 {getCurrentTestimonials().map((testimonial, idx) => (
                   <Link key={testimonial.id || idx} to={testimonial.projectLink} className="testimonial-card">
                     {/* Stars Rating */}
-                    <Box sx={{ display: "flex", gap: "6px", mb: 3 }}>
+                    <Box sx={{ display: "flex", gap: "6px", mb: 3, justifyContent: "center" }}>
                       {[...Array(5)].map((_, i) => (
                         <span key={i} className={i < testimonial.rating ? "star-filled" : "star-empty"} style={{ fontSize: "20px" }}>
                           ★
@@ -316,12 +315,12 @@ function Testimonials() {
                     </Box>
 
                     {/* Testimonial Content */}
-                    <Typography className="testimonial-quote">
+                    <Typography className="testimonial-quote" sx={{ textAlign: "center" }}>
                       "{testimonial.content}"
                     </Typography>
 
                     {/* Author Information */}
-                    <Box>
+                    <Box sx={{ textAlign: "center" }}>
                       <Typography className="testimonial-name">
                         {testimonial.name}
                       </Typography>
@@ -331,7 +330,7 @@ function Testimonials() {
                     </Box>
 
                     {/* View Project Link */}
-                    <div className="view-project-link">
+                    <div className="view-project-link" style={{ justifyContent: "center" }}>
                       <span>View Project Details</span>
                       <span style={{ fontSize: "14px" }}>→</span>
                     </div>
@@ -365,7 +364,7 @@ function Testimonials() {
             </Box>
           )}
 
-          {/* Note about testimonials location - CONTRAST FIXED */}
+          {/* Note about testimonials location */}
           <Box sx={{
             textAlign: "center",
             mt: "32px",

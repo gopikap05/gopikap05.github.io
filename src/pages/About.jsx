@@ -8,7 +8,12 @@ import AboutPortfolio from "../components/about/aboutPortfolio";
 
 function About() {
   return (
-    <Box id="main-content" tabIndex="-1" style={{ outline: "none" }}>
+    <Box 
+      id="main-content" 
+      tabIndex="-1" 
+      role="main"
+      style={{ outline: "none" }}
+    >
       {/* Hidden heading for screen readers - provides proper landmark structure */}
       <h1 style={{
         position: "absolute",

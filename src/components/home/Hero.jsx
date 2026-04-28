@@ -520,7 +520,7 @@ function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.8 }}
             >
-              Junior
+              Web
             </motion.span>
 
             <motion.span

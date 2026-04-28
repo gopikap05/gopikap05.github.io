@@ -15,7 +15,6 @@ function Contact() {
       style={{ outline: "none" }}
       sx={{ backgroundColor: "#000", minHeight: "100vh" }}
     >
-      {/* Hidden heading for screen readers - provides proper landmark structure */}
       <h1 style={{
         position: "absolute",
         width: "1px",

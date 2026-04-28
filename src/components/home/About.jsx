@@ -120,7 +120,7 @@ function AboutSection() {
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
         }
         .about-tag-dot {
           width: 5px; height: 5px;
@@ -170,7 +170,7 @@ function AboutSection() {
           font-size: 11px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           margin-top: 4px;
           position: relative;
           z-index: 1;
@@ -302,7 +302,7 @@ function AboutSection() {
                 {words.map((word, index) => {
                   const start = index / words.length;
                   const end = start + 1.5 / words.length;
-                  const opacity = useTransform(scrollYProgress, [start, end], [0.45, 1]); // CHANGED: was 0.15, now 0.45 for better initial visibility
+                  const opacity = useTransform(scrollYProgress, [start, end], [0.7, 1]);
                   const y = useTransform(scrollYProgress, [start, end], [8, 0]);
                   return (
                     <motion.span
@@ -314,7 +314,7 @@ function AboutSection() {
                         marginRight: "0.4em",
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)",
-                        color: "var(--theme-text-primary)", // CHANGED: was secondary, now primary for better contrast
+                        color: "var(--theme-text-primary)", // FIXED: uses theme variable instead of hardcoded color
                       }}
                     >
                       {word}

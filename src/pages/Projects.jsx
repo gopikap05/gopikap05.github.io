@@ -6,18 +6,19 @@ import ProjectHero from "../components/projects/project";
 
 function Projects() {
   return (
-    <Box
-      id="main-content"
-      tabIndex="-1"
+    <Box 
+      id="main-content" 
+      tabIndex="-1" 
+      role="main"
       style={{ outline: "none" }}
     >
       {/* Hidden heading for screen readers - provides proper landmark structure */}
-      <h1 style={{
-        position: "absolute",
-        width: "1px",
-        height: "1px",
-        padding: 0,
-        margin: "-1px",
+      <h1 style={{ 
+        position: "absolute", 
+        width: "1px", 
+        height: "1px", 
+        padding: 0, 
+        margin: "-1px", 
         overflow: "hidden",
         clip: "rect(0, 0, 0, 0)",
         border: 0,

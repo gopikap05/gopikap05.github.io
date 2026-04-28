@@ -210,17 +210,17 @@ function CTASection() {
           font-size: 10px;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--theme-text-secondary); /* CHANGED: was muted */
+          color: var(--theme-text-secondary);
         }
 
-        /* CONTRAST FIX: Subtitle text */
+        /* CONTRAST FIX: Subtitle text with margin bottom */
         .cta-subtitle {
           font-family: 'DM Sans', sans-serif;
-          color: var(--theme-text-secondary); /* CHANGED: was muted */
+          color: var(--theme-text-secondary);
           font-size: clamp(0.9rem, 1vw, 1.05rem);
           line-height: 1.8;
           max-width: 520px;
-          margin: 0 auto;
+          margin: 0 auto 32px auto;
         }
       `}</style>
 
@@ -343,7 +343,7 @@ function CTASection() {
               </Typography>
             </motion.div>
 
-            {/* Subtitle - CONTRAST FIXED */}
+            {/* Subtitle - CONTRAST FIXED with margin bottom */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}

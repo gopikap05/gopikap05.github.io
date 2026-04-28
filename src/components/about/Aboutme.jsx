@@ -47,7 +47,7 @@ function AboutMe() {
           font-size: 10px;
           letter-spacing: 2px;
           text-transform: uppercase;
-          color: var(--theme-text-muted);
+          color: var(--theme-text-secondary);
           border: 1px solid var(--theme-border-hover);
           padding: 3px 10px;
           border-radius: 999px;
@@ -56,7 +56,7 @@ function AboutMe() {
         }
         .service-tag:hover {
           border-color: var(--theme-primary);
-          color: var(--theme-text-secondary);
+          color: var(--theme-text-primary);
         }
 
         /* ── Service row hover ── */
@@ -172,21 +172,21 @@ function AboutMe() {
               fontSize: "10px",
               letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
             }}>
               About Me
             </span>
           </motion.div>
 
-          {/* Big title — per-letter hover */}
+          {/* Big title — per-letter hover - CHANGED from h1 to h2 */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 style={{
+            <h2 style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(4rem, 14vw, 14rem)",
+              fontSize: "clamp(3rem, 12vw, 10rem)",
               fontWeight: 400,
               letterSpacing: "6px",
               lineHeight: 0.9,
@@ -194,12 +194,12 @@ function AboutMe() {
               textAlign: "center",
               color: "var(--theme-text-primary)",
             }}>
-              {"ABOUT ME".split("").map((char, i) => (
+              {"SERVICES".split("").map((char, i) => (
                 <span key={i} className="about-hero-char">
                   {char === " " ? "\u00A0" : char}
                 </span>
               ))}
-            </h1>
+            </h2>
           </motion.div>
 
           {/* Subtitle */}
@@ -211,13 +211,13 @@ function AboutMe() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(12px, 1.1vw, 14px)",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
               letterSpacing: "3px",
               textTransform: "uppercase",
               textAlign: "center",
               margin: 0,
             }}>
-              Frontend Developer · Hosur, India
+              What I Do Best
             </p>
           </motion.div>
         </Box>
@@ -264,7 +264,7 @@ function AboutMe() {
                   fontSize: "10px",
                   letterSpacing: "2px",
                   textTransform: "uppercase",
-                  color: "var(--theme-text-muted)",
+                  color: "var(--theme-text-secondary)",
                   marginBottom: "20px",
                 }}>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#ff3b3b", display: "inline-block" }} />

@@ -90,19 +90,19 @@ function AboutMeHero() {
               fontSize: "10px",
               letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
             }}>
               About Me
             </span>
           </motion.div>
 
-          {/* Big title — per-letter hover */}
+          {/* Big title — per-letter hover - CHANGED from h1 to h2 */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 style={{
+            <h2 style={{
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "clamp(4rem, 14vw, 14rem)",
               fontWeight: 400,
@@ -117,7 +117,7 @@ function AboutMeHero() {
                   {char === " " ? "\u00A0" : char}
                 </span>
               ))}
-            </h1>
+            </h2>
           </motion.div>
 
           {/* Subtitle */}
@@ -129,7 +129,7 @@ function AboutMeHero() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(12px, 1.1vw, 14px)",
-              color: "var(--theme-text-muted)",
+              color: "var(--theme-text-secondary)",
               letterSpacing: "3px",
               textTransform: "uppercase",
               textAlign: "center",

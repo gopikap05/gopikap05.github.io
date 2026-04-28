@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import projects from "../../data/projects";
 import Breadcrumbs from "../common/breadcrumbs";
 
@@ -11,7 +12,7 @@ import shopify from "../../assets/tech icons/shopify.svg";
 import vscode from "../../assets/tech icons/vs code.svg";
 import webflow from "../../assets/tech icons/webflow.svg";
 import wordpress from "../../assets/tech icons/wordpress.svg";
-import hostinger from "../../assets/tech icons/hostinge.png";
+import hostinger from "../../assets/tech icons/hostinger.png";
 import firebase from "../../assets/tech icons/firebase.png";
 import antigravity from "../../assets/tech icons/antigravity.png";
 import mui from "../../assets/tech icons/mui.png";
@@ -78,6 +79,7 @@ function ProjectDetails() {
       <Box 
         id="main-content"
         tabIndex="-1"
+        role="main"
         style={{ outline: "none" }}
         sx={{
           width: "100%", minHeight: "100vh", background: "var(--theme-bg-primary)",
@@ -85,6 +87,10 @@ function ProjectDetails() {
           justifyContent: "center", px: "5%",
         }}
       >
+        <Helmet>
+          <title>Project Not Found | Gopika P Portfolio</title>
+          <meta name="description" content="The requested project could not be found. Explore other projects in Gopika P's portfolio." />
+        </Helmet>
         <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: { xs: "14px", sm: "16px" }, color: "var(--theme-text-secondary)" }}>
           Project not found.
         </Typography>
@@ -108,8 +114,18 @@ function ProjectDetails() {
   // Zero-pad project number: 1 → "01", 12 → "12"
   const projectNumber = String(project.count).padStart(2, "0");
 
+  // Generate meta description
+  const metaDescription = `${project.title} - ${project.shortDescription || "A web development project by Gopika P."} Built with ${project.tech?.join(", ") || "modern web technologies"}.`;
+
   return (
-    <div id="main-content" tabIndex="-1" style={{ outline: "none" }}>
+    <div id="main-content" tabIndex="-1" role="main" style={{ outline: "none" }}>
+      {/* Helmet for SEO */}
+      <Helmet>
+        <title>{project.title} | {project.company} | Gopika P Portfolio</title>
+        <meta name="description" content={metaDescription} />
+        <meta name="keywords" content={`${project.title}, ${project.company}, web development, React, TypeScript, portfolio, Gopika P`} />
+      </Helmet>
+
       {/* Hidden heading for screen readers - provides proper landmark structure */}
       <h1 style={{ 
         position: "absolute", 
@@ -415,10 +431,10 @@ function ProjectDetails() {
               {project.title}
             </Typography>
 
-            {/* Company + Location + CEO - FIXED: removed opacity */}
+            {/* Company + Location + CEO - FIXED: changed to primary for better contrast */}
             <Typography sx={{
               fontFamily: "'DM Sans', sans-serif",
-              color: "var(--theme-text-secondary)",
+              color: "var(--theme-text-primary)",
               fontSize: { xs: "12px", sm: "13px", md: "14px" },
               letterSpacing: "1px",
               mb: 4,
@@ -426,7 +442,7 @@ function ProjectDetails() {
               {project.company}
               {project.location && ` · ${project.location}`}
               {project.ceo && (
-                <span style={{ color: "var(--theme-text-secondary)" }}> · CEO: {project.ceo}</span>
+                <span style={{ color: "var(--theme-text-primary)" }}> · CEO: {project.ceo}</span>
               )}
             </Typography>
           </motion.div>
@@ -478,7 +494,7 @@ function ProjectDetails() {
                 </Box>
               )}
 
-              {/* Tech stack - FIXED: aspect ratio for images */}
+              {/* Tech stack - with error handling for missing icons */}
               {project.tech?.length > 0 && (
                 <Box sx={{ mb: 6 }}>
                   <p className="pd-section-label">Tech Used</p>
@@ -497,6 +513,7 @@ function ProjectDetails() {
                               objectFit: "contain",
                               filter: "none",
                             }}
+                            onError={(e) => { e.target.style.display = 'none'; }}
                           />
                         )}
                         <Typography sx={{
