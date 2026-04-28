@@ -88,7 +88,7 @@ function ProjectDetails() {
         }}
       >
         <Helmet>
-          <title>Project Not Found | Gopika P Portfolio</title>
+          <title>Projects | Project Not Found | Gopika P Portfolio</title>
           <meta name="description" content="The requested project could not be found. Explore other projects in Gopika P's portfolio." />
         </Helmet>
         <Typography sx={{ fontFamily: "'DM Sans', sans-serif", fontSize: { xs: "14px", sm: "16px" }, color: "var(--theme-text-secondary)" }}>
@@ -114,16 +114,28 @@ function ProjectDetails() {
   // Zero-pad project number: 1 → "01", 12 → "12"
   const projectNumber = String(project.count).padStart(2, "0");
 
-  // Generate meta description
-  const metaDescription = `${project.title} - ${project.shortDescription || "A web development project by Gopika P."} Built with ${project.tech?.join(", ") || "modern web technologies"}.`;
+  // Generate meta title with format: Projects | [Project Title]
+  const metaTitle = project?.title 
+    ? `Projects | ${project.title} | Gopika P Portfolio`
+    : 'Projects | Gopika P Portfolio';
+
+  // Generate meta description with fallback
+  const metaDescription = project?.shortDescription
+    ? `${project.title} - ${project.shortDescription} Built with ${project.tech?.join(", ") || "modern web technologies"}.`
+    : `${project.title} - A web development project by Gopika P. Explore the full case study and technical implementation.`;
+
+  // Generate meta keywords with fallback
+  const metaKeywords = project?.title && project?.company
+    ? `${project.title}, ${project.company}, web development, React, TypeScript, portfolio, Gopika P`
+    : `web development, React, TypeScript, portfolio, Gopika P`;
 
   return (
     <div id="main-content" tabIndex="-1" role="main" style={{ outline: "none" }}>
-      {/* Helmet for SEO */}
+      {/* Helmet for SEO - with format: Projects | Title */}
       <Helmet>
-        <title>{project.title} | {project.company} | Gopika P Portfolio</title>
+        <title>{metaTitle}</title>
         <meta name="description" content={metaDescription} />
-        <meta name="keywords" content={`${project.title}, ${project.company}, web development, React, TypeScript, portfolio, Gopika P`} />
+        <meta name="keywords" content={metaKeywords} />
       </Helmet>
 
       {/* Hidden heading for screen readers - provides proper landmark structure */}
@@ -267,6 +279,8 @@ function ProjectDetails() {
           color: var(--theme-text-secondary);
           margin-bottom: 14px;
           font-weight:700;
+          font-style:italic;
+          text-decoration:underline;
         }
 
         /* Mobile horizontal scroll for recent projects */
@@ -667,11 +681,11 @@ function ProjectDetails() {
                       sx={{
                         fontFamily: "'DM Sans', sans-serif",
                         fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                        color: "var(--theme-text-secondary)",
-                        textDecoration: "underline",
+                        color: "#3b82f6",
+                        textDecoration: "none",
                         wordBreak: "break-all",
                         "&:hover": {
-                          color: "var(--theme-text-primary)",
+                          color: "#7898ccff",
                         },
                       }}
                     >

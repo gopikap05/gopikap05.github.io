@@ -30,6 +30,7 @@ function Contact() {
       </h1>
 
       <Helmet>
+        <title>Contact | Gopika - Portfolio</title>
         <meta name="description" content="Get in touch with Gopika P — feel free to reach out for collaborations, inquiries, or just to say hello. Connect via contact form or social media." />
       </Helmet>
 

@@ -455,7 +455,7 @@ function Resume() {
                 fontSize: "10px",
                 letterSpacing: "2px",
                 textTransform: "uppercase",
-                color: "var(--theme-text-muted)",
+                color: "var(--theme-text-secondary)",
               }}
             >
               <span

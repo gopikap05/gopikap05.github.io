@@ -11,6 +11,7 @@ function Home() {
     <div
       id="main-content"
       tabIndex="-1"
+      role="main"
       style={{ position: "relative", outline: "none" }}
     >
       {/* Hidden heading for screen readers - provides proper landmark structure */}
@@ -29,6 +30,7 @@ function Home() {
       </h1>
 
       <Helmet>
+        <title>Gopika P | Web Developer Portfolio</title>
         <meta name="description" content="Gopika P — Web Developer portfolio showcasing innovative projects, front-end expertise, and creative solutions. Explore my work, skills, and professional journey." />
       </Helmet>
 

@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { useTheme } from "../context/ThemeContext";
 
 function ThemeSettings() {
@@ -9,6 +10,7 @@ function ThemeSettings() {
     <Box 
       id="main-content"
       tabIndex="-1"
+      role="main"
       style={{ outline: "none" }}
       sx={{
         minHeight: "100vh",
@@ -18,6 +20,11 @@ function ThemeSettings() {
         px: "5%",
       }}
     >
+      <Helmet>
+        <title>Theme Settings | Gopika - Portfolio</title>
+        <meta name="description" content="Choose between dark and light theme mode for Gopika P's portfolio website." />
+      </Helmet>
+
       {/* Hidden heading for screen readers - provides proper landmark structure */}
       <h1 style={{ 
         position: "absolute", 

@@ -14,13 +14,13 @@ function About() {
       role="main"
       style={{ outline: "none" }}
     >
-      {/* Hidden heading for screen readers - provides proper landmark structure */}
-      <h1 style={{
-        position: "absolute",
-        width: "1px",
-        height: "1px",
-        padding: 0,
-        margin: "-1px",
+      {/* Hidden heading for screen readers */}
+      <h1 style={{ 
+        position: "absolute", 
+        width: "1px", 
+        height: "1px", 
+        padding: 0, 
+        margin: "-1px", 
         overflow: "hidden",
         clip: "rect(0, 0, 0, 0)",
         border: 0,
@@ -30,6 +30,7 @@ function About() {
       </h1>
 
       <Helmet>
+        <title>About | Gopika - Portfolio</title>
         <meta name="description" content="Learn more about Gopika P — my background, skills, resume, portfolio highlights, and frequently asked questions. Explore my journey and work in web development." />
       </Helmet>
 

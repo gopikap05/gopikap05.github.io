@@ -12,7 +12,11 @@ function Projects() {
       role="main"
       style={{ outline: "none" }}
     >
-      {/* Hidden heading for screen readers - provides proper landmark structure */}
+      <Helmet>
+        <title>Projects | Gopika - Portfolio</title>
+        <meta name="description" content="Explore Gopika P's portfolio projects — a collection of web development work including React applications, responsive designs, and innovative front-end solutions." />
+      </Helmet>
+
       <h1 style={{ 
         position: "absolute", 
         width: "1px", 
@@ -26,10 +30,6 @@ function Projects() {
       }}>
         Projects Portfolio - Gopika P Web Development Work
       </h1>
-
-      <Helmet>
-        <meta name="description" content="Explore Gopika P's portfolio projects — a collection of web development work including React applications, responsive designs, and innovative front-end solutions." />
-      </Helmet>
 
       <Breadcrumbs
         items={[
